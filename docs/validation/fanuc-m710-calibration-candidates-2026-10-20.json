@@ -1,0 +1,1010 @@
+{
+  "schema": "vlagraph.fanuc_calibration_comparison.v1",
+  "source_path": "C:\\Users\\0\\Desktop\\VLAPROJECT\\isaac_exts_omy3m_6dof_project\\isaac_exts\\S05PROC.LS",
+  "execution_requested": false,
+  "network_commands_sent": [],
+  "candidates": [
+    {
+      "schema": "vlagraph.fanuc_calibration_candidate_review.v1",
+      "status": "requires_coordinate_alignment",
+      "source_sha256": "3b2cd362143e34430d3f60a8290e3b2be504e89aace596a1bcd9ec96ee3f213b",
+      "candidate_sha256": "71a35c5de9c5dbb53993650e8ca08a5a18b0483914bd6f1921aa2121d07eb9bb",
+      "digest_encoding": "decoded_text_utf8",
+      "metadata": {
+        "CONTROLLER_VERSION": "V8",
+        "RRS_VERSION": "v8.3_R30iB_GM_global4",
+        "ROBOT_NAME": "m710ic_20l_HFS1_R01"
+      },
+      "robot_model_matches": true,
+      "available_frames": {
+        "UF": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "10"
+        ],
+        "UT": [
+          "1",
+          "6",
+          "7",
+          "10"
+        ]
+      },
+      "required_frames": {
+        "UF": [
+          "1"
+        ],
+        "UT": [
+          "1"
+        ]
+      },
+      "missing_frames": {
+        "UF": [],
+        "UT": []
+      },
+      "cartesian_references": [
+        {
+          "line": 13,
+          "position_id": 78,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 14,
+          "position_id": 77,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 15,
+          "position_id": 76,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 16,
+          "position_id": 75,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 17,
+          "position_id": 74,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 19,
+          "position_id": 5,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 20,
+          "position_id": 8,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 31,
+          "position_id": 9,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 32,
+          "position_id": 10,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 33,
+          "position_id": 11,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 34,
+          "position_id": 12,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 35,
+          "position_id": 13,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 36,
+          "position_id": 14,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 37,
+          "position_id": 7,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 38,
+          "position_id": 46,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 39,
+          "position_id": 47,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 40,
+          "position_id": 48,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 41,
+          "position_id": 49,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 42,
+          "position_id": 50,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 43,
+          "position_id": 59,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 44,
+          "position_id": 35,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 51,
+          "position_id": 16,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 52,
+          "position_id": 31,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 53,
+          "position_id": 18,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 54,
+          "position_id": 53,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 55,
+          "position_id": 19,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 56,
+          "position_id": 20,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 57,
+          "position_id": 21,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 58,
+          "position_id": 22,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 59,
+          "position_id": 64,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 62,
+          "position_id": 36,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 63,
+          "position_id": 17,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 64,
+          "position_id": 23,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 65,
+          "position_id": 60,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 67,
+          "position_id": 24,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 68,
+          "position_id": 26,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 80,
+          "position_id": 70,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 81,
+          "position_id": 69,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 82,
+          "position_id": 63,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 84,
+          "position_id": 62,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 85,
+          "position_id": 61,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 86,
+          "position_id": 25,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 89,
+          "position_id": 43,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 90,
+          "position_id": 42,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 91,
+          "position_id": 41,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 92,
+          "position_id": 40,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 93,
+          "position_id": 39,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 94,
+          "position_id": 30,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 95,
+          "position_id": 29,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 96,
+          "position_id": 28,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 97,
+          "position_id": 27,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 105,
+          "position_id": 65,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 106,
+          "position_id": 58,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 107,
+          "position_id": 57,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 108,
+          "position_id": 56,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 109,
+          "position_id": 55,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 110,
+          "position_id": 54,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 111,
+          "position_id": 52,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 112,
+          "position_id": 45,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 113,
+          "position_id": 44,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 114,
+          "position_id": 38,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 115,
+          "position_id": 37,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 116,
+          "position_id": 34,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 117,
+          "position_id": 33,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 118,
+          "position_id": 32,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 119,
+          "position_id": 73,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 121,
+          "position_id": 72,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 122,
+          "position_id": 71,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 123,
+          "position_id": 68,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 124,
+          "position_id": 67,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 125,
+          "position_id": 66,
+          "uf": 1,
+          "ut": 1
+        }
+      ],
+      "seed": {
+        "name": "start",
+        "joints_deg": [
+          89.998,
+          -38.108,
+          16.46,
+          0.0,
+          -106.461,
+          0.003
+        ]
+      },
+      "issues": [],
+      "uninterpreted_records": [
+        {
+          "line": 16,
+          "record": "$PLMR_GRP[1].$WMR_ENB"
+        },
+        {
+          "line": 17,
+          "record": "$PLMR_GRP[1].$ANGLE"
+        }
+      ],
+      "pending_evidence": [
+        "robot_instance_and_program_provenance",
+        "controller_base_to_ik_base_transform",
+        "uf_wpr_convention_and_reference_pose",
+        "flange_to_tcp_convention_and_reference_pose",
+        "external_axis_frame_and_zero",
+        "calibration_revision_and_measured_residuals"
+      ],
+      "transforms_applied": false,
+      "calibration_verified": false,
+      "execution_ready": false,
+      "candidate_path": "C:\\Users\\0\\Desktop\\VLAPROJECT\\CW Paint HFS\\R01\\tooldata.ls"
+    },
+    {
+      "schema": "vlagraph.fanuc_calibration_candidate_review.v1",
+      "status": "rejected",
+      "source_sha256": "3b2cd362143e34430d3f60a8290e3b2be504e89aace596a1bcd9ec96ee3f213b",
+      "candidate_sha256": "9395472cfac631de2b43239007c6990862aa3491b494abc0d1dd8a0f42c80601",
+      "digest_encoding": "decoded_text_utf8",
+      "metadata": {
+        "CONTROLLER_VERSION": "V8",
+        "RRS_VERSION": "v8.3_R30iB_GM_global4",
+        "ROBOT_NAME": "m20ia_HFS1_R07"
+      },
+      "robot_model_matches": false,
+      "available_frames": {
+        "UF": [
+          "1"
+        ],
+        "UT": [
+          "1"
+        ]
+      },
+      "required_frames": {
+        "UF": [
+          "1"
+        ],
+        "UT": [
+          "1"
+        ]
+      },
+      "missing_frames": {
+        "UF": [],
+        "UT": []
+      },
+      "cartesian_references": [
+        {
+          "line": 13,
+          "position_id": 78,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 14,
+          "position_id": 77,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 15,
+          "position_id": 76,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 16,
+          "position_id": 75,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 17,
+          "position_id": 74,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 19,
+          "position_id": 5,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 20,
+          "position_id": 8,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 31,
+          "position_id": 9,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 32,
+          "position_id": 10,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 33,
+          "position_id": 11,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 34,
+          "position_id": 12,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 35,
+          "position_id": 13,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 36,
+          "position_id": 14,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 37,
+          "position_id": 7,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 38,
+          "position_id": 46,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 39,
+          "position_id": 47,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 40,
+          "position_id": 48,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 41,
+          "position_id": 49,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 42,
+          "position_id": 50,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 43,
+          "position_id": 59,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 44,
+          "position_id": 35,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 51,
+          "position_id": 16,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 52,
+          "position_id": 31,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 53,
+          "position_id": 18,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 54,
+          "position_id": 53,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 55,
+          "position_id": 19,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 56,
+          "position_id": 20,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 57,
+          "position_id": 21,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 58,
+          "position_id": 22,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 59,
+          "position_id": 64,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 62,
+          "position_id": 36,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 63,
+          "position_id": 17,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 64,
+          "position_id": 23,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 65,
+          "position_id": 60,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 67,
+          "position_id": 24,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 68,
+          "position_id": 26,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 80,
+          "position_id": 70,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 81,
+          "position_id": 69,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 82,
+          "position_id": 63,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 84,
+          "position_id": 62,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 85,
+          "position_id": 61,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 86,
+          "position_id": 25,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 89,
+          "position_id": 43,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 90,
+          "position_id": 42,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 91,
+          "position_id": 41,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 92,
+          "position_id": 40,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 93,
+          "position_id": 39,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 94,
+          "position_id": 30,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 95,
+          "position_id": 29,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 96,
+          "position_id": 28,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 97,
+          "position_id": 27,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 105,
+          "position_id": 65,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 106,
+          "position_id": 58,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 107,
+          "position_id": 57,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 108,
+          "position_id": 56,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 109,
+          "position_id": 55,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 110,
+          "position_id": 54,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 111,
+          "position_id": 52,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 112,
+          "position_id": 45,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 113,
+          "position_id": 44,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 114,
+          "position_id": 38,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 115,
+          "position_id": 37,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 116,
+          "position_id": 34,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 117,
+          "position_id": 33,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 118,
+          "position_id": 32,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 119,
+          "position_id": 73,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 121,
+          "position_id": 72,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 122,
+          "position_id": 71,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 123,
+          "position_id": 68,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 124,
+          "position_id": 67,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "line": 125,
+          "position_id": 66,
+          "uf": 1,
+          "ut": 1
+        }
+      ],
+      "seed": {
+        "name": "HOME",
+        "joints_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "issues": [
+        {
+          "code": "robot_model_mismatch"
+        }
+      ],
+      "uninterpreted_records": [
+        {
+          "line": 9,
+          "record": "$PLMR_GRP[1].$WMR_ENB"
+        },
+        {
+          "line": 10,
+          "record": "$PLMR_GRP[1].$ANGLE"
+        }
+      ],
+      "pending_evidence": [
+        "robot_instance_and_program_provenance",
+        "controller_base_to_ik_base_transform",
+        "uf_wpr_convention_and_reference_pose",
+        "flange_to_tcp_convention_and_reference_pose",
+        "external_axis_frame_and_zero",
+        "calibration_revision_and_measured_residuals"
+      ],
+      "transforms_applied": false,
+      "calibration_verified": false,
+      "execution_ready": false,
+      "candidate_path": "C:\\Users\\0\\Desktop\\VLAPROJECT\\CW Paint HFS\\R07\\tooldata.ls"
+    }
+  ]
+}

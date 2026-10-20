@@ -1,0 +1,18 @@
+{
+  "nodes": [
+    {"id": "upload", "type": "dataset_upload", "position": {"x": 80, "y": 160},
+     "data": {"label": "FANUC LS Upload", "datasetPath": "", "datasetFormat": "ls"}},
+    {"id": "parse", "type": "fanuc_ls_parse", "position": {"x": 400, "y": 160}, "data": {"label": "Parse LS"}},
+    {"id": "prepare", "type": "fanuc_m710_prepare", "position": {"x": 720, "y": 160},
+     "data": {"label": "Prepare Preview", "previewOnly": true, "enableExecution": false, "requireAllIk": true}},
+    {"id": "validate", "type": "fanuc_trajectory_validate", "position": {"x": 1080, "y": 160},
+     "data": {"label": "Trajectory Preflight", "maxVelocity": {}, "maxAcceleration": {}}},
+    {"id": "print", "type": "print", "position": {"x": 1500, "y": 160}, "data": {"label": "Print Report"}}
+  ],
+  "edges": [
+    {"id": "upload-parse", "source": "upload", "target": "parse", "sourceHandle": "dataset", "targetHandle": "dataset"},
+    {"id": "parse-prepare", "source": "parse", "target": "prepare", "sourceHandle": "program", "targetHandle": "program"},
+    {"id": "prepare-validate", "source": "prepare", "target": "validate", "sourceHandle": "action", "targetHandle": "action"},
+    {"id": "validate-print", "source": "validate", "target": "print", "sourceHandle": "report", "targetHandle": "input"}
+  ]
+}

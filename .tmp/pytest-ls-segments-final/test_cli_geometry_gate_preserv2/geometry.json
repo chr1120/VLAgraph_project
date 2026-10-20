@@ -1,0 +1,14 @@
+{
+  "schema": "vlagraph.fanuc_ls_geometry_diagnostic.v1",
+  "status": "blocked_preflight",
+  "execution_requested": false,
+  "network_commands_sent": [],
+  "action": null,
+  "report": null,
+  "errors": [
+    {
+      "code": "cnt_blending_unverified",
+      "frame": 1
+    }
+  ]
+}

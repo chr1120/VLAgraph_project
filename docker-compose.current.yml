@@ -1,0 +1,5 @@
+services:
+  frontend:
+    container_name: openvla_frontend_current
+    ports: !override
+      - "9174:9173"

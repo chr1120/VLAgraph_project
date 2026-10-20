@@ -1,0 +1,20 @@
+{
+  "schema": "vlagraph.fanuc_alignment_references.v1",
+  "units": "m",
+  "source_sha256": null,
+  "candidate_sha256": null,
+  "references": [
+    {
+      "controller_tcp_in_base": null,
+      "ik_tcp_in_base": null
+    },
+    {
+      "controller_tcp_in_base": null,
+      "ik_tcp_in_base": null
+    },
+    {
+      "controller_tcp_in_base": null,
+      "ik_tcp_in_base": null
+    }
+  ]
+}

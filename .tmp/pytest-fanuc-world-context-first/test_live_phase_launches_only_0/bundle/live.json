@@ -1,0 +1,15 @@
+{
+  "status": "blocked",
+  "returncode": 1,
+  "observation": {
+    "ok": false,
+    "commands_sent": [
+      "get_state",
+      "scan_scene",
+      "capture_world_state",
+      "get_collision_geometry"
+    ]
+  },
+  "stderr": "",
+  "motion_requested": false
+}

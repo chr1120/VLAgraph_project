@@ -1,0 +1,4172 @@
+{
+  "schema": "vlagraph.fanuc_segment_review.v1",
+  "action_digest": "3e15894dc09b97b91f7b7a50f2087b15edaf563053cd831733ac2e97b6b48d45",
+  "snapshot_ref": null,
+  "source_program": {
+    "name": "S05PROC",
+    "path": "C:\\Users\\0\\Desktop\\VLAPROJECT\\isaac_exts_omy3m_6dof_project\\isaac_exts\\S05PROC.LS"
+  },
+  "program_static_checks_passed": false,
+  "global_issues": [],
+  "segment_count": 73,
+  "status_counts": {
+    "blocked": 73
+  },
+  "error_counts": {
+    "non_increasing_time": 1,
+    "cnt_blending_unverified": 55,
+    "uf_ut_calibration_missing": 71,
+    "cartesian_path_fidelity_unverified": 55
+  },
+  "segments": [
+    {
+      "segment": 0,
+      "start": {
+        "frame": null,
+        "source": "unknown_initial_state"
+      },
+      "end": {
+        "frame": 0,
+        "source_line": 10,
+        "source_position_id": 1,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0,
+      "original_end_time_sec": 0.0,
+      "duration_sec": 0.0,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "non_increasing_time",
+          "frame": 0,
+          "time_sec": 0.0,
+          "previous_time": 0.0
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 0
+        },
+        {
+          "code": "invalid_segment_duration"
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 1,
+          "kind": "process_or_io",
+          "statement": "SET SEGMENT(10)"
+        },
+        {
+          "source_line": 5,
+          "kind": "process_or_io",
+          "statement": "PAYLOAD[1]"
+        },
+        {
+          "source_line": 7,
+          "kind": "process_or_io",
+          "statement": "ENTER I-ZONE(5)"
+        },
+        {
+          "source_line": 8,
+          "kind": "process_or_io",
+          "statement": "ENTER I-ZONE(6)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 1,
+      "start": {
+        "frame": 0,
+        "source_line": 10,
+        "source_position_id": 1,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 1,
+        "source_line": 13,
+        "source_position_id": 78,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.0,
+      "original_end_time_sec": 0.02,
+      "duration_sec": 0.02,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "non_increasing_time",
+          "frame": 0,
+          "time_sec": 0.0,
+          "previous_time": 0.0
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 0
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 1,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 1
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 2,
+      "start": {
+        "frame": 1,
+        "source_line": 13,
+        "source_position_id": 78,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 2,
+        "source_line": 14,
+        "source_position_id": 77,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.02,
+      "original_end_time_sec": 0.158777,
+      "duration_sec": 0.138777,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 1,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 1
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 2,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 2,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 2
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 3,
+      "start": {
+        "frame": 2,
+        "source_line": 14,
+        "source_position_id": 77,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 3,
+        "source_line": 15,
+        "source_position_id": 76,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.158777,
+      "original_end_time_sec": 0.387892,
+      "duration_sec": 0.229115,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 2,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 2,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 2
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 3,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 3,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 3
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 4,
+      "start": {
+        "frame": 3,
+        "source_line": 15,
+        "source_position_id": 76,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 4,
+        "source_line": 16,
+        "source_position_id": 75,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.387892,
+      "original_end_time_sec": 0.440076,
+      "duration_sec": 0.05218400000000001,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 3,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 3,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 3
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 4,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 4,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 5,
+      "start": {
+        "frame": 4,
+        "source_line": 16,
+        "source_position_id": 75,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 5,
+        "source_line": 17,
+        "source_position_id": 74,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.440076,
+      "original_end_time_sec": 0.535893,
+      "duration_sec": 0.09581699999999993,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 4,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 4,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 5,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 5,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 6,
+      "start": {
+        "frame": 5,
+        "source_line": 17,
+        "source_position_id": 74,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 6,
+        "source_line": 19,
+        "source_position_id": 5,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.535893,
+      "original_end_time_sec": 0.57505,
+      "duration_sec": 0.039157,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 5,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 5,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 6,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 6,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 18,
+          "kind": "wait",
+          "statement": "WAIT    .30(sec)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 7,
+      "start": {
+        "frame": 6,
+        "source_line": 19,
+        "source_position_id": 5,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 7,
+        "source_line": 20,
+        "source_position_id": 8,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.57505,
+      "original_end_time_sec": 0.687972,
+      "duration_sec": 0.11292200000000008,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 6,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 6,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 7,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 7,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 8,
+      "start": {
+        "frame": 7,
+        "source_line": 20,
+        "source_position_id": 8,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 8,
+        "source_line": 31,
+        "source_position_id": 9,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.687972,
+      "original_end_time_sec": 0.707972,
+      "duration_sec": 0.020000000000000018,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 7,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 7,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 8,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 8,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 22,
+          "kind": "process_or_io",
+          "statement": "EXIT I-ZONE(6)"
+        },
+        {
+          "source_line": 25,
+          "kind": "process_or_io",
+          "statement": "ENTER PLC ZONE(1)"
+        },
+        {
+          "source_line": 27,
+          "kind": "process_or_io",
+          "statement": "ENTER I-ZONE(5)"
+        },
+        {
+          "source_line": 28,
+          "kind": "process_or_io",
+          "statement": "ENTER I-ZONE(6)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 9,
+      "start": {
+        "frame": 8,
+        "source_line": 31,
+        "source_position_id": 9,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 9,
+        "source_line": 32,
+        "source_position_id": 10,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.707972,
+      "original_end_time_sec": 0.823862,
+      "duration_sec": 0.11588999999999994,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 8,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 8,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 9,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 9,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 9
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 10,
+      "start": {
+        "frame": 9,
+        "source_line": 32,
+        "source_position_id": 10,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 10,
+        "source_line": 33,
+        "source_position_id": 11,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.823862,
+      "original_end_time_sec": 0.925031,
+      "duration_sec": 0.10116900000000006,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 9,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 9,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 9
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 10,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 10,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 10
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 11,
+      "start": {
+        "frame": 10,
+        "source_line": 33,
+        "source_position_id": 11,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 11,
+        "source_line": 34,
+        "source_position_id": 12,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 0.925031,
+      "original_end_time_sec": 1.058893,
+      "duration_sec": 0.13386200000000004,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 10,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 10,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 10
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 11,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 11,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 11
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 12,
+      "start": {
+        "frame": 11,
+        "source_line": 34,
+        "source_position_id": 12,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 12,
+        "source_line": 35,
+        "source_position_id": 13,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 1.058893,
+      "original_end_time_sec": 1.208224,
+      "duration_sec": 0.14933099999999988,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 11,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 11,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 11
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 12,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 12,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 12
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 13,
+      "start": {
+        "frame": 12,
+        "source_line": 35,
+        "source_position_id": 13,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 13,
+        "source_line": 36,
+        "source_position_id": 14,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 1.208224,
+      "original_end_time_sec": 1.416177,
+      "duration_sec": 0.20795300000000005,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 12,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 12,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 12
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 13,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 13,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 13
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 14,
+      "start": {
+        "frame": 13,
+        "source_line": 36,
+        "source_position_id": 14,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 14,
+        "source_line": 37,
+        "source_position_id": 7,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 1.416177,
+      "original_end_time_sec": 1.5712,
+      "duration_sec": 0.1550229999999999,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 13,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 13,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 13
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 14,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 14,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 14
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 15,
+      "start": {
+        "frame": 14,
+        "source_line": 37,
+        "source_position_id": 7,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 15,
+        "source_line": 38,
+        "source_position_id": 46,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 1.5712,
+      "original_end_time_sec": 1.700978,
+      "duration_sec": 0.12977800000000017,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 14,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 14,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 14
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 15,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 15,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 15
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 16,
+      "start": {
+        "frame": 15,
+        "source_line": 38,
+        "source_position_id": 46,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 16,
+        "source_line": 39,
+        "source_position_id": 47,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 1.700978,
+      "original_end_time_sec": 1.893301,
+      "duration_sec": 0.1923229999999998,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 15,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 15,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 15
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 16,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 16,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 16
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 17,
+      "start": {
+        "frame": 16,
+        "source_line": 39,
+        "source_position_id": 47,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 17,
+        "source_line": 40,
+        "source_position_id": 48,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 1.893301,
+      "original_end_time_sec": 2.093497,
+      "duration_sec": 0.20019600000000026,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 16,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 16,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 16
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 17,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 17,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 17
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 18,
+      "start": {
+        "frame": 17,
+        "source_line": 40,
+        "source_position_id": 48,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 18,
+        "source_line": 41,
+        "source_position_id": 49,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 2.093497,
+      "original_end_time_sec": 2.269711,
+      "duration_sec": 0.17621399999999987,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 17,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 17,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 17
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 18,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 18,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 18
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 19,
+      "start": {
+        "frame": 18,
+        "source_line": 41,
+        "source_position_id": 49,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 19,
+        "source_line": 42,
+        "source_position_id": 50,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 2.269711,
+      "original_end_time_sec": 2.403879,
+      "duration_sec": 0.13416799999999984,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 18,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 18,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 18
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 19,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 19,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 19
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 20,
+      "start": {
+        "frame": 19,
+        "source_line": 42,
+        "source_position_id": 50,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 20,
+        "source_line": 43,
+        "source_position_id": 59,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 2.403879,
+      "original_end_time_sec": 2.603199,
+      "duration_sec": 0.19932000000000016,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 19,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 19,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 19
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 20,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 20,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 20
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 21,
+      "start": {
+        "frame": 20,
+        "source_line": 43,
+        "source_position_id": 59,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 21,
+        "source_line": 44,
+        "source_position_id": 35,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 2.603199,
+      "original_end_time_sec": 2.623199,
+      "duration_sec": 0.020000000000000018,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 20,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 20,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 20
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 21,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 21,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 22,
+      "start": {
+        "frame": 21,
+        "source_line": 44,
+        "source_position_id": 35,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 22,
+        "source_line": 51,
+        "source_position_id": 16,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 2.623199,
+      "original_end_time_sec": 2.643199,
+      "duration_sec": 0.020000000000000018,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 21,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 21,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 22,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 22,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 47,
+          "kind": "process_or_io",
+          "statement": "ENTER PLC ZONE(2)"
+        },
+        {
+          "source_line": 48,
+          "kind": "wait",
+          "statement": "WAIT   1.00(sec)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 23,
+      "start": {
+        "frame": 22,
+        "source_line": 51,
+        "source_position_id": 16,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 23,
+        "source_line": 52,
+        "source_position_id": 31,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 2.643199,
+      "original_end_time_sec": 2.93895,
+      "duration_sec": 0.2957510000000001,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 22,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 22,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 23,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 23,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 23
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 24,
+      "start": {
+        "frame": 23,
+        "source_line": 52,
+        "source_position_id": 31,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 24,
+        "source_line": 53,
+        "source_position_id": 18,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 2.93895,
+      "original_end_time_sec": 3.205747,
+      "duration_sec": 0.26679699999999995,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 23,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 23,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 23
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 24,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 24
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 25,
+      "start": {
+        "frame": 24,
+        "source_line": 53,
+        "source_position_id": 18,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 25,
+        "source_line": 54,
+        "source_position_id": 53,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 3.205747,
+      "original_end_time_sec": 4.717575,
+      "duration_sec": 1.511828,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 24,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 24
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 25,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 25
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 26,
+      "start": {
+        "frame": 25,
+        "source_line": 54,
+        "source_position_id": 53,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 26,
+        "source_line": 55,
+        "source_position_id": 19,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 4.717575,
+      "original_end_time_sec": 5.640788,
+      "duration_sec": 0.9232129999999996,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 25,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 25
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 26,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 26
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 27,
+      "start": {
+        "frame": 26,
+        "source_line": 55,
+        "source_position_id": 19,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 27,
+        "source_line": 56,
+        "source_position_id": 20,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 5.640788,
+      "original_end_time_sec": 6.390765,
+      "duration_sec": 0.7499770000000003,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 26,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 26
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 27,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 27
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 28,
+      "start": {
+        "frame": 27,
+        "source_line": 56,
+        "source_position_id": 20,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 28,
+        "source_line": 57,
+        "source_position_id": 21,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 6.390765,
+      "original_end_time_sec": 8.603981,
+      "duration_sec": 2.213215999999999,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 27,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 27
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 28,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 28
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 29,
+      "start": {
+        "frame": 28,
+        "source_line": 57,
+        "source_position_id": 21,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 29,
+        "source_line": 58,
+        "source_position_id": 22,
+        "motion_type": "J",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 8.603981,
+      "original_end_time_sec": 8.985259,
+      "duration_sec": 0.381278,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 28,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 28
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 29,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 29
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 30,
+      "start": {
+        "frame": 29,
+        "source_line": 58,
+        "source_position_id": 22,
+        "motion_type": "J",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 30,
+        "source_line": 59,
+        "source_position_id": 64,
+        "motion_type": "J",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 8.985259,
+      "original_end_time_sec": 9.099,
+      "duration_sec": 0.11374100000000098,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 29,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 29
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 30,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 30
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 31,
+      "start": {
+        "frame": 30,
+        "source_line": 59,
+        "source_position_id": 64,
+        "motion_type": "J",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 31,
+        "source_line": 62,
+        "source_position_id": 36,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 9.099,
+      "original_end_time_sec": 9.524847,
+      "duration_sec": 0.4258469999999992,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 30,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 30
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 31,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 31,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 31
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 32,
+      "start": {
+        "frame": 31,
+        "source_line": 62,
+        "source_position_id": 36,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 32,
+        "source_line": 63,
+        "source_position_id": 17,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 9.524847,
+      "original_end_time_sec": 9.668949,
+      "duration_sec": 0.14410200000000017,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 31,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 31,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 31
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 32,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 32,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 32
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 33,
+      "start": {
+        "frame": 32,
+        "source_line": 63,
+        "source_position_id": 17,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 33,
+        "source_line": 64,
+        "source_position_id": 23,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 9.668949,
+      "original_end_time_sec": 9.905778,
+      "duration_sec": 0.23682900000000018,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 32,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 32,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 32
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 33,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 33,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 34,
+      "start": {
+        "frame": 33,
+        "source_line": 64,
+        "source_position_id": 23,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 34,
+        "source_line": 65,
+        "source_position_id": 60,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 9.905778,
+      "original_end_time_sec": 9.955266,
+      "duration_sec": 0.0494880000000002,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 33,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 33,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 34,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 34,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 35,
+      "start": {
+        "frame": 34,
+        "source_line": 65,
+        "source_position_id": 60,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 35,
+        "source_line": 67,
+        "source_position_id": 24,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 9.955266,
+      "original_end_time_sec": 9.976284,
+      "duration_sec": 0.02101799999999976,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 34,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 34,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 35,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 35,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 35
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 66,
+          "kind": "wait",
+          "statement": "WAIT    .30(sec)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 36,
+      "start": {
+        "frame": 35,
+        "source_line": 67,
+        "source_position_id": 24,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 36,
+        "source_line": 68,
+        "source_position_id": 26,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 9.976284,
+      "original_end_time_sec": 10.137883,
+      "duration_sec": 0.16159900000000071,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 35,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 35,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 35
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 36,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 36,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 37,
+      "start": {
+        "frame": 36,
+        "source_line": 68,
+        "source_position_id": 26,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 37,
+        "source_line": 80,
+        "source_position_id": 70,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 10.137883,
+      "original_end_time_sec": 10.157883,
+      "duration_sec": 0.019999999999999574,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 36,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 36,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 37,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 37,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 70,
+          "kind": "process_or_io",
+          "statement": "EXIT I-ZONE(5)"
+        },
+        {
+          "source_line": 73,
+          "kind": "process_or_io",
+          "statement": "ENTER PLC ZONE(3)"
+        },
+        {
+          "source_line": 74,
+          "kind": "process_or_io",
+          "statement": "SET SEGMENT(30)"
+        },
+        {
+          "source_line": 76,
+          "kind": "process_or_io",
+          "statement": "ENTER I-ZONE(5)"
+        },
+        {
+          "source_line": 77,
+          "kind": "process_or_io",
+          "statement": "ENTER I-ZONE(6)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 38,
+      "start": {
+        "frame": 37,
+        "source_line": 80,
+        "source_position_id": 70,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 38,
+        "source_line": 81,
+        "source_position_id": 69,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 10.157883,
+      "original_end_time_sec": 10.318297,
+      "duration_sec": 0.1604139999999994,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 37,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 37,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 38,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 38,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 38
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 39,
+      "start": {
+        "frame": 38,
+        "source_line": 81,
+        "source_position_id": 69,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 39,
+        "source_line": 82,
+        "source_position_id": 63,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 10.318297,
+      "original_end_time_sec": 10.340398,
+      "duration_sec": 0.022101000000001036,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 38,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 38,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 38
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 39,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 39,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 40,
+      "start": {
+        "frame": 39,
+        "source_line": 82,
+        "source_position_id": 63,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 40,
+        "source_line": 84,
+        "source_position_id": 62,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 10.340398,
+      "original_end_time_sec": 10.369172,
+      "duration_sec": 0.0287740000000003,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 39,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 39,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 40,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 40,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 83,
+          "kind": "wait",
+          "statement": "WAIT    .30(sec)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 41,
+      "start": {
+        "frame": 40,
+        "source_line": 84,
+        "source_position_id": 62,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 41,
+        "source_line": 85,
+        "source_position_id": 61,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 10.369172,
+      "original_end_time_sec": 10.487845,
+      "duration_sec": 0.11867299999999936,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 40,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 40,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 41,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 41,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 41
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 42,
+      "start": {
+        "frame": 41,
+        "source_line": 85,
+        "source_position_id": 61,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 42,
+        "source_line": 86,
+        "source_position_id": 25,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 10.487845,
+      "original_end_time_sec": 10.632127,
+      "duration_sec": 0.14428200000000047,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 41,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 41,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 41
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 42,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 42,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 42
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 43,
+      "start": {
+        "frame": 42,
+        "source_line": 86,
+        "source_position_id": 25,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 43,
+        "source_line": 89,
+        "source_position_id": 43,
+        "motion_type": "J",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 10.632127,
+      "original_end_time_sec": 11.778043,
+      "duration_sec": 1.1459159999999997,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 42,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 42,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 42
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 43,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 43
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 44,
+      "start": {
+        "frame": 43,
+        "source_line": 89,
+        "source_position_id": 43,
+        "motion_type": "J",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 44,
+        "source_line": 90,
+        "source_position_id": 42,
+        "motion_type": "J",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 11.778043,
+      "original_end_time_sec": 11.897359,
+      "duration_sec": 0.11931599999999953,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 43,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 43
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 44,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 44
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 45,
+      "start": {
+        "frame": 44,
+        "source_line": 90,
+        "source_position_id": 42,
+        "motion_type": "J",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 45,
+        "source_line": 91,
+        "source_position_id": 41,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 11.897359,
+      "original_end_time_sec": 12.278622,
+      "duration_sec": 0.3812630000000006,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 44,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 44
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 45,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 45
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 46,
+      "start": {
+        "frame": 45,
+        "source_line": 91,
+        "source_position_id": 41,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 46,
+        "source_line": 92,
+        "source_position_id": 40,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 12.278622,
+      "original_end_time_sec": 14.491907,
+      "duration_sec": 2.213284999999999,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 45,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 45
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 46,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 46
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 47,
+      "start": {
+        "frame": 46,
+        "source_line": 92,
+        "source_position_id": 40,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 47,
+        "source_line": 93,
+        "source_position_id": 39,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 14.491907,
+      "original_end_time_sec": 15.241606,
+      "duration_sec": 0.7496990000000014,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 46,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 46
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 47,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 47
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 48,
+      "start": {
+        "frame": 47,
+        "source_line": 93,
+        "source_position_id": 39,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 48,
+        "source_line": 94,
+        "source_position_id": 30,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 15.241606,
+      "original_end_time_sec": 16.164734,
+      "duration_sec": 0.9231279999999984,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 47,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 47
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 48,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 48
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 49,
+      "start": {
+        "frame": 48,
+        "source_line": 94,
+        "source_position_id": 30,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 49,
+        "source_line": 95,
+        "source_position_id": 29,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 16.164734,
+      "original_end_time_sec": 17.676628,
+      "duration_sec": 1.5118940000000016,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 48,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 48
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 49,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 49
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 50,
+      "start": {
+        "frame": 49,
+        "source_line": 95,
+        "source_position_id": 29,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 50,
+        "source_line": 96,
+        "source_position_id": 28,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 17.676628,
+      "original_end_time_sec": 18.104276,
+      "duration_sec": 0.4276479999999978,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 49,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 49
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 50,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 50,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 50
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 51,
+      "start": {
+        "frame": 50,
+        "source_line": 96,
+        "source_position_id": 28,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 51,
+        "source_line": 97,
+        "source_position_id": 27,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 18.104276,
+      "original_end_time_sec": 18.695671,
+      "duration_sec": 0.5913950000000021,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 50,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 50,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 50
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 51,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 51,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 52,
+      "start": {
+        "frame": 51,
+        "source_line": 97,
+        "source_position_id": 27,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 52,
+        "source_line": 105,
+        "source_position_id": 65,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 18.695671,
+      "original_end_time_sec": 18.715671,
+      "duration_sec": 0.019999999999999574,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 51,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 51,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 52,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 52,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 100,
+          "kind": "wait",
+          "statement": "WAIT   1.00(sec)"
+        },
+        {
+          "source_line": 101,
+          "kind": "process_or_io",
+          "statement": "ENTER PLC ZONE(4)"
+        },
+        {
+          "source_line": 102,
+          "kind": "wait",
+          "statement": "WAIT   1.00(sec)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 53,
+      "start": {
+        "frame": 52,
+        "source_line": 105,
+        "source_position_id": 65,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 53,
+        "source_line": 106,
+        "source_position_id": 58,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 18.715671,
+      "original_end_time_sec": 18.735671,
+      "duration_sec": 0.019999999999999574,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 52,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 52,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 53,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 53,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 53
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 54,
+      "start": {
+        "frame": 53,
+        "source_line": 106,
+        "source_position_id": 58,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 54,
+        "source_line": 107,
+        "source_position_id": 57,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 18.735671,
+      "original_end_time_sec": 18.934237,
+      "duration_sec": 0.19856599999999958,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 53,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 53,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 53
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 54,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 54,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 54
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 55,
+      "start": {
+        "frame": 54,
+        "source_line": 107,
+        "source_position_id": 57,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 55,
+        "source_line": 108,
+        "source_position_id": 56,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 18.934237,
+      "original_end_time_sec": 19.067873,
+      "duration_sec": 0.1336359999999992,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 54,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 54,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 54
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 55,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 55,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 55
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 56,
+      "start": {
+        "frame": 55,
+        "source_line": 108,
+        "source_position_id": 56,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 56,
+        "source_line": 109,
+        "source_position_id": 55,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 19.067873,
+      "original_end_time_sec": 19.242334,
+      "duration_sec": 0.17446100000000087,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 55,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 55,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 55
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 56,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 56,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 56
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 57,
+      "start": {
+        "frame": 56,
+        "source_line": 109,
+        "source_position_id": 55,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 57,
+        "source_line": 110,
+        "source_position_id": 54,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 19.242334,
+      "original_end_time_sec": 19.443865,
+      "duration_sec": 0.20153099999999924,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 56,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 56,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 56
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 57,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 57,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 57
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 58,
+      "start": {
+        "frame": 57,
+        "source_line": 110,
+        "source_position_id": 54,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 58,
+        "source_line": 111,
+        "source_position_id": 52,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 19.443865,
+      "original_end_time_sec": 19.636824,
+      "duration_sec": 0.19295900000000188,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 57,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 57,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 57
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 58,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 58,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 58
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 59,
+      "start": {
+        "frame": 58,
+        "source_line": 111,
+        "source_position_id": 52,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 59,
+        "source_line": 112,
+        "source_position_id": 45,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 19.636824,
+      "original_end_time_sec": 19.765088,
+      "duration_sec": 0.12826399999999794,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 58,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 58,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 58
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 59,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 59,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 59
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 60,
+      "start": {
+        "frame": 59,
+        "source_line": 112,
+        "source_position_id": 45,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 60,
+        "source_line": 113,
+        "source_position_id": 44,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 19.765088,
+      "original_end_time_sec": 19.92099,
+      "duration_sec": 0.1559020000000011,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 59,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 59,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 59
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 60,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 60,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 60
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 61,
+      "start": {
+        "frame": 60,
+        "source_line": 113,
+        "source_position_id": 44,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 61,
+        "source_line": 114,
+        "source_position_id": 38,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 19.92099,
+      "original_end_time_sec": 20.12892,
+      "duration_sec": 0.20793000000000106,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 60,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 60,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 60
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 61,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 61,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 61
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 62,
+      "start": {
+        "frame": 61,
+        "source_line": 114,
+        "source_position_id": 38,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 62,
+        "source_line": 115,
+        "source_position_id": 37,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.12892,
+      "original_end_time_sec": 20.278099,
+      "duration_sec": 0.14917900000000017,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 61,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 61,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 61
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 62,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 62,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 62
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 63,
+      "start": {
+        "frame": 62,
+        "source_line": 115,
+        "source_position_id": 37,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 63,
+        "source_line": 116,
+        "source_position_id": 34,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.278099,
+      "original_end_time_sec": 20.411486,
+      "duration_sec": 0.13338699999999903,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 62,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 62,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 62
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 63,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 63,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 63
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 64,
+      "start": {
+        "frame": 63,
+        "source_line": 116,
+        "source_position_id": 34,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 64,
+        "source_line": 117,
+        "source_position_id": 33,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.411486,
+      "original_end_time_sec": 20.512626,
+      "duration_sec": 0.1011400000000009,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 63,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 63,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 63
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 64,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 64,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 64
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 65,
+      "start": {
+        "frame": 64,
+        "source_line": 117,
+        "source_position_id": 33,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 65,
+        "source_line": 118,
+        "source_position_id": 32,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.512626,
+      "original_end_time_sec": 20.629049,
+      "duration_sec": 0.1164229999999975,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 64,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 64,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 64
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 65,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 65,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 65
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 66,
+      "start": {
+        "frame": 65,
+        "source_line": 118,
+        "source_position_id": 32,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 66,
+        "source_line": 119,
+        "source_position_id": 73,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.629049,
+      "original_end_time_sec": 20.817047,
+      "duration_sec": 0.18799800000000033,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 65,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 65,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 65
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 66,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 66,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 67,
+      "start": {
+        "frame": 66,
+        "source_line": 119,
+        "source_position_id": 73,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 67,
+        "source_line": 121,
+        "source_position_id": 72,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.817047,
+      "original_end_time_sec": 20.856817,
+      "duration_sec": 0.03977000000000075,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 66,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 66,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 67,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 67,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [
+        {
+          "source_line": 120,
+          "kind": "wait",
+          "statement": "WAIT    .30(sec)"
+        }
+      ],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 68,
+      "start": {
+        "frame": 67,
+        "source_line": 121,
+        "source_position_id": 72,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 68,
+        "source_line": 122,
+        "source_position_id": 71,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.856817,
+      "original_end_time_sec": 20.952715,
+      "duration_sec": 0.09589800000000182,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 67,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 67,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 68,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 68,
+          "motion_type": "L"
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 69,
+      "start": {
+        "frame": 68,
+        "source_line": 122,
+        "source_position_id": 71,
+        "motion_type": "L",
+        "termination": "FINE",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 69,
+        "source_line": 123,
+        "source_position_id": 68,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.952715,
+      "original_end_time_sec": 20.972715,
+      "duration_sec": 0.019999999999999574,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 68,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 68,
+          "motion_type": "L"
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 69,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 69,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 69
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 70,
+      "start": {
+        "frame": 69,
+        "source_line": 123,
+        "source_position_id": 68,
+        "motion_type": "L",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 70,
+        "source_line": 124,
+        "source_position_id": 67,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 20.972715,
+      "original_end_time_sec": 21.2018,
+      "duration_sec": 0.22908499999999776,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 69,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 69,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 69
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 70,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 70,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 70
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 71,
+      "start": {
+        "frame": 70,
+        "source_line": 124,
+        "source_position_id": 67,
+        "motion_type": "L",
+        "termination": "CNT50",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 71,
+        "source_line": 125,
+        "source_position_id": 66,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 21.2018,
+      "original_end_time_sec": 21.574045,
+      "duration_sec": 0.37224500000000305,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 70,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cartesian_path_fidelity_unverified",
+          "frame": 70,
+          "motion_type": "L"
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 70
+        },
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 71,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 71
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    },
+    {
+      "segment": 72,
+      "start": {
+        "frame": 71,
+        "source_line": 125,
+        "source_position_id": 66,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "end": {
+        "frame": 72,
+        "source_line": 127,
+        "source_position_id": 51,
+        "motion_type": "J",
+        "termination": "CNT100",
+        "source": "ls_motion"
+      },
+      "original_start_time_sec": 21.574045,
+      "original_end_time_sec": 21.594045,
+      "duration_sec": 0.019999999999999574,
+      "status": "blocked",
+      "issues": [
+        {
+          "code": "uf_ut_calibration_missing",
+          "frame": 71,
+          "uf": 1,
+          "ut": 1
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 71
+        },
+        {
+          "code": "cnt_blending_unverified",
+          "frame": 72
+        }
+      ],
+      "unmodeled_instructions": [],
+      "geometry_diagnostic_candidate": false,
+      "execution_ready": false
+    }
+  ],
+  "source_instruction_audit": {
+    "schema": "vlagraph.fanuc_ls_instruction_audit.v1",
+    "source_sha256": "edb21b16b1308c938146c6434c43cb9751e8682381231586dcf79ac4f1a66fa9",
+    "recognized_counts": {
+      "frame_selection": 2,
+      "motion": 73
+    },
+    "unmodeled": [
+      {
+        "source_line": 1,
+        "kind": "process_or_io",
+        "statement": "SET SEGMENT(10)"
+      },
+      {
+        "source_line": 5,
+        "kind": "process_or_io",
+        "statement": "PAYLOAD[1]"
+      },
+      {
+        "source_line": 7,
+        "kind": "process_or_io",
+        "statement": "ENTER I-ZONE(5)"
+      },
+      {
+        "source_line": 8,
+        "kind": "process_or_io",
+        "statement": "ENTER I-ZONE(6)"
+      },
+      {
+        "source_line": 18,
+        "kind": "wait",
+        "statement": "WAIT    .30(sec)"
+      },
+      {
+        "source_line": 22,
+        "kind": "process_or_io",
+        "statement": "EXIT I-ZONE(6)"
+      },
+      {
+        "source_line": 25,
+        "kind": "process_or_io",
+        "statement": "ENTER PLC ZONE(1)"
+      },
+      {
+        "source_line": 27,
+        "kind": "process_or_io",
+        "statement": "ENTER I-ZONE(5)"
+      },
+      {
+        "source_line": 28,
+        "kind": "process_or_io",
+        "statement": "ENTER I-ZONE(6)"
+      },
+      {
+        "source_line": 47,
+        "kind": "process_or_io",
+        "statement": "ENTER PLC ZONE(2)"
+      },
+      {
+        "source_line": 48,
+        "kind": "wait",
+        "statement": "WAIT   1.00(sec)"
+      },
+      {
+        "source_line": 66,
+        "kind": "wait",
+        "statement": "WAIT    .30(sec)"
+      },
+      {
+        "source_line": 70,
+        "kind": "process_or_io",
+        "statement": "EXIT I-ZONE(5)"
+      },
+      {
+        "source_line": 73,
+        "kind": "process_or_io",
+        "statement": "ENTER PLC ZONE(3)"
+      },
+      {
+        "source_line": 74,
+        "kind": "process_or_io",
+        "statement": "SET SEGMENT(30)"
+      },
+      {
+        "source_line": 76,
+        "kind": "process_or_io",
+        "statement": "ENTER I-ZONE(5)"
+      },
+      {
+        "source_line": 77,
+        "kind": "process_or_io",
+        "statement": "ENTER I-ZONE(6)"
+      },
+      {
+        "source_line": 83,
+        "kind": "wait",
+        "statement": "WAIT    .30(sec)"
+      },
+      {
+        "source_line": 100,
+        "kind": "wait",
+        "statement": "WAIT   1.00(sec)"
+      },
+      {
+        "source_line": 101,
+        "kind": "process_or_io",
+        "statement": "ENTER PLC ZONE(4)"
+      },
+      {
+        "source_line": 102,
+        "kind": "wait",
+        "statement": "WAIT   1.00(sec)"
+      },
+      {
+        "source_line": 120,
+        "kind": "wait",
+        "statement": "WAIT    .30(sec)"
+      },
+      {
+        "source_line": 129,
+        "kind": "process_or_io",
+        "statement": "EXIT I-ZONE(5)"
+      },
+      {
+        "source_line": 130,
+        "kind": "process_or_io",
+        "statement": "EXIT I-ZONE(6)"
+      }
+    ],
+    "issues": [],
+    "source_program_semantics_verified": false
+  },
+  "scope": "nominal_dedicated_bridge_motion_segments_only",
+  "time_rebased": false,
+  "partial_program_execution_supported": false,
+  "physical_collision_verified": false,
+  "execution_ready": false
+}

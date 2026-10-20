@@ -286,6 +286,7 @@ def _record_text(scene_id: str, obj: Dict[str, Any], waypoint: List[float], prom
 
 
 def _context_record_text(record: Dict[str, Any]) -> str:
+    record = normalize_memory_record(record)
     metadata = _as_dict(record.get("metadata"))
     obj = _text(metadata.get("object") or metadata.get("target_object"))
     pos = metadata.get("object_position")
@@ -299,13 +300,13 @@ def _context_record_text(record: Dict[str, Any]) -> str:
         if waypoint is not None:
             parts.append(f"stored_approach_waypoint={waypoint}")
             if isinstance(waypoint, list) and len(waypoint) >= 3:
-                parts.append(
-                    "Approach waypoint is "
-                    f"x={waypoint[0]} y={waypoint[1]} yaw={waypoint[2]}"
-                )
+                parts.append("waypoint_validation=unverified; revalidate before execution")
+        parts.append(f"record_kind={record['record_kind']}; outcome={record['outcome']}")
         source = _text(metadata.get("source"))
         if source:
             parts.append(f"source={source}")
+        parts.append(f"coordinate_frame={metadata.get('coordinate_frame', 'stage_unknown')}")
+        parts.append(f"meters_per_unit={metadata.get('meters_per_unit')}; up_axis={metadata.get('up_axis')}")
         return "; ".join(parts)
 
     text = _text(record.get("text"))
@@ -315,7 +316,7 @@ def _context_record_text(record: Dict[str, Any]) -> str:
         text,
         flags=re.IGNORECASE,
     )
-    return text
+    return f"{text}; record_kind={record['record_kind']}; outcome={record['outcome']}"
 
 
 def _scan_context_record(scan: Dict[str, Any], prompt: str) -> Dict[str, Any]:
@@ -337,6 +338,9 @@ def _scan_context_record(scan: Dict[str, Any], prompt: str) -> Dict[str, Any]:
             "object_position": _position(obj.get("position") or obj.get("bbox_center")),
             "approach_waypoint": waypoint,
             "source": "live_scene_scan",
+            "coordinate_frame": "isaac_stage",
+            "meters_per_unit": scan.get("meters_per_unit"),
+            "up_axis": scan.get("up_axis"),
             "target_object": _text(obj.get("label") or obj.get("name")),
         },
         "scan": _json_safe(scan),
@@ -345,7 +349,43 @@ def _scan_context_record(scan: Dict[str, Any], prompt: str) -> Dict[str, Any]:
     }
 
 
-def _read_records(path: Path) -> List[Dict[str, Any]]:
+def normalize_memory_record(record: Dict[str, Any]) -> Dict[str, Any]:
+    """Interpret old records without treating an acknowledgement as task success.
+
+    Experience evidence is supplied by the completion/evaluation producer:
+    result.status=completed, result.actual_state and result.evaluation containing
+    verified=true and outcome=success|failure. A legacy success flag is ignored.
+    This is a read adapter; the original JSONL file is never migrated in place.
+    """
+    result = _as_dict(record.get("result"))
+    evaluation = _as_dict(result.get("evaluation"))
+    verified = bool(
+        _as_dict(record.get("scan"))
+        and _as_dict(record.get("scan")).get("ok") is not False
+        and _as_dict(record.get("action"))
+        and result.get("status") == "completed"
+        and _as_dict(result.get("actual_state"))
+        and _as_dict(result.get("actual_state")).get("ok") is not False
+        and result.get("ok") is not False
+        and evaluation.get("verified") is True
+        and evaluation.get("outcome") in ("success", "failure")
+    )
+    outcome = evaluation["outcome"] if verified else "unknown"
+    return {
+        **record,
+        "schema_version": 2,
+        "record_kind": "experience" if verified else "observation",
+        "outcome": outcome,
+        "metadata": {
+            **_as_dict(record.get("metadata")),
+            "success": outcome == "success" if verified else None,
+            "outcome": outcome,
+            "outcome_verified": verified,
+        },
+    }
+
+
+def _read_records(path: Path, *, normalize: bool = True) -> List[Dict[str, Any]]:
     if not path.exists():
         return []
     records: List[Dict[str, Any]] = []
@@ -358,7 +398,7 @@ def _read_records(path: Path) -> List[Dict[str, Any]]:
         except Exception:
             continue
         if isinstance(item, dict):
-            records.append(item)
+            records.append(normalize_memory_record(item) if normalize else item)
     return records
 
 
@@ -373,7 +413,7 @@ def _extract_scan(inputs: Dict[str, Any], props: Dict[str, Any]) -> Dict[str, An
         value = inputs.get(key)
         if isinstance(value, dict):
             if isinstance(value.get("scan"), dict):
-                return value.get("scan")
+                return {**value["scan"], **({"ok": False} if value.get("ok") is False else {})}
             return value
     value = props.get("scan")
     return value if isinstance(value, dict) else {}
@@ -385,6 +425,7 @@ def normalize_scene_scan_response(response: Dict[str, Any], fallback_scene_id: s
         scan = _as_dict(response["response"].get("scan"))
     if not scan:
         scan = {
+            **response,
             "scene_id": _text(response.get("scene_id") or response.get("sceneId") or fallback_scene_id),
             "robot": _as_dict(response.get("robot")),
             "objects": response.get("objects") if isinstance(response.get("objects"), list) else [],
@@ -401,8 +442,49 @@ def normalize_scene_scan_response(response: Dict[str, Any], fallback_scene_id: s
         "objects": objects,
         "obstacles": obstacles,
     }
+    if response.get("ok") is False:
+        normalized["ok"] = False
     normalized.setdefault("object_count", len(objects))
+    normalized["observation_quality"] = inspect_scene_scan(normalized)
     return normalized
+
+
+def inspect_scene_scan(scan: Dict[str, Any]) -> Dict[str, Any]:
+    """Report missing or ambiguous data; do not invent units or free space."""
+    objects = scan.get("objects") if isinstance(scan.get("objects"), list) else []
+    seen: set[str] = set()
+    duplicate_paths: List[str] = []
+    invalid_positions: List[str] = []
+    for index, item in enumerate(objects):
+        item = _as_dict(item)
+        path = _text(item.get("prim_path"))
+        if path and path in seen:
+            duplicate_paths.append(path)
+        if path:
+            seen.add(path)
+        pos = item.get("position")
+        if not isinstance(pos, (list, tuple)) or len(pos) != 3 or any(
+            isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value)
+            for value in pos
+        ):
+            invalid_positions.append(path or str(index))
+    units = scan.get("meters_per_unit")
+    units_known = (
+        isinstance(units, (int, float)) and not isinstance(units, bool)
+        and math.isfinite(units) and units > 0
+    )
+    return {
+        "units_known": units_known,
+        "up_axis_known": scan.get("up_axis") in ("Y", "Z"),
+        "sim_time_known": (
+            isinstance(scan.get("sim_time"), (int, float))
+            and not isinstance(scan.get("sim_time"), bool)
+            and math.isfinite(scan["sim_time"]) and scan["sim_time"] >= 0
+        ),
+        "coverage": "partial" if scan.get("truncated") is True else "unknown",
+        "duplicate_prim_paths": duplicate_paths,
+        "invalid_object_positions": invalid_positions,
+    }
 
 
 def exec_scene_scan(node: Dict[str, Any], context: Dict[str, Any], edges: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -453,7 +535,7 @@ def exec_scene_scan(node: Dict[str, Any], context: Dict[str, Any], edges: List[D
                     "endpoint": candidate,
                     "request": request,
                     "response": response,
-                    "scan": {"scene_id": "unknown_scene", "robot": {}, "objects": [], "obstacles": []},
+                    "scan": {"ok": False, "scene_id": "unknown_scene", "robot": {}, "objects": [], "obstacles": []},
                     "objects": [],
                     "robot": {},
                     "scene_id": "unknown_scene",
@@ -491,7 +573,7 @@ def exec_scene_scan(node: Dict[str, Any], context: Dict[str, Any], edges: List[D
         "type": "scene_scan_result",
         "endpoint": endpoint,
         "request": request,
-        "scan": {"scene_id": "unknown_scene", "robot": {}, "objects": [], "obstacles": []},
+        "scan": {"ok": False, "scene_id": "unknown_scene", "robot": {}, "objects": [], "obstacles": []},
         "objects": [],
         "robot": {},
         "scene_id": "unknown_scene",
@@ -503,6 +585,9 @@ def exec_scene_context_reset(node: Dict[str, Any], context: Dict[str, Any], edge
     props = _props(node)
     inputs = _incoming_values(node["id"], edges, context)
     scan = _extract_scan(inputs, props)
+    if scan.get("ok") is False:
+        return {"ok": False, "type": "scene_context_reset_result", "scene": scan,
+                "message": "Scene scan failed; scene context was not updated."}
     current_scene_id = _scene_id(scan, _text(props.get("sceneId") or "default_scene"))
     signature = _object_signature(scan)
     previous = _as_dict(context.get("_spatial_scene_context"))
@@ -532,7 +617,7 @@ def exec_scene_context_reset(node: Dict[str, Any], context: Dict[str, Any], edge
         path = _memory_path(props.get("memoryPath"))
         kept = [
             record
-            for record in _read_records(path)
+            for record in _read_records(path, normalize=False)
             if _text(_as_dict(record.get("metadata")).get("scene_id")) != current_scene_id
         ]
         _write_records(path, kept)
@@ -558,6 +643,9 @@ def exec_spatial_memory_save(node: Dict[str, Any], context: Dict[str, Any], edge
     props = _props(node)
     inputs = _incoming_values(node["id"], edges, context)
     scan = _extract_scan(inputs, props)
+    if scan.get("ok") is False:
+        return {"ok": False, "type": "spatial_memory_record", "skipped": True,
+                "record": {}, "message": "Scene scan failed; memory was not saved."}
     prompt = _text(inputs.get("prompt") or props.get("prompt"))
     action = inputs.get("action") or props.get("action") or {}
     result = inputs.get("result") or props.get("result") or {}
@@ -565,7 +653,6 @@ def exec_spatial_memory_save(node: Dict[str, Any], context: Dict[str, Any], edge
     obj = _choose_target_object(scan, prompt)
     scene_id = _scene_id(scan, _text(props.get("sceneId") or "default_scene"))
     waypoint = _approach_waypoint(robot, obj) if obj else [0.0, 0.0, 0.0]
-    success = _to_bool(props.get("success"), bool(_as_dict(result).get("ok", True)))
     if not obj and not _to_bool(props.get("allowEmptySceneMemory"), False):
         return {
             "ok": True,
@@ -585,20 +672,23 @@ def exec_spatial_memory_save(node: Dict[str, Any], context: Dict[str, Any], edge
         "object_position": _position(obj.get("position") or obj.get("bbox_center")),
         "approach_waypoint": waypoint,
         "source": "isaac_sim",
-        "success": success,
-        "error": _text(_as_dict(result).get("error") or _as_dict(result).get("message")) if not success else "",
+        "coordinate_frame": "isaac_stage",
+        "stage_identifier": scan.get("stage_identifier"),
+        "meters_per_unit": scan.get("meters_per_unit"),
+        "up_axis": scan.get("up_axis"),
+        "error": _text(_as_dict(result).get("error")),
         "action_type": _text(_as_dict(action).get("command") or _as_dict(action).get("type")),
         "target_object": _text(obj.get("label") or obj.get("name")),
-        "executed_at": time.time(),
+        "observed_at": time.time(),
     }
-    record = {
+    record = normalize_memory_record({
         "id": _text(props.get("recordId")) or f"{scene_id}_{uuid.uuid4().hex[:12]}",
         "text": text,
         "metadata": metadata,
         "scan": _json_safe(scan),
         "action": _json_safe(action),
         "result": _json_safe(result),
-    }
+    })
     path = _memory_path(props.get("memoryPath"))
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
@@ -613,6 +703,7 @@ def exec_spatial_memory_save(node: Dict[str, Any], context: Dict[str, Any], edge
 
 
 def _record_score(record: Dict[str, Any], prompt: str, scene_id: str, robot_position: List[float]) -> Tuple[float, Dict[str, Any]]:
+    record = normalize_memory_record(record)
     metadata = _as_dict(record.get("metadata"))
     score = 0.0
     reasons: List[str] = []
@@ -630,7 +721,7 @@ def _record_score(record: Dict[str, Any], prompt: str, scene_id: str, robot_posi
     if task_overlap:
         score += 1.0 * task_overlap
         reasons.append("task_keyword")
-    if _to_bool(metadata.get("success"), False):
+    if record["outcome"] == "success" and metadata["outcome_verified"]:
         score += 1.0
         reasons.append("success")
     waypoint = metadata.get("approach_waypoint")
@@ -696,13 +787,13 @@ def exec_spatial_context_builder(node: Dict[str, Any], context: Dict[str, Any], 
     context_records: List[Dict[str, Any]] = []
     live_record = _scan_context_record(scan, prompt)
     if live_record:
-        context_records.append(live_record)
+        context_records.append(normalize_memory_record(live_record))
     for record in memories:
         if not isinstance(record, dict):
             continue
         if live_record and _text(record.get("id")) == _text(live_record.get("id")):
             continue
-        context_records.append(record)
+        context_records.append(normalize_memory_record(record))
         if len(context_records) >= max_lines:
             break
 

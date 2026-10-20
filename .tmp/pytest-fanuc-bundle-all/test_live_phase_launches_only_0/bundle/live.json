@@ -1,0 +1,4 @@
+{
+  "status": "error",
+  "message": "Use a fresh output directory for live evidence; an observation artifact already exists"
+}

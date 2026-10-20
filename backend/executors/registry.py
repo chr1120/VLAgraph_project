@@ -52,6 +52,10 @@ from backend.executors.spatial_nodes import (
     exec_spatial_memory_save,
     exec_spatial_rag_retrieve,
 )
+from backend.executors.world_model_nodes import (
+    exec_fanuc_world_context, exec_fanuc_world_prediction,
+    exec_execution_guard, exec_execution_observe, exec_fanuc_collision_check, exec_fanuc_snapshot_read, exec_fanuc_state_read, exec_fanuc_trajectory_validate, exec_fanuc_usd_geometry_read, exec_fanuc_usd_proxy_build, exec_world_state_build,
+)
 
 
 NODE_EXECUTORS = {
@@ -89,6 +93,17 @@ NODE_EXECUTORS = {
     "fanuc_omy3m_retarget": exec_fanuc_omy3m_retarget,
     "fanuc_omy3m_isaaclab_export": exec_fanuc_omy3m_isaaclab_export,
     "scene_scan": exec_scene_scan,
+    "world_state_build": exec_world_state_build,
+    "fanuc_state_read": exec_fanuc_state_read,
+    "fanuc_snapshot_read": exec_fanuc_snapshot_read,
+    "execution_observe": exec_execution_observe,
+    "execution_guard": exec_execution_guard,
+    "fanuc_trajectory_validate": exec_fanuc_trajectory_validate,
+    "fanuc_collision_check": exec_fanuc_collision_check,
+    "fanuc_usd_geometry_read": exec_fanuc_usd_geometry_read,
+    "fanuc_usd_proxy_build": exec_fanuc_usd_proxy_build,
+    "fanuc_world_context": exec_fanuc_world_context,
+    "fanuc_world_prediction": exec_fanuc_world_prediction,
     "scene_context_reset": exec_scene_context_reset,
     "spatial_memory_save": exec_spatial_memory_save,
     "spatial_rag_retrieve": exec_spatial_rag_retrieve,

@@ -11,6 +11,20 @@ except ModuleNotFoundError:
 
 
 class G1SkillNodesTest(unittest.TestCase):
+    def test_context_without_user_task_cannot_supply_navigation(self) -> None:
+        decoded = decode_g1_skill_command(
+            prompt="Known spatial context:\n- stored_approach_waypoint=[10, 20, 0]",
+            action={}, state={},
+        )
+        self.assertFalse(decoded["intent"].get("approach_waypoint"))
+        self.assertIsNone(decoded.get("target_pose"))
+
+    def test_explicit_user_waypoint_remains_supported(self) -> None:
+        decoded = decode_g1_skill_command(
+            prompt="Approach waypoint is x=1 y=2 yaw=0", action={}, state={},
+        )
+        self.assertTrue(decoded["intent"].get("approach_waypoint"))
+
     def test_spatial_context_waypoint_is_not_treated_as_control_command(self) -> None:
         prompt = (
             "Known spatial context:\n"

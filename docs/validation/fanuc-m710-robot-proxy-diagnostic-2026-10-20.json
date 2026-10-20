@@ -1,0 +1,2116 @@
+{
+  "source": "synthetic_zero_joint_trajectory_on_actual_usd_proxy",
+  "motion_requested": false,
+  "action": {
+    "schema": "vlagraph.fanuc_m710ic20l.action.v1",
+    "command": "apply_fanuc_trajectory",
+    "unit": "degree",
+    "joint_names": [
+      "J1",
+      "J2",
+      "J3",
+      "J4",
+      "J5",
+      "J6",
+      "externalAxisJoint"
+    ],
+    "joint_trajectory": [
+      {
+        "time_sec": 2,
+        "joint_positions": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "motion_type": "J",
+        "termination": "FINE"
+      },
+      {
+        "time_sec": 4,
+        "joint_positions": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "motion_type": "J",
+        "termination": "FINE"
+      }
+    ]
+  },
+  "report": {
+    "schema": "vlagraph.fanuc_collision_report.v1",
+    "status": "collision",
+    "action_digest": "326fdf92365dbb23f8b5ee7f07c0a96e2a56c3b5ea40602badd12dd2d3edfe2d",
+    "scene_digest": "576cb0e10a754e6a749844ac37141d41d5f5f8cd829269dedac3ec4997dcb310",
+    "scene_id": "C:/Users/0/Desktop/VLAPROJECT/open_manipulator_description/urdf/TEST/Test8.usd",
+    "scene_version": "cff677264ea4f3aa8912d7d8243957aae5b192bb2624e03c7187e94df4c0607c",
+    "robot_model_version": "usd_robot_aabb_capsules_v2",
+    "geometry_source": "configured_proxy",
+    "inventory_digest": "cff677264ea4f3aa8912d7d8243957aae5b192bb2624e03c7187e94df4c0607c",
+    "source_coverage": "authored_mapped_robot_collision_bounds",
+    "snapshot_ref": null,
+    "initial_segment_checked": false,
+    "checked_time_range_sec": [
+      2.0,
+      4.0
+    ],
+    "kinematics_source": "project_m710_configuration",
+    "geometry_tolerance_m": 1e-07,
+    "coverage": "configured_capsules_and_static_aabbs",
+    "samples_checked": 41,
+    "min_sampled_clearance_m": -0.4742510556273938,
+    "margin_m": 0.01,
+    "contacts": [
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.29861168159302287
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.3141301777013711
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.4742510556273938
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.1912507393658504
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.363936655879584
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.05264033447368245
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.30144897358702094
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.20427766276094467
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.0,
+        "clearance_m": -0.10898134397764753
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.29861168159302287
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.3141301777013711
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.4742510556273938
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.1912507393658504
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.363936655879584
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.05264033447368245
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.30144897358702094
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.20427766276094467
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.05,
+        "clearance_m": -0.10898134397764753
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.29861168159302287
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.3141301777013711
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.4742510556273938
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.1912507393658504
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.363936655879584
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.05264033447368245
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.30144897358702094
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.20427766276094467
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.1,
+        "clearance_m": -0.10898134397764753
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.29861168159302287
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.3141301777013711
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.4742510556273938
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.1912507393658504
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.363936655879584
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.05264033447368245
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.30144897358702094
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.20427766276094467
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.15,
+        "clearance_m": -0.10898134397764753
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.29861168159302287
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.3141301777013711
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.4742510556273938
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.1912507393658504
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.363936655879584
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.05264033447368245
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.30144897358702094
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.20427766276094467
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.2,
+        "clearance_m": -0.10898134397764753
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.29861168159302287
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.3141301777013711
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.4742510556273938
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.1912507393658504
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.363936655879584
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.05264033447368245
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.30144897358702094
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.20427766276094467
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.25,
+        "clearance_m": -0.10898134397764753
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.29861168159302287
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.3141301777013711
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.4742510556273938
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.1912507393658504
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.363936655879584
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.05264033447368245
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.30144897358702094
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.20427766276094467
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.3,
+        "clearance_m": -0.10898134397764753
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.29861168159302287
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.3141301777013711
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.4742510556273938
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.1912507393658504
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.363936655879584
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.05264033447368245
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.30144897358702094
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.20427766276094467
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "time_sec": 2.35,
+        "clearance_m": -0.10898134397764753
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "time_sec": 2.4,
+        "clearance_m": -0.09052713333032374
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.4,
+        "clearance_m": -0.09811008616692395
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "time_sec": 2.4,
+        "clearance_m": -0.16566780330688263
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "time_sec": 2.4,
+        "clearance_m": -0.29861168159302287
+      }
+    ],
+    "unresolved_intervals": [
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.05,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.1,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.15,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.2,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.25,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.3,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.35,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "end_time_sec": 2.4,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "end_time_sec": 2.45,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.45,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "end_time_sec": 2.45,
+        "motion_bound_m": 0.0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "end_time_sec": 2.45,
+        "motion_bound_m": 0.0
+      }
+    ],
+    "pair_diagnostics": [
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.09052713333032374,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.09811008616692395,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.2400753465051322,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.683152697143444,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 2.0534527144729644,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 2.2100323993170194,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 2.5782533535943095,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 2.7322973140621394,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.16566780330688263,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.0038080599785326,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.4480723181009405,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.8519049760295172,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 2.0272675979866768,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 2.394772113891792,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 2.547074290882042,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.29861168159302287,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 0.08099454860234068,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.0092637812137155,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.3780034334028255,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.7098430308994332,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.8283864038997801,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.3141301777013711,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 0.6586321683872376,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.0775467297330619,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.3888450246771196,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 1.4858702409132125,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.4742510556273938,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.1912507393658504,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 0.11357000730368443,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 0.21661606341333706,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.363936655879584,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.05264033447368245,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": 0.04607969883273623,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.30144897358702094,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.20427766276094467,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      },
+      {
+        "pair": [
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box"
+        ],
+        "kind": "self",
+        "min_sampled_clearance_m": -0.10898134397764753,
+        "min_time_sec": 2.0,
+        "samples_checked": 41,
+        "margin_violation_samples": 41
+      }
+    ],
+    "contacts_limit": 100,
+    "self_pairs_checked": 36,
+    "excluded_self_pairs": [],
+    "capsules_by_attachment": {
+      "joint": 6,
+      "base": 2,
+      "world": 1
+    },
+    "source_geometry_coverage": {
+      "scope": "active_enabled_collision_prims_in_inventory",
+      "enabled_robot_colliders": 9,
+      "included_robot_colliders": 9,
+      "unmapped_robot_colliders": [],
+      "all_enabled_robot_colliders_mapped": true,
+      "capsules_by_attachment": {
+        "joint": 6,
+        "base": 2,
+        "world": 1
+      },
+      "static_obstacle_count": 0,
+      "unmodeled_moving_obstacles": [],
+      "boundables_without_collision_api": 5721,
+      "disabled_collision_prims": [],
+      "tool_coverage": "unverified",
+      "environment_coverage": "unverified",
+      "full_cell_coverage_verified": false
+    },
+    "unmodeled_geometry": [],
+    "between_samples_certified": false,
+    "physical_collision_verified": false,
+    "execution_ready": false,
+    "unchecked": [
+      "initial_motion_before_first_frame",
+      "actual_mesh_coverage",
+      "dynamic_obstacles",
+      "physical_rollout",
+      "physical_base_alignment",
+      "live_state_at_dispatch",
+      "base_and_tool_coverage",
+      "environment_collision_coverage",
+      "contact_skin_defaults"
+    ]
+  }
+}

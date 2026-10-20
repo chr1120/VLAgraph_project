@@ -1,0 +1,3 @@
+class Bridge:
+    def __init__(self):
+        self._last_state_ok_at = 0.0

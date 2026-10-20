@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import tempfile
+import json
 import unittest
 from pathlib import Path
 
@@ -10,6 +11,8 @@ from backend.executors.spatial_nodes import (
     exec_spatial_memory_save,
     exec_spatial_rag_retrieve,
     normalize_scene_scan_response,
+    normalize_memory_record,
+    _record_score,
 )
 
 
@@ -23,6 +26,82 @@ def _edge(source: str, target: str, source_handle: str, target_handle: str) -> d
 
 
 class SpatialNodesTest(unittest.TestCase):
+    def test_observation_ignores_success_flag_and_acknowledgement(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            result = exec_spatial_memory_save(
+                {"id": "save", "data": {
+                    "memoryPath": str(Path(tmpdir) / "memory.jsonl"), "success": True,
+                    "scan": {"scene_id": "lab", "objects": [{"name": "box", "position": [1, 2, 3]}]},
+                    "action": {"command": "move"}, "result": {"ok": True, "applied": True},
+                }}, {}, [],
+            )
+            record = result["record"]
+            self.assertEqual(record["record_kind"], "observation")
+            self.assertEqual(record["outcome"], "unknown")
+            self.assertIsNone(record["metadata"]["success"])
+
+    def test_verified_completion_required_for_success_and_failure(self) -> None:
+        for outcome in ("success", "failure"):
+            record = {
+                "scan": {"scene_id": "lab"}, "action": {"command": "move"},
+                "result": {"status": "completed", "actual_state": {"position": [1, 2, 3]},
+                           "evaluation": {"verified": True, "outcome": outcome}},
+            }
+            self.assertEqual(normalize_memory_record(record)["outcome"], outcome)
+            for missing in ("actual_state", "evaluation", "status"):
+                incomplete = {**record, "result": {k: v for k, v in record["result"].items() if k != missing}}
+                self.assertEqual(normalize_memory_record(incomplete)["outcome"], "unknown")
+
+    def test_legacy_success_does_not_boost_retrieval_or_rewrite_file(self) -> None:
+        legacy = {"id": "old", "text": "box", "metadata": {"scene_id": "lab", "success": True}}
+        with tempfile.TemporaryDirectory() as tmpdir:
+            path = Path(tmpdir) / "memory.jsonl"
+            path.write_text(json.dumps(legacy) + "\n", encoding="utf-8")
+            original = path.read_bytes()
+            retrieved = exec_spatial_rag_retrieve(
+                {"id": "retrieve", "data": {"memoryPath": str(path), "sceneId": "lab"}}, {}, [],
+            )["memories"][0]
+            self.assertEqual(path.read_bytes(), original)
+            self.assertEqual(retrieved["outcome"], "unknown")
+            self.assertNotIn("success", retrieved["score_debug"]["reasons"])
+            built = exec_spatial_context_builder(
+                {"id": "ctx", "data": {"memories": [legacy]}}, {}, [],
+            )
+            self.assertIn("outcome=unknown", built["text"])
+            self.assertIsNone(built["memories"][0]["metadata"]["success"])
+
+    def test_only_verified_success_gets_score_bonus(self) -> None:
+        record = {"scan": {"scene_id": "lab"}, "action": {"command": "move"},
+                  "result": {"status": "completed", "actual_state": {"position": [0, 0, 0]},
+                             "evaluation": {"verified": True, "outcome": "success"}}}
+        self.assertIn("success", _record_score(record, "", "", [0, 0, 0])[1]["reasons"])
+
+    def test_failed_scan_is_not_saved_or_used_to_reset_scene(self) -> None:
+        context = {"scan": {"ok": False, "scan": {"scene_id": "lab", "objects": [{"name": "box"}]}}}
+        edges = [_edge("scan", "save", "scan", "scan")]
+        # The scan handle itself must carry failure, as exec_scene_scan now does.
+        context["scan"]["scan"]["ok"] = False
+        self.assertFalse(exec_spatial_memory_save({"id": "save", "data": {}}, context, edges)["ok"])
+        reset_edges = [_edge("scan", "reset", None, "scan")]
+        self.assertFalse(exec_scene_context_reset({"id": "reset", "data": {}}, context, reset_edges)["ok"])
+        self.assertNotIn("_spatial_scene_context", context)
+
+    def test_scan_preserves_metadata_and_reports_uncertainty(self) -> None:
+        scan = normalize_scene_scan_response({
+            "scene_id": "lab", "timestamp": 123, "meters_per_unit": 0.01, "up_axis": "Y",
+            "truncated": True, "scan_scope": {"max_objects": 2},
+            "objects": [{"prim_path": "/Box", "position": [1, 2, 3]},
+                        {"prim_path": "/Box", "position": [float("nan"), 0, 0]}],
+        })
+        self.assertEqual(scan["timestamp"], 123)
+        self.assertEqual(scan["scan_scope"]["max_objects"], 2)
+        quality = scan["observation_quality"]
+        self.assertEqual(quality["coverage"], "partial")
+        self.assertFalse(quality["sim_time_known"])
+        self.assertTrue(quality["units_known"])
+        self.assertEqual(quality["duplicate_prim_paths"], ["/Box"])
+        self.assertEqual(quality["invalid_object_positions"], ["/Box"])
+
     def test_memory_save_retrieve_and_context_builder(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             memory_path = str(Path(tmpdir) / "spatial_memory.jsonl")

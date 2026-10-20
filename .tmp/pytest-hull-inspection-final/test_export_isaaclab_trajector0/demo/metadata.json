@@ -1,0 +1,28 @@
+{
+  "schema": "vlagraph.isaaclab.omy3m.trajectory.v1",
+  "episode": "demo",
+  "embodiment": "OMY3M_6DOF",
+  "joint_names": [
+    "joint1",
+    "joint2",
+    "joint3",
+    "joint4",
+    "joint5",
+    "joint6"
+  ],
+  "step_count": 2,
+  "source_frame_count": 3,
+  "provenance": "planned_fanuc_ls_ik_retarget",
+  "measured_rollout": false,
+  "observation_keys": [
+    "joint_positions",
+    "joint_velocities"
+  ],
+  "action_keys": [
+    "joint_positions"
+  ],
+  "execution_result": {
+    "ok": true
+  },
+  "steps_file": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-hull-inspection-final\\test_export_isaaclab_trajector0\\demo\\steps.jsonl"
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "vlagraph.fanuc_execute_integration_validation.v1",
+  "source_path": "C:\\Users\\0\\Desktop\\VLAPROJECT\\isaac_exts_omy3m_6dof_project\\isaac_exts\\S05PROC.LS",
+  "initial_settings_supplied": false,
+  "validation_ok": true,
+  "validation_policy": "full",
+  "prepared_frames": 73,
+  "static_errors_by_code": {
+    "non_increasing_time": 1,
+    "cnt_blending_unverified": 55,
+    "uf_ut_calibration_missing": 71,
+    "cartesian_path_fidelity_unverified": 55
+  },
+  "guard_reasons": [
+    "static_validation_failed",
+    "preflight_report_failed",
+    "full_validation_unavailable"
+  ],
+  "execution_approved": false,
+  "execution_skipped": true,
+  "transport_calls": 0,
+  "actual_network_commands_sent": [],
+  "scope": "real LS parsing and validation with transport patched to prevent robot motion"
+}

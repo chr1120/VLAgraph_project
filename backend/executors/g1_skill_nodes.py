@@ -145,7 +145,7 @@ def decode_g1_skill_command(
     amplitude = _bounded(amplitude, 0.05, 2.0, 1.0)
 
     explicit_skill = _canonical_skill(_first_text(action_payload, "skill", "motion_skill", "motionSkill", "gesture"))
-    approach_waypoint = _extract_approach_waypoint(prompt_text, state)
+    approach_waypoint = _extract_approach_waypoint(control_prompt, state)
     target_pose = (
         _target_pose_from_action(action_payload)
         or (approach_waypoint.get("target_pose") if approach_waypoint else None)
@@ -860,6 +860,8 @@ def _control_prompt_text(value: Any) -> str:
     marker = re.search(r"\bUser\s+task\s*:\s*", text, flags=re.IGNORECASE)
     if marker:
         return text[marker.end() :].strip()
+    if text.lower().startswith("known spatial context:"):
+        return ""
     return text
 
 

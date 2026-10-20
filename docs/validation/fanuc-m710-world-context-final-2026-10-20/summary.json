@@ -1,0 +1,88 @@
+{
+  "schema": "vlagraph.fanuc_validation_bundle.v1",
+  "created_at": "2026-10-20T07:24:59.941237+00:00",
+  "status": "blocked",
+  "source_path": "C:\\Users\\0\\Desktop\\VLAPROJECT\\isaac_exts_omy3m_6dof_project\\isaac_exts\\S05PROC.LS",
+  "usd_path": "C:\\Users\\0\\Desktop\\VLAPROJECT\\open_manipulator_description\\urdf\\TEST\\Test8.usd",
+  "collection_completed": true,
+  "execution_validation_completed": false,
+  "phases": {
+    "calibration": {
+      "status": "collected",
+      "artifact": "calibration.json"
+    },
+    "alignment": {
+      "status": "collected",
+      "artifact": "alignment.json"
+    },
+    "geometry": {
+      "status": "collected",
+      "artifact": "geometry.json"
+    },
+    "execute": {
+      "status": "collected",
+      "artifact": "execute.json"
+    },
+    "collision": {
+      "status": "collected",
+      "artifact": "collision.json"
+    },
+    "live": {
+      "status": "collected",
+      "artifact": "live.json"
+    },
+    "world-context": {
+      "status": "collected",
+      "artifact": "world-context.json"
+    }
+  },
+  "blockers": [
+    "controller_ik_base_tcp_external_axis_calibration_unverified",
+    "tool_and_environment_collision_coverage_unverified",
+    "physical_rollout_and_command_completion_unverified",
+    "base_alignment_reference_measurements_missing_or_failed",
+    "source_ls_preflight_failed",
+    "source_ls_semantics_unverified",
+    "source_ls_collision_not_clear",
+    "synchronized_live_snapshot_and_geometry_unavailable",
+    "integrated_world_physical_prediction_unavailable",
+    "collection_current_scene_reconciliation_unavailable_or_failed"
+  ],
+  "motion_requested": false,
+  "execution_ready": false,
+  "execute_boundary_status": "blocked_as_expected",
+  "checks": {
+    "calibration_candidates": [
+      {
+        "path": "C:\\Users\\0\\Desktop\\VLAPROJECT\\CW Paint HFS\\R01\\tooldata.ls",
+        "status": "requires_coordinate_alignment"
+      }
+    ],
+    "alignment": "missing_reference_measurements",
+    "geometry": {
+      "collider_count": 9,
+      "full_cell_coverage_verified": false
+    },
+    "ls_preflight": "failed",
+    "collision": "blocked_preflight",
+    "live": "blocked",
+    "world_context": {
+      "context_status": "unavailable",
+      "prediction_status": "blocked_inputs",
+      "execute_skipped": true
+    }
+  },
+  "read_only_commands": [
+    "get_state",
+    "scan_scene",
+    "capture_world_state",
+    "get_collision_geometry"
+  ],
+  "preflight_errors_by_code": {
+    "non_increasing_time": 1,
+    "cnt_blending_unverified": 55,
+    "uf_ut_calibration_missing": 71,
+    "cartesian_path_fidelity_unverified": 55
+  },
+  "unmodeled_source_instruction_count": 24
+}

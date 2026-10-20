@@ -1,0 +1,54 @@
+{
+  "schema": "vlagraph.fanuc_collision_report.v1",
+  "status": "clear",
+  "action_digest": "87332475f4b304b7518dc934234f66b61ffa6e3422d6d96ee65afa550670aaf0",
+  "scene_digest": "8b2fa30fc01963bdfaedb6dd0d47e1d7fca9965691bb00797107d11692aa7f19",
+  "scene_id": "synthetic_cell",
+  "scene_version": "v1",
+  "robot_model_version": "illustrative_capsules_v1",
+  "geometry_source": "configured_proxy",
+  "kinematics_source": "project_m710_configuration",
+  "geometry_tolerance_m": 1e-07,
+  "coverage": "configured_capsules_and_static_aabbs",
+  "samples_checked": 41,
+  "min_sampled_clearance_m": 0.10999999999999993,
+  "margin_m": 0.01,
+  "contacts": [],
+  "unresolved_intervals": [],
+  "self_pairs_checked": 9,
+  "excluded_self_pairs": [
+    [
+      "link1",
+      "link2"
+    ],
+    [
+      "link2",
+      "link3"
+    ],
+    [
+      "link3",
+      "link4"
+    ],
+    [
+      "link4",
+      "link5"
+    ],
+    [
+      "link4",
+      "link6"
+    ],
+    [
+      "link5",
+      "link6"
+    ]
+  ],
+  "between_samples_certified": true,
+  "physical_collision_verified": false,
+  "execution_ready": false,
+  "unchecked": [
+    "initial_motion_before_first_frame",
+    "actual_mesh_coverage",
+    "dynamic_obstacles",
+    "physical_rollout"
+  ]
+}

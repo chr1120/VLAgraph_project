@@ -338,6 +338,7 @@ def _parse_initial_settings(path: Path) -> Dict[str, Any]:
 
 
 def exec_fanuc_ls_parse(node: Dict[str, Any], context: Dict[str, Any], edges: List[Dict[str, Any]]) -> Dict[str, Any]:
+    from backend.world_model.fanuc_segment_review import audit_ls_instructions
     inputs = _incoming_values(node["id"], edges, context)
     data = _props(node)
     path = _path_from_dataset(inputs.get("dataset") or data.get("filePath"))
@@ -354,6 +355,7 @@ def exec_fanuc_ls_parse(node: Dict[str, Any], context: Dict[str, Any], edges: Li
         initial_settings = _parse_initial_settings(initial_settings_path)
     program = {
         "schema": "vlagraph.fanuc_ls.v1",
+        "instruction_audit": audit_ls_instructions(source),
         "program_name": program_match.group(1) if program_match else path.stem,
         "source_path": str(path),
         "positions": list(positions.values()),
@@ -802,10 +804,14 @@ def exec_fanuc_m710_prepare(
     if joint_trajectory:
         total_duration_sec = float(joint_trajectory[-1].get("time_sec", total_duration_sec))
 
-    execution_ready = bool(joint_trajectory) and (not require_all_ik or ik_failures == 0)
+    execution_ready = bool(joint_trajectory) and (
+        not require_all_ik or (ik_failures == 0 and skipped_cartesian == 0 and skipped_unresolved == 0)
+    )
     effective_preview_only = preview_only or not enable_execution or not execution_ready
     action = {
         "schema": "vlagraph.fanuc_m710ic20l.action.v1",
+        "source_program": {"name": program.get("program_name"), "path": program.get("source_path")},
+        "source_instruction_audit": program.get("instruction_audit"),
         "type": "fanuc_m710ic20l_trajectory",
         "command": "apply_fanuc_trajectory",
         "target_embodiment": "FANUC_M710IC_20L",
@@ -822,6 +828,9 @@ def exec_fanuc_m710_prepare(
         "preview_only": effective_preview_only,
         "execution_enabled": enable_execution,
         "execution_ready": execution_ready,
+        "ik_failures": ik_failures,
+        "skipped_cartesian_frames": skipped_cartesian,
+        "skipped_unresolved_frames": skipped_unresolved,
         "requires_uf_ut_calibration": bool(program.get("summary", {}).get("requires_uf_ut_calibration")),
         "cartesian_mode": (
             "calibrated_uf_ik"

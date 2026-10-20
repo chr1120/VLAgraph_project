@@ -1,0 +1,50 @@
+{
+  "schema": "vlagraph.fanuc_observation_validation.v1",
+  "endpoint": "ws://127.0.0.1:9910/omniverse",
+  "ok": false,
+  "commands_sent": [
+    "get_state",
+    "scan_scene",
+    "capture_world_state",
+    "get_collision_geometry"
+  ],
+  "motion_requested": false,
+  "arm": {
+    "request_id": null,
+    "observed_at": null,
+    "capture_duration_sec": null,
+    "prim_path": null,
+    "physics_ready": null,
+    "motion_active": null,
+    "joints": null,
+    "external_axes": null,
+    "sim_time": null,
+    "missing_fields": null,
+    "prediction_ready": null,
+    "completion_verified": null
+  },
+  "scene": {
+    "scene_id": null,
+    "timestamp": null,
+    "object_count": null,
+    "meters_per_unit": null,
+    "up_axis": null,
+    "observation_quality": null
+  },
+  "errors": {},
+  "limitations": [
+    "get_state and scan_scene are separate observations, not a synchronized physics snapshot",
+    "motion_active=false does not verify per-command completion or task success",
+    "missing stage units and axis must be supplied by the bridge before world-state conversion",
+    "USD geometry uses default-time transforms; it is not a synchronized physics rollout"
+  ],
+  "snapshot_validation": {
+    "ok": true,
+    "snapshot": {}
+  },
+  "geometry_validation": {
+    "ok": false,
+    "inventory": null,
+    "message": "Unsupported command"
+  }
+}

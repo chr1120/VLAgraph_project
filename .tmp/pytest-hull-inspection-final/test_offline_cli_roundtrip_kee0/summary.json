@@ -1,0 +1,47 @@
+{
+  "geometry_review": {
+    "review_digest": "90b48076a1f6abf87b806f26fc0702c2c8730f9995200730218c4a515beacd32",
+    "source_scene_digest": "6283d64d016407bfb00643d81fb54fbe09101394e2ecbf602703ec83df6d42e3",
+    "hull_inspection_digest": null,
+    "reviewed_pair_count": 0,
+    "total_pair_count": 15,
+    "excluded_pair_count": 0,
+    "exclusion_audit": [],
+    "physical_collision_verified": false,
+    "execution_ready": false
+  },
+  "geometry_coverage": {
+    "scope": "active_enabled_collision_prims_in_inventory",
+    "enabled_robot_colliders": 6,
+    "included_robot_colliders": 6,
+    "unmapped_robot_colliders": [],
+    "all_enabled_robot_colliders_mapped": true,
+    "capsules_by_attachment": {
+      "joint": 6,
+      "base": 0,
+      "world": 0
+    },
+    "static_obstacle_count": 0,
+    "unmodeled_moving_obstacles": [],
+    "boundables_without_collision_api": 0,
+    "disabled_collision_prims": [],
+    "tool_coverage": "unverified",
+    "environment_coverage": "unverified",
+    "full_cell_coverage_verified": false,
+    "declared_geometry_expectations": {
+      "tool": {
+        "declared": false,
+        "entries": [],
+        "status": "undeclared"
+      },
+      "environment": {
+        "declared": false,
+        "entries": [],
+        "status": "undeclared"
+      }
+    },
+    "declared_geometry_incomplete": false
+  },
+  "motion_requested": false,
+  "execution_ready": false
+}

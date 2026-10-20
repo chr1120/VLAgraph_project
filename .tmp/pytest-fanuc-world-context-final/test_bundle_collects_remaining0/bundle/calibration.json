@@ -1,0 +1,63 @@
+{
+  "candidates": [
+    {
+      "schema": "vlagraph.fanuc_calibration_candidate_review.v1",
+      "status": "rejected",
+      "source_sha256": "7fa68e344b5a04803a1c2f93a2f8b46d186147273a7bbef13da03325fd90a02a",
+      "candidate_sha256": "4b6f0e10d5b6de8d54dcd194aefa62b728e051ee1e821ec7afdc15f64a4752d1",
+      "digest_encoding": "decoded_text_utf8",
+      "metadata": {
+        "ROBOT_NAME": "m20ia"
+      },
+      "robot_model_matches": false,
+      "available_frames": {
+        "UF": [],
+        "UT": []
+      },
+      "required_frames": {
+        "UF": [],
+        "UT": []
+      },
+      "missing_frames": {
+        "UF": [],
+        "UT": []
+      },
+      "cartesian_references": [],
+      "seed": {
+        "name": "start",
+        "joints_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "issues": [
+        {
+          "code": "robot_model_mismatch"
+        }
+      ],
+      "uninterpreted_records": [],
+      "pending_evidence": [
+        "robot_instance_and_program_provenance",
+        "controller_base_to_ik_base_transform",
+        "uf_wpr_convention_and_reference_pose",
+        "flange_to_tcp_convention_and_reference_pose",
+        "external_axis_frame_and_zero",
+        "calibration_revision_and_measured_residuals"
+      ],
+      "transforms_applied": false,
+      "calibration_verified": false,
+      "execution_ready": false,
+      "candidate_path": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-final\\test_bundle_collects_remaining0\\tooldata.ls"
+    },
+    {
+      "status": "error",
+      "candidate_path": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-final\\test_bundle_collects_remaining0\\missing.ls",
+      "message": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\0\\\\Desktop\\\\vla_chr\\\\VLAgraph_project\\\\.tmp\\\\pytest-fanuc-world-context-final\\\\test_bundle_collects_remaining0\\\\missing.ls'"
+    }
+  ],
+  "transforms_applied": false
+}

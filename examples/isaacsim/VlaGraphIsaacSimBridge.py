@@ -1907,6 +1907,8 @@ class VlaGraphIsaacSimBridge:
         return str(prim.GetName() or "")
 
     def _scan_scene(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        from pxr import UsdGeom
+
         stage = self._get_stage()
         if stage is None:
             raise ValueError("USD stage is not available")
@@ -1947,10 +1949,12 @@ class VlaGraphIsaacSimBridge:
             robot["type"] = str(robot_prim.GetTypeName())
 
         objects: list[Dict[str, Any]] = []
+        truncated = False
         prefix = root_path.rstrip("/") + "/"
         robot_prefix = robot_path.rstrip("/") + "/"
         for prim in stage.Traverse():
             if len(objects) >= max(1, max_objects):
+                truncated = True
                 break
             if not prim or not prim.IsValid() or not prim.IsActive():
                 continue
@@ -1995,6 +1999,16 @@ class VlaGraphIsaacSimBridge:
             "obstacles": [],
             "object_count": len(objects),
             "timestamp": time.time(),
+            "meters_per_unit": float(UsdGeom.GetStageMetersPerUnit(stage)),
+            "up_axis": str(UsdGeom.GetStageUpAxis(stage)),
+            "truncated": truncated,
+            "scan_scope": {
+                "root_path": root_path,
+                "max_objects": max(1, max_objects),
+                "include_types": sorted(include_types),
+                "excluded_types": sorted(exclude_tokens),
+                "robot_excluded": True,
+            },
         }
 
     def _stage_top_level_model_path(self, descendant_path: str) -> str:

@@ -1,0 +1,2 @@
+ROBOT_NAME,m710ic_20l_R01
+POSE,start,0,0,0,0,0,0

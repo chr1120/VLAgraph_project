@@ -1,0 +1,200 @@
+{
+  "action": {
+    "schema": "vlagraph.fanuc_m710ic20l.action.v1",
+    "command": "apply_fanuc_trajectory",
+    "unit": "degree",
+    "joint_names": [
+      "J1",
+      "J2",
+      "J3",
+      "J4",
+      "J5",
+      "J6"
+    ],
+    "preview_only": true,
+    "execution_enabled": false,
+    "execution_ready": false,
+    "joint_trajectory": [
+      {
+        "time_sec": 2,
+        "joint_positions": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "motion_type": "J",
+        "termination": "FINE"
+      },
+      {
+        "time_sec": 4,
+        "joint_positions": [
+          10,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "motion_type": "J",
+        "termination": "FINE"
+      }
+    ]
+  },
+  "scene": {
+    "schema": "vlagraph.fanuc_collision_scene.v1",
+    "scene_id": "synthetic_cell",
+    "scene_version": "v1",
+    "robot_model_version": "illustrative_capsules_v1",
+    "geometry_source": "configured_proxy",
+    "kinematics_source": "project_m710_configuration",
+    "frame": "right_handed_z_up_m",
+    "description": "Illustrative proxies only; radii and coverage are not validated against FANUC/USD collision shapes.",
+    "base_position": [
+      0,
+      0,
+      0
+    ],
+    "base_orientation_wxyz": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "link_capsules": [
+      {
+        "id": "link1",
+        "joint_index": 0,
+        "start_local": [
+          0,
+          0,
+          0
+        ],
+        "end_local": [
+          0.15,
+          0.0,
+          0.0
+        ],
+        "radius_m": 0.04
+      },
+      {
+        "id": "link2",
+        "joint_index": 1,
+        "start_local": [
+          0,
+          0,
+          0
+        ],
+        "end_local": [
+          0.0,
+          0.0,
+          1.15
+        ],
+        "radius_m": 0.04
+      },
+      {
+        "id": "link3",
+        "joint_index": 2,
+        "start_local": [
+          0,
+          0,
+          0
+        ],
+        "end_local": [
+          0.0,
+          0.0,
+          0.19
+        ],
+        "radius_m": 0.04
+      },
+      {
+        "id": "link4",
+        "joint_index": 3,
+        "start_local": [
+          0,
+          0,
+          0
+        ],
+        "end_local": [
+          1.8,
+          0.0,
+          0.0
+        ],
+        "radius_m": 0.04
+      },
+      {
+        "id": "link5",
+        "joint_index": 4,
+        "start_local": [
+          0,
+          0,
+          0
+        ],
+        "end_local": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "radius_m": 0.04
+      },
+      {
+        "id": "link6",
+        "joint_index": 5,
+        "start_local": [
+          0,
+          0,
+          0
+        ],
+        "end_local": [
+          0.1,
+          0.0,
+          0.0
+        ],
+        "radius_m": 0.04
+      }
+    ],
+    "excluded_self_pairs": [
+      [
+        "link1",
+        "link2"
+      ],
+      [
+        "link2",
+        "link3"
+      ],
+      [
+        "link3",
+        "link4"
+      ],
+      [
+        "link4",
+        "link5"
+      ],
+      [
+        "link5",
+        "link6"
+      ],
+      [
+        "link4",
+        "link6"
+      ]
+    ],
+    "obstacles": [
+      {
+        "id": "far_box",
+        "min": [
+          8,
+          8,
+          0
+        ],
+        "max": [
+          9,
+          9,
+          3
+        ]
+      }
+    ]
+  }
+}

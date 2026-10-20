@@ -15,6 +15,17 @@ export type NodeKind =
   | "motion_extract"
   | "motion_retarget"
   | "scene_scan"
+  | "world_state_build"
+  | "fanuc_state_read"
+  | "fanuc_snapshot_read"
+  | "fanuc_usd_geometry_read"
+  | "fanuc_usd_proxy_build"
+  | "fanuc_world_context"
+  | "fanuc_world_prediction"
+  | "fanuc_trajectory_validate"
+  | "fanuc_collision_check"
+  | "execution_observe"
+  | "execution_guard"
   | "scene_context_reset"
   | "spatial_memory_save"
   | "spatial_rag_retrieve"
@@ -209,6 +220,11 @@ export type GraphNodeData = {
   datasetNodeId?: string;
   sourceNodeId?: string;
   sceneId?: string;
+  episodeId?: string;
+  commandId?: string;
+  requireExecutionGuard?: boolean;
+  validationPolicy?: string;
+  sceneVersion?: string;
   sceneRootPath?: string;
   rootPath?: string;
   robotPrimPath?: string;

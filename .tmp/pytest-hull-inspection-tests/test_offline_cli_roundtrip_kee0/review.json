@@ -1,0 +1,291 @@
+{
+  "schema": "vlagraph.fanuc_geometry_review.v1",
+  "inventory_digest": "8dba192963f3d6be356303660d688430afc2603f5602b93383fda391cd8b1d63",
+  "scene_digest": "900ec7b048d2b3381043764f05d06b7878e01c5340e5356e6829f97b7f6be513",
+  "pair_decisions": [
+    {
+      "pair": [
+        "/World/Robot/link1/shape",
+        "/World/Robot/link2/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link1",
+        "/World/Robot/link2"
+      ],
+      "usd_relation": "adjacent_revolute_joint",
+      "inspection_priority": "inspect",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link1/shape",
+        "/World/Robot/link3/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link1",
+        "/World/Robot/link3"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link1/shape",
+        "/World/Robot/link4/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link1",
+        "/World/Robot/link4"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link1/shape",
+        "/World/Robot/link5/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link1",
+        "/World/Robot/link5"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link1/shape",
+        "/World/Robot/link6/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link1",
+        "/World/Robot/link6"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link2/shape",
+        "/World/Robot/link3/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link2",
+        "/World/Robot/link3"
+      ],
+      "usd_relation": "adjacent_revolute_joint",
+      "inspection_priority": "inspect",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link2/shape",
+        "/World/Robot/link4/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link2",
+        "/World/Robot/link4"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link2/shape",
+        "/World/Robot/link5/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link2",
+        "/World/Robot/link5"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link2/shape",
+        "/World/Robot/link6/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link2",
+        "/World/Robot/link6"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link3/shape",
+        "/World/Robot/link4/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link3",
+        "/World/Robot/link4"
+      ],
+      "usd_relation": "adjacent_revolute_joint",
+      "inspection_priority": "inspect",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link3/shape",
+        "/World/Robot/link5/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link3",
+        "/World/Robot/link5"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link3/shape",
+        "/World/Robot/link6/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link3",
+        "/World/Robot/link6"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link4/shape",
+        "/World/Robot/link5/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link4",
+        "/World/Robot/link5"
+      ],
+      "usd_relation": "adjacent_revolute_joint",
+      "inspection_priority": "inspect",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link4/shape",
+        "/World/Robot/link6/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link4",
+        "/World/Robot/link6"
+      ],
+      "usd_relation": "no_direct_joint_connection",
+      "inspection_priority": "normal",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    },
+    {
+      "pair": [
+        "/World/Robot/link5/shape",
+        "/World/Robot/link6/shape"
+      ],
+      "body_paths": [
+        "/World/Robot/link5",
+        "/World/Robot/link6"
+      ],
+      "usd_relation": "adjacent_revolute_joint",
+      "inspection_priority": "inspect",
+      "sampled_diagnostic": null,
+      "hull_inspection": null,
+      "decision": "keep",
+      "reviewed": false,
+      "reviewed_by": "",
+      "rationale": ""
+    }
+  ],
+  "geometry_expectations": {
+    "tool": {
+      "declared": false,
+      "required_prim_paths": []
+    },
+    "environment": {
+      "declared": false,
+      "required_prim_paths": []
+    }
+  },
+  "diagnostic_action_digest": null,
+  "hull_inspection_digest": null,
+  "physical_collision_verified": false,
+  "execution_ready": false
+}

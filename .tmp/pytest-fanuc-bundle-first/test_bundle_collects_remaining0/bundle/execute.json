@@ -1,0 +1,802 @@
+{
+  "schema": "vlagraph.fanuc_execute_offline_review.v1",
+  "boundary_status": "blocked_as_expected",
+  "graph_error_count": 1,
+  "report": {
+    "schema": "vlagraph.fanuc_preflight.v1",
+    "static_checks_passed": false,
+    "action_digest": "e21ef2cda029d3673c6607ef178ca7478f44db5c9dea501fa4a1c4712ed80bdc",
+    "validation_config": {
+      "maxVelocity": {},
+      "maxAcceleration": {}
+    },
+    "execution_ready": false,
+    "collision_checked": false,
+    "limit_source": "project_m710_configuration",
+    "interpolation": "dedicated_bridge_joint_smoothstep",
+    "errors": [
+      {
+        "code": "non_increasing_time",
+        "frame": 0,
+        "time_sec": 0.0,
+        "previous_time": 0.0
+      },
+      {
+        "code": "cnt_blending_unverified",
+        "frame": 1
+      }
+    ],
+    "warnings": [
+      "Velocity/acceleration limits must be configured before execution assessment"
+    ],
+    "unchecked": [
+      "environment_collision",
+      "self_collision",
+      "singularity",
+      "physical_rollout",
+      "live_state_freshness",
+      {
+        "check": "maxVelocity",
+        "unconfigured_axes": [
+          "J1",
+          "J2",
+          "J3",
+          "J4",
+          "J5",
+          "J6",
+          "externalAxisJoint"
+        ]
+      },
+      {
+        "check": "maxAcceleration",
+        "unconfigured_axes": [
+          "J1",
+          "J2",
+          "J3",
+          "J4",
+          "J5",
+          "J6",
+          "externalAxisJoint"
+        ]
+      },
+      "initial_motion_without_snapshot"
+    ],
+    "snapshot_ref": null,
+    "normalized_trajectory": [
+      {
+        "frame": 0,
+        "time_sec": 0.0,
+        "positions": {
+          "J1": 0.0,
+          "J2": 0.0,
+          "J3": 0.0,
+          "J4": 0.0,
+          "J5": 0.0,
+          "J6": 0.0,
+          "externalAxisJoint": 0.0
+        }
+      },
+      {
+        "frame": 1,
+        "time_sec": 4.0,
+        "positions": {
+          "J1": 0.17453292519943295,
+          "J2": -0.3490658503988659,
+          "J3": 0.5235987755982988,
+          "J4": -0.6981317007977318,
+          "J5": 0.8726646259971648,
+          "J6": -1.0471975511965976,
+          "externalAxisJoint": 0.0
+        }
+      },
+      {
+        "frame": 2,
+        "time_sec": 9.555556,
+        "positions": {
+          "J1": -0.2617993877991494,
+          "J2": 0.4363323129985824,
+          "J3": -0.6108652381980153,
+          "J4": 0.7853981633974483,
+          "J5": -0.9599310885968813,
+          "J6": 1.1344640137963142,
+          "externalAxisJoint": 0.0
+        }
+      }
+    ],
+    "segments": [
+      {
+        "end_frame": 1,
+        "duration_sec": 4.0,
+        "smoothstep_peaks": {
+          "J6": {
+            "velocity": 0.39269908169872414,
+            "acceleration": 0.39269908169872414
+          },
+          "J5": {
+            "velocity": 0.3272492347489368,
+            "acceleration": 0.3272492347489368
+          },
+          "J4": {
+            "velocity": 0.2617993877991494,
+            "acceleration": 0.2617993877991494
+          },
+          "J3": {
+            "velocity": 0.19634954084936207,
+            "acceleration": 0.19634954084936207
+          },
+          "J1": {
+            "velocity": 0.06544984694978735,
+            "acceleration": 0.06544984694978735
+          },
+          "externalAxisJoint": {
+            "velocity": 0.0,
+            "acceleration": 0.0
+          },
+          "J2": {
+            "velocity": 0.1308996938995747,
+            "acceleration": 0.1308996938995747
+          }
+        }
+      },
+      {
+        "end_frame": 2,
+        "duration_sec": 5.555555999999999,
+        "smoothstep_peaks": {
+          "J6": {
+            "velocity": 0.5890485754242003,
+            "acceleration": 0.42411494037622904
+          },
+          "J5": {
+            "velocity": 0.4948008033563283,
+            "acceleration": 0.3562565499160324
+          },
+          "J4": {
+            "velocity": 0.4005530312884562,
+            "acceleration": 0.28839815945583575
+          },
+          "J3": {
+            "velocity": 0.30630525922058416,
+            "acceleration": 0.2205397689956391
+          },
+          "J1": {
+            "velocity": 0.11780971508484003,
+            "acceleration": 0.08482298807524578
+          },
+          "externalAxisJoint": {
+            "velocity": 0.0,
+            "acceleration": 0.0
+          },
+          "J2": {
+            "velocity": 0.21205748715271208,
+            "acceleration": 0.15268137853544245
+          }
+        }
+      }
+    ],
+    "preview_action": null
+  },
+  "segment_report": {
+    "schema": "vlagraph.fanuc_segment_review.v1",
+    "action_digest": "e21ef2cda029d3673c6607ef178ca7478f44db5c9dea501fa4a1c4712ed80bdc",
+    "snapshot_ref": null,
+    "source_program": {
+      "name": "JOINTONLY",
+      "path": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-bundle-first\\test_bundle_collects_remaining0\\source.LS"
+    },
+    "program_static_checks_passed": false,
+    "global_issues": [],
+    "segment_count": 3,
+    "status_counts": {
+      "blocked": 3
+    },
+    "error_counts": {
+      "non_increasing_time": 1,
+      "cnt_blending_unverified": 1
+    },
+    "segments": [
+      {
+        "segment": 0,
+        "start": {
+          "frame": null,
+          "source": "unknown_initial_state"
+        },
+        "end": {
+          "frame": 0,
+          "source_line": 1,
+          "source_position_id": 1,
+          "motion_type": "J",
+          "termination": "FINE",
+          "source": "ls_motion"
+        },
+        "original_start_time_sec": 0,
+        "original_end_time_sec": 0.0,
+        "duration_sec": 0.0,
+        "status": "blocked",
+        "issues": [
+          {
+            "code": "non_increasing_time",
+            "frame": 0,
+            "time_sec": 0.0,
+            "previous_time": 0.0
+          },
+          {
+            "code": "invalid_segment_duration"
+          }
+        ],
+        "unmodeled_instructions": [],
+        "geometry_diagnostic_candidate": false,
+        "execution_ready": false
+      },
+      {
+        "segment": 1,
+        "start": {
+          "frame": 0,
+          "source_line": 1,
+          "source_position_id": 1,
+          "motion_type": "J",
+          "termination": "FINE",
+          "source": "ls_motion"
+        },
+        "end": {
+          "frame": 1,
+          "source_line": 2,
+          "source_position_id": 2,
+          "motion_type": "J",
+          "termination": "CNT50",
+          "source": "ls_motion"
+        },
+        "original_start_time_sec": 0.0,
+        "original_end_time_sec": 4.0,
+        "duration_sec": 4.0,
+        "status": "blocked",
+        "issues": [
+          {
+            "code": "non_increasing_time",
+            "frame": 0,
+            "time_sec": 0.0,
+            "previous_time": 0.0
+          },
+          {
+            "code": "cnt_blending_unverified",
+            "frame": 1
+          }
+        ],
+        "unmodeled_instructions": [],
+        "geometry_diagnostic_candidate": false,
+        "execution_ready": false
+      },
+      {
+        "segment": 2,
+        "start": {
+          "frame": 1,
+          "source_line": 2,
+          "source_position_id": 2,
+          "motion_type": "J",
+          "termination": "CNT50",
+          "source": "ls_motion"
+        },
+        "end": {
+          "frame": 2,
+          "source_line": 3,
+          "source_position_id": 3,
+          "motion_type": "J",
+          "termination": "FINE",
+          "source": "ls_motion"
+        },
+        "original_start_time_sec": 4.0,
+        "original_end_time_sec": 9.555556,
+        "duration_sec": 5.555555999999999,
+        "status": "blocked",
+        "issues": [
+          {
+            "code": "cnt_blending_unverified",
+            "frame": 1
+          }
+        ],
+        "unmodeled_instructions": [],
+        "geometry_diagnostic_candidate": false,
+        "execution_ready": false
+      }
+    ],
+    "source_instruction_audit": {
+      "schema": "vlagraph.fanuc_ls_instruction_audit.v1",
+      "source_sha256": "ed79cb545dbd1c62f69bd7cc2d3a4a8dde8c2ef62fb74a49a07b59ebb0cbcc8f",
+      "recognized_counts": {
+        "motion": 3
+      },
+      "unmodeled": [],
+      "issues": [],
+      "source_program_semantics_verified": false
+    },
+    "scope": "nominal_dedicated_bridge_motion_segments_only",
+    "time_rebased": false,
+    "partial_program_execution_supported": false,
+    "physical_collision_verified": false,
+    "execution_ready": false
+  },
+  "prepare_summary": {
+    "source_frames": 3,
+    "executable_joint_frames": 3,
+    "direct_joint_frames": 3,
+    "calibrated_cartesian_frames": 0,
+    "relative_cartesian_frames": 0,
+    "skipped_cartesian_frames": 0,
+    "skipped_unresolved_frames": 0,
+    "ik_solved_frames": 0,
+    "ik_failures": 0,
+    "skipped_unresolved_details": [],
+    "skipped_cartesian_details": [],
+    "execution_ready": true,
+    "preview_only": true,
+    "total_duration_sec": 9.555556,
+    "seconds_per_frame": 3.0,
+    "timing_mode": "source_speed",
+    "trajectory_time_scale": 1.0,
+    "cartesian_axis_signs": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "joint_axis_signs": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "initial_joint_axis_signs": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "external_axis_vectors": {
+      "E1": [
+        -1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "external_axis_joint_names": {
+      "E1": "externalAxisJoint"
+    },
+    "external_axis_root_motion_enabled": true,
+    "external_axis_affects_ik": false,
+    "initial_settings_applied": false,
+    "initial_settings_source_path": null,
+    "initial_joint_seed_applied": false,
+    "initial_pose_frame_applied": false,
+    "initial_pose_duration_sec": 0.0,
+    "initial_pose_hold_sec": 0.0,
+    "return_to_initial_pose_on_complete": true,
+    "initial_pose_return_sec": 0.0,
+    "initial_external_axes_mm": {},
+    "trailing_external_axis_return": {
+      "trimmed_frames": 0
+    },
+    "frame_time_sanitization": {
+      "adjusted_frames": 0,
+      "min_step_sec": 0.001
+    },
+    "calibrated_uframes": [],
+    "calibrated_utools": []
+  },
+  "guard": {
+    "ok": true,
+    "type": "execution_guard_result",
+    "action": {
+      "type": "execution_blocked",
+      "reasons": [
+        {
+          "code": "static_validation_failed",
+          "errors": [
+            {
+              "code": "non_increasing_time",
+              "frame": 0,
+              "time_sec": 0.0,
+              "previous_time": 0.0
+            },
+            {
+              "code": "cnt_blending_unverified",
+              "frame": 1
+            }
+          ]
+        },
+        {
+          "code": "preflight_report_failed"
+        },
+        {
+          "code": "prepare_did_not_enable_execution"
+        },
+        {
+          "code": "full_validation_unavailable",
+          "unchecked": [
+            "environment_collision",
+            "self_collision",
+            "singularity",
+            "physical_rollout",
+            "live_state_freshness",
+            {
+              "check": "maxVelocity",
+              "unconfigured_axes": [
+                "J1",
+                "J2",
+                "J3",
+                "J4",
+                "J5",
+                "J6",
+                "externalAxisJoint"
+              ]
+            },
+            {
+              "check": "maxAcceleration",
+              "unconfigured_axes": [
+                "J1",
+                "J2",
+                "J3",
+                "J4",
+                "J5",
+                "J6",
+                "externalAxisJoint"
+              ]
+            },
+            "initial_motion_without_snapshot"
+          ]
+        }
+      ]
+    },
+    "approved": false,
+    "action_digest": null,
+    "decision": {
+      "approved": false,
+      "validation_policy": "full",
+      "reasons": [
+        {
+          "code": "static_validation_failed",
+          "errors": [
+            {
+              "code": "non_increasing_time",
+              "frame": 0,
+              "time_sec": 0.0,
+              "previous_time": 0.0
+            },
+            {
+              "code": "cnt_blending_unverified",
+              "frame": 1
+            }
+          ]
+        },
+        {
+          "code": "preflight_report_failed"
+        },
+        {
+          "code": "prepare_did_not_enable_execution"
+        },
+        {
+          "code": "full_validation_unavailable",
+          "unchecked": [
+            "environment_collision",
+            "self_collision",
+            "singularity",
+            "physical_rollout",
+            "live_state_freshness",
+            {
+              "check": "maxVelocity",
+              "unconfigured_axes": [
+                "J1",
+                "J2",
+                "J3",
+                "J4",
+                "J5",
+                "J6",
+                "externalAxisJoint"
+              ]
+            },
+            {
+              "check": "maxAcceleration",
+              "unconfigured_axes": [
+                "J1",
+                "J2",
+                "J3",
+                "J4",
+                "J5",
+                "J6",
+                "externalAxisJoint"
+              ]
+            },
+            "initial_motion_without_snapshot"
+          ]
+        }
+      ],
+      "collision_checked": false,
+      "physical_rollout_checked": false,
+      "collision_geometry": {
+        "status": "not_requested",
+        "coverage": null,
+        "scene_id": null,
+        "scene_version": null,
+        "scene_digest": null,
+        "physical_collision_verified": false,
+        "snapshot_ref": null,
+        "initial_segment_checked": null
+      },
+      "initial_snapshot_age_sec": null,
+      "unchecked": [
+        "environment_collision",
+        "self_collision",
+        "singularity",
+        "physical_rollout",
+        "live_state_freshness",
+        {
+          "check": "maxVelocity",
+          "unconfigured_axes": [
+            "J1",
+            "J2",
+            "J3",
+            "J4",
+            "J5",
+            "J6",
+            "externalAxisJoint"
+          ]
+        },
+        {
+          "check": "maxAcceleration",
+          "unconfigured_axes": [
+            "J1",
+            "J2",
+            "J3",
+            "J4",
+            "J5",
+            "J6",
+            "externalAxisJoint"
+          ]
+        },
+        "initial_motion_without_snapshot"
+      ]
+    }
+  },
+  "execute": {
+    "ok": false,
+    "skipped": true,
+    "result": {
+      "ok": false,
+      "skipped": true,
+      "mode": "omniverse",
+      "message": "Execution guard blocked the action or authorization is missing.",
+      "guard_decision": {
+        "approved": false,
+        "validation_policy": "full",
+        "reasons": [
+          {
+            "code": "static_validation_failed",
+            "errors": [
+              {
+                "code": "non_increasing_time",
+                "frame": 0,
+                "time_sec": 0.0,
+                "previous_time": 0.0
+              },
+              {
+                "code": "cnt_blending_unverified",
+                "frame": 1
+              }
+            ]
+          },
+          {
+            "code": "preflight_report_failed"
+          },
+          {
+            "code": "prepare_did_not_enable_execution"
+          },
+          {
+            "code": "full_validation_unavailable",
+            "unchecked": [
+              "environment_collision",
+              "self_collision",
+              "singularity",
+              "physical_rollout",
+              "live_state_freshness",
+              {
+                "check": "maxVelocity",
+                "unconfigured_axes": [
+                  "J1",
+                  "J2",
+                  "J3",
+                  "J4",
+                  "J5",
+                  "J6",
+                  "externalAxisJoint"
+                ]
+              },
+              {
+                "check": "maxAcceleration",
+                "unconfigured_axes": [
+                  "J1",
+                  "J2",
+                  "J3",
+                  "J4",
+                  "J5",
+                  "J6",
+                  "externalAxisJoint"
+                ]
+              },
+              "initial_motion_without_snapshot"
+            ]
+          }
+        ],
+        "collision_checked": false,
+        "physical_rollout_checked": false,
+        "collision_geometry": {
+          "status": "not_requested",
+          "coverage": null,
+          "scene_id": null,
+          "scene_version": null,
+          "scene_digest": null,
+          "physical_collision_verified": false,
+          "snapshot_ref": null,
+          "initial_segment_checked": null
+        },
+        "initial_snapshot_age_sec": null,
+        "unchecked": [
+          "environment_collision",
+          "self_collision",
+          "singularity",
+          "physical_rollout",
+          "live_state_freshness",
+          {
+            "check": "maxVelocity",
+            "unconfigured_axes": [
+              "J1",
+              "J2",
+              "J3",
+              "J4",
+              "J5",
+              "J6",
+              "externalAxisJoint"
+            ]
+          },
+          {
+            "check": "maxAcceleration",
+            "unconfigured_axes": [
+              "J1",
+              "J2",
+              "J3",
+              "J4",
+              "J5",
+              "J6",
+              "externalAxisJoint"
+            ]
+          },
+          "initial_motion_without_snapshot"
+        ]
+      }
+    },
+    "message": "Execution guard blocked the action or authorization is missing."
+  },
+  "network_commands_sent": [],
+  "motion_requested": false,
+  "calibration_candidates_applied": false,
+  "node_errors": {
+    "fanuc-m710-execute": {
+      "ok": false,
+      "skipped": true,
+      "result": {
+        "ok": false,
+        "skipped": true,
+        "mode": "omniverse",
+        "message": "Execution guard blocked the action or authorization is missing.",
+        "guard_decision": {
+          "approved": false,
+          "validation_policy": "full",
+          "reasons": [
+            {
+              "code": "static_validation_failed",
+              "errors": [
+                {
+                  "code": "non_increasing_time",
+                  "frame": 0,
+                  "time_sec": 0.0,
+                  "previous_time": 0.0
+                },
+                {
+                  "code": "cnt_blending_unverified",
+                  "frame": 1
+                }
+              ]
+            },
+            {
+              "code": "preflight_report_failed"
+            },
+            {
+              "code": "prepare_did_not_enable_execution"
+            },
+            {
+              "code": "full_validation_unavailable",
+              "unchecked": [
+                "environment_collision",
+                "self_collision",
+                "singularity",
+                "physical_rollout",
+                "live_state_freshness",
+                {
+                  "check": "maxVelocity",
+                  "unconfigured_axes": [
+                    "J1",
+                    "J2",
+                    "J3",
+                    "J4",
+                    "J5",
+                    "J6",
+                    "externalAxisJoint"
+                  ]
+                },
+                {
+                  "check": "maxAcceleration",
+                  "unconfigured_axes": [
+                    "J1",
+                    "J2",
+                    "J3",
+                    "J4",
+                    "J5",
+                    "J6",
+                    "externalAxisJoint"
+                  ]
+                },
+                "initial_motion_without_snapshot"
+              ]
+            }
+          ],
+          "collision_checked": false,
+          "physical_rollout_checked": false,
+          "collision_geometry": {
+            "status": "not_requested",
+            "coverage": null,
+            "scene_id": null,
+            "scene_version": null,
+            "scene_digest": null,
+            "physical_collision_verified": false,
+            "snapshot_ref": null,
+            "initial_segment_checked": null
+          },
+          "initial_snapshot_age_sec": null,
+          "unchecked": [
+            "environment_collision",
+            "self_collision",
+            "singularity",
+            "physical_rollout",
+            "live_state_freshness",
+            {
+              "check": "maxVelocity",
+              "unconfigured_axes": [
+                "J1",
+                "J2",
+                "J3",
+                "J4",
+                "J5",
+                "J6",
+                "externalAxisJoint"
+              ]
+            },
+            {
+              "check": "maxAcceleration",
+              "unconfigured_axes": [
+                "J1",
+                "J2",
+                "J3",
+                "J4",
+                "J5",
+                "J6",
+                "externalAxisJoint"
+              ]
+            },
+            "initial_motion_without_snapshot"
+          ]
+        }
+      },
+      "message": "Execution guard blocked the action or authorization is missing."
+    }
+  }
+}

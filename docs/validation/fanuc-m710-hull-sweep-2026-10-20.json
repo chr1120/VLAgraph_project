@@ -1,0 +1,418 @@
+{
+  "schema": "vlagraph.fanuc_hull_sweep.v1",
+  "status": "margin_violation",
+  "pairs": [
+    {
+      "pair": [
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box",
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+      ],
+      "body_paths": [
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail",
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link"
+      ],
+      "status": "margin_violation",
+      "samples_checked": 41,
+      "margin_violation_samples": 41,
+      "indeterminate_samples": 0,
+      "unresolved_interval_count": 40,
+      "unresolved_intervals": [
+        {
+          "start_time_sec": 2.0,
+          "end_time_sec": 2.05,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.05,
+          "end_time_sec": 2.1,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.1,
+          "end_time_sec": 2.15,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.15,
+          "end_time_sec": 2.2,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.2,
+          "end_time_sec": 2.25,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.25,
+          "end_time_sec": 2.3,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.3,
+          "end_time_sec": 2.35,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.35,
+          "end_time_sec": 2.4,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.4,
+          "end_time_sec": 2.45,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.45,
+          "end_time_sec": 2.5,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.5,
+          "end_time_sec": 2.55,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.55,
+          "end_time_sec": 2.6,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.6,
+          "end_time_sec": 2.65,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.65,
+          "end_time_sec": 2.7,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.7,
+          "end_time_sec": 2.75,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.75,
+          "end_time_sec": 2.8,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.8,
+          "end_time_sec": 2.85,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.85,
+          "end_time_sec": 2.9,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.9,
+          "end_time_sec": 2.95,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 2.95,
+          "end_time_sec": 3.0,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.0,
+          "end_time_sec": 3.05,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.05,
+          "end_time_sec": 3.1,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.1,
+          "end_time_sec": 3.15,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.15,
+          "end_time_sec": 3.2,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.2,
+          "end_time_sec": 3.25,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.25,
+          "end_time_sec": 3.3,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.3,
+          "end_time_sec": 3.35,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.35,
+          "end_time_sec": 3.4,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.4,
+          "end_time_sec": 3.45,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.45,
+          "end_time_sec": 3.5,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.5,
+          "end_time_sec": 3.55,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.55,
+          "end_time_sec": 3.6,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.6,
+          "end_time_sec": 3.65,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.65,
+          "end_time_sec": 3.7,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.7,
+          "end_time_sec": 3.75,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.75,
+          "end_time_sec": 3.8,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.8,
+          "end_time_sec": 3.85,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.85,
+          "end_time_sec": 3.9,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.9,
+          "end_time_sec": 3.95,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        },
+        {
+          "start_time_sec": 3.95,
+          "end_time_sec": 4.0,
+          "motion_bound_m": 0.0,
+          "distance_lower_bound_m": 0.0
+        }
+      ],
+      "min_sample_distance_lower_bound_m": 0.0,
+      "min_sample_distance_upper_bound_m": 1.2062185739584076e-16,
+      "min_upper_bound_time_sec": 2.0,
+      "min_interval_distance_lower_bound_m": 0.0,
+      "geometry": [
+        {
+          "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box",
+          "representation": "authored_cube_vertices",
+          "point_count": 8,
+          "anchor_points_digest": "d7667de0d6f401a6c7c6dc4617b103f3bee8eabebf56072c79ede17c63bd3cfb"
+        },
+        {
+          "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "representation": "convex_hull_of_authored_mesh_points",
+          "point_count": 141,
+          "anchor_points_digest": "ecab7d4460f5d8a6a65028357ae00adcf7f69a00a726d5a49b26ab17f8cf88b9"
+        }
+      ],
+      "unsupported_geometry": {},
+      "between_samples_certified": false
+    },
+    {
+      "pair": [
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1"
+      ],
+      "body_paths": [
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link",
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link"
+      ],
+      "status": "separated_over_interval",
+      "samples_checked": 41,
+      "margin_violation_samples": 0,
+      "indeterminate_samples": 0,
+      "unresolved_interval_count": 0,
+      "unresolved_intervals": [],
+      "min_sample_distance_lower_bound_m": 0.03561204887293152,
+      "min_sample_distance_upper_bound_m": 0.03561204887698067,
+      "min_upper_bound_time_sec": 2.0,
+      "min_interval_distance_lower_bound_m": 0.03561204887293152,
+      "geometry": [
+        {
+          "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+          "representation": "convex_hull_of_authored_mesh_points",
+          "point_count": 72,
+          "anchor_points_digest": "360e64f5b3d12f3c31f4113c69cd562602cec73c3fd361c8f5f7853fb6a3dafd"
+        },
+        {
+          "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+          "representation": "convex_hull_of_authored_mesh_points",
+          "point_count": 138,
+          "anchor_points_digest": "7d7cf8a2fb9e27ba3320d744e12ab03cdb0e54141f799463ca2cefcdd1e8b253"
+        }
+      ],
+      "unsupported_geometry": {},
+      "between_samples_certified": true
+    },
+    {
+      "pair": [
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1"
+      ],
+      "body_paths": [
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link",
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link"
+      ],
+      "status": "separated_over_interval",
+      "samples_checked": 41,
+      "margin_violation_samples": 0,
+      "indeterminate_samples": 0,
+      "unresolved_interval_count": 0,
+      "unresolved_intervals": [],
+      "min_sample_distance_lower_bound_m": 0.14144877727744232,
+      "min_sample_distance_upper_bound_m": 0.14144877728144184,
+      "min_upper_bound_time_sec": 2.0,
+      "min_interval_distance_lower_bound_m": 0.14144877727744232,
+      "geometry": [
+        {
+          "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+          "representation": "convex_hull_of_authored_mesh_points",
+          "point_count": 342,
+          "anchor_points_digest": "e496e66e168eddc4b2cf6ab7cea995b6287587241bdedf99ac3f9f82baa7fa16"
+        },
+        {
+          "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+          "representation": "convex_hull_of_authored_mesh_points",
+          "point_count": 141,
+          "anchor_points_digest": "ecab7d4460f5d8a6a65028357ae00adcf7f69a00a726d5a49b26ab17f8cf88b9"
+        }
+      ],
+      "unsupported_geometry": {},
+      "between_samples_certified": true
+    },
+    {
+      "pair": [
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box"
+      ],
+      "body_paths": [
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link",
+        "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base"
+      ],
+      "status": "separated_over_interval",
+      "samples_checked": 41,
+      "margin_violation_samples": 0,
+      "indeterminate_samples": 0,
+      "unresolved_interval_count": 0,
+      "unresolved_intervals": [],
+      "min_sample_distance_lower_bound_m": 0.16213455334919444,
+      "min_sample_distance_upper_bound_m": 0.16213455335319585,
+      "min_upper_bound_time_sec": 2.0,
+      "min_interval_distance_lower_bound_m": 0.16213455334919444,
+      "geometry": [
+        {
+          "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+          "representation": "convex_hull_of_authored_mesh_points",
+          "point_count": 213,
+          "anchor_points_digest": "8104ddb31eadbb3d2ea99e5d018b8fcae55f1007900ab101cebb9040150d07ee"
+        },
+        {
+          "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+          "representation": "authored_cube_vertices",
+          "point_count": 8,
+          "anchor_points_digest": "56b0141ce502a284c5bc6bb7d76723311264bb1c75b71d9236edda44a7f183ae"
+        }
+      ],
+      "unsupported_geometry": {},
+      "between_samples_certified": true
+    }
+  ],
+  "inventory_digest": "cff677264ea4f3aa8912d7d8243957aae5b192bb2624e03c7187e94df4c0607c",
+  "scene_digest": "576cb0e10a754e6a749844ac37141d41d5f5f8cd829269dedac3ec4997dcb310",
+  "action_digest": "326fdf92365dbb23f8b5ee7f07c0a96e2a56c3b5ea40602badd12dd2d3edfe2d",
+  "collision_report_digest": "6f9b3a65e6dfc1a7871e05a8cecb6e90509e0b24c3a5f68fcbd21aa6a1a81c16",
+  "snapshot_ref": null,
+  "initial_segment_checked": false,
+  "checked_time_range_sec": [
+    2.0,
+    4.0
+  ],
+  "sample_count": 41,
+  "max_step_sec": 0.05,
+  "margin_m": 0.01,
+  "scope": "selected_nonadjacent_capsule_violation_pairs_only",
+  "all_selected_pairs_certified": false,
+  "motion_requested": false,
+  "physical_collision_verified": false,
+  "execution_ready": false,
+  "exclusion_policy": "unchanged",
+  "unchecked": [
+    "other_collision_pairs",
+    "physx_cooked_collision_shapes",
+    "contact_skin_defaults",
+    "live_physics_state",
+    "tool_and_environment_completeness"
+  ],
+  "sweep_digest": "64a4bdc96998a46b20ec5ef12bcf00f5d7321c1fab4e3c002d3c9bffa5f553ec"
+}

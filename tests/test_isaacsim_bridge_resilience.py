@@ -56,3 +56,42 @@ def test_backend_websocket_connection_failures_are_rate_limited(monkeypatch):
     assert second is None
     assert attempts == 1
     assert bridge._backend_ws_next_connect_at_by_kind["state"] > time.time()
+
+
+def test_scene_scan_reports_stage_units_scope_and_truncation(monkeypatch):
+    module = _load_bridge_module()
+    bridge = module.VlaGraphIsaacSimBridge()
+
+    class Prim:
+        def __init__(self, path):
+            self.path = path
+
+        def IsValid(self): return True
+        def IsActive(self): return True
+        def IsAbstract(self): return False
+        def GetPath(self): return self.path
+        def GetName(self): return self.path.rsplit("/", 1)[-1]
+        def GetTypeName(self): return "Cube"
+
+    prims = [Prim("/World/Robot"), Prim("/World/Box1"), Prim("/World/Box2")]
+    stage = SimpleNamespace(
+        GetRootLayer=lambda: SimpleNamespace(identifier="cell.usd"),
+        GetPrimAtPath=lambda path: Prim(path), Traverse=lambda: iter(prims),
+    )
+    monkeypatch.setitem(sys.modules, "pxr", SimpleNamespace(UsdGeom=SimpleNamespace(
+        GetStageMetersPerUnit=lambda _: 0.001, GetStageUpAxis=lambda _: "Y",
+    )))
+    monkeypatch.setattr(bridge, "_get_stage", lambda: stage)
+    monkeypatch.setattr(bridge, "_valid_prim_path", lambda _: True)
+    monkeypatch.setattr(bridge, "_prim_world_pose", lambda _: {"position": [1, 2, 3]})
+    monkeypatch.setattr(bridge, "_prim_world_bbox", lambda _: {"center": [1, 2, 3], "size": [1, 1, 1]})
+    monkeypatch.setattr(bridge, "_prim_semantic_label", lambda _: "box")
+    limited = bridge._scan_scene({"prim_path": "/World/Robot", "max_objects": 1})
+    assert limited["meters_per_unit"] == 0.001
+    assert limited["up_axis"] == "Y"
+    assert limited["truncated"] is True
+    assert limited["scan_scope"]["robot_excluded"] is True
+    assert "sim_time" not in limited
+    full = bridge._scan_scene({"prim_path": "/World/Robot", "max_objects": 10})
+    assert full["truncated"] is False
+    assert len(full["objects"]) == 2

@@ -11,6 +11,8 @@ function prettyValue(value: unknown) {
 function isBooleanKey(key: string) {
   return [
     "enabled",
+    "requireInitialSnapshot",
+    "requireWorldContext",
     "dryRun",
     "loraEnabled",
     "returnTimestamps",
@@ -35,6 +37,12 @@ function isBooleanKey(key: string) {
 
 function isNumberKey(key: string) {
   return [
+    "maxStepSec",
+    "marginM",
+    "maxSamples",
+    "maxSnapshotAgeSec",
+    "maxColliders",
+    "paddingM",
     "maxDelta",
     "epochs",
     "batchSize",
@@ -766,6 +774,22 @@ function renderFieldInput(
   nodeId: string,
   onNodeDataChange: (nodeId: string, key: string, value: unknown) => void
 ) {
+  if (nodeType === "fanuc_usd_geometry_read" && key === "source") {
+    return (
+      <select value={String(value ?? "bridge")} onChange={(e) => onNodeDataChange(nodeId, key, e.target.value)}>
+        <option value="bridge">Isaac Sim 현재 USD 장면</option>
+        <option value="file">백엔드에서 접근 가능한 USD 파일</option>
+      </select>
+    );
+  }
+  if (nodeType === "execution_guard" && key === "validationPolicy") {
+    return (
+      <select value={String(value ?? "full")} onChange={(e) => onNodeDataChange(nodeId, key, e.target.value)}>
+        <option value="full">전체 검증 — 미검증 항목이 있으면 차단</option>
+        <option value="static_simulation">정적 검사 후 Isaac Sim 실행 — 충돌·물리 예측 미포함</option>
+      </select>
+    );
+  }
   if (isRootMotionModeKey(nodeType, key)) {
     return (
       <select

@@ -482,6 +482,162 @@ export const NODE_DEF_BY_TYPE: Record<string, NodeDef> = {
     },
   },
 
+  fanuc_usd_geometry_read: {
+    type: "fanuc_usd_geometry_read", label: "FANUC USD Geometry", category: "Spatial", width: 360,
+    inputs: [],
+    outputs: [{ id: "inventory", label: "USD Collision Inventory", pinType: "JSON", kind: "source" }],
+    defaults: {
+      label: "FANUC USD Geometry", source: "bridge", usdPath: "",
+      omniverseEndpoint: "ws://host.docker.internal:9910/omniverse",
+      robotPrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+      rootPath: "/World", maxColliders: 4096, timeoutSec: 15,
+    },
+  },
+
+  fanuc_usd_proxy_build: {
+    type: "fanuc_usd_proxy_build", label: "FANUC USD Proxy", category: "Spatial", width: 360,
+    inputs: [
+      { id: "inventory", label: "USD Collision Inventory", pinType: "JSON", kind: "target" },
+      { id: "review", label: "Geometry Review (optional)", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [
+      { id: "scene", label: "Robot Proxy Scene", pinType: "JSON", kind: "source" },
+      { id: "coverage_report", label: "Geometry Coverage", pinType: "JSON", kind: "source" },
+      { id: "review_plan", label: "Geometry Review Plan", pinType: "JSON", kind: "source" },
+      { id: "binding_report", label: "USD / FK Binding", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "FANUC USD Proxy", paddingM: 0, excludedSelfPairs: [], geometryReview: {} },
+  },
+
+  fanuc_collision_check: {
+    type: "fanuc_collision_check", label: "FANUC Geometry Collision", category: "Spatial", width: 360,
+    inputs: [
+      { id: "action", label: "Prepared Action", pinType: "JSON", kind: "target" },
+      { id: "scene", label: "Collision Scene", pinType: "JSON", kind: "target" },
+      { id: "inventory", label: "USD Inventory (optional)", pinType: "JSON", kind: "target" },
+      { id: "snapshot", label: "Initial Snapshot", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [{ id: "collision_report", label: "Collision Report", pinType: "JSON", kind: "source" }],
+    defaults: { label: "FANUC Geometry Collision", enabled: false, scene: {}, maxStepSec: 0.05, marginM: 0.01, maxSamples: 10000 },
+  },
+
+  fanuc_trajectory_validate: {
+    type: "fanuc_trajectory_validate", label: "FANUC Trajectory Preflight", category: "Spatial", width: 360,
+    inputs: [
+      { id: "action", label: "Prepared Action", pinType: "JSON", kind: "target" },
+      { id: "snapshot", label: "Initial Snapshot", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [
+      { id: "report", label: "Validation Report", pinType: "JSON", kind: "source" },
+      { id: "segment_report", label: "LS Segment Review", pinType: "JSON", kind: "source" },
+      { id: "preview_action", label: "Preview Only", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "FANUC Trajectory Preflight", maxVelocity: {}, maxAcceleration: {} },
+  },
+
+  fanuc_snapshot_read: {
+    type: "fanuc_snapshot_read", label: "FANUC Physics Snapshot", category: "Spatial", width: 340,
+    inputs: [],
+    outputs: [{ id: "snapshot", label: "Snapshot", pinType: "JSON", kind: "source" }],
+    defaults: {
+      label: "FANUC Physics Snapshot", omniverseEndpoint: "ws://host.docker.internal:9910/omniverse",
+      robotPrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+      timeoutSec: 5,
+    },
+  },
+
+  fanuc_world_context: {
+    type: "fanuc_world_context", label: "FANUC Collection Context", category: "Spatial", width: 360,
+    inputs: [
+      { id: "scan", label: "Current Scene Scan", pinType: "JSON", kind: "target" },
+      { id: "snapshot", label: "Physics Snapshot", pinType: "JSON", kind: "target" },
+      { id: "inventory", label: "Collision Inventory", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [
+      { id: "context_report", label: "Collection Reconciliation", pinType: "JSON", kind: "source" },
+      { id: "scene", label: "Reconciled Collision Scene", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "FANUC Collection Context", memoryPath: "spatial_memory/spatial_memory.jsonl",
+      maxMemoryAgeSec: 86400, maxLiveAgeSec: 5, positionToleranceM: 0.02 },
+  },
+  fanuc_world_prediction: {
+    type: "fanuc_world_prediction", label: "FANUC Prediction Handoff", category: "Spatial", width: 360,
+    inputs: [
+      { id: "action", label: "Prepared Action", pinType: "JSON", kind: "target" },
+      { id: "context_report", label: "World Context", pinType: "JSON", kind: "target" },
+      { id: "collision_report", label: "Geometry Sweep", pinType: "JSON", kind: "target" },
+      { id: "snapshot", label: "Physics Snapshot", pinType: "JSON", kind: "target" },
+      { id: "scene", label: "Collision Scene", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [{ id: "prediction_report", label: "Prediction Availability", pinType: "JSON", kind: "source" }],
+    defaults: { label: "FANUC Prediction Handoff" },
+  },
+  execution_guard: {
+    type: "execution_guard", label: "Execution Guard", category: "Spatial", width: 360,
+    inputs: [
+      { id: "action", label: "Prepared Action", pinType: "JSON", kind: "target" },
+      { id: "report", label: "Validation Report", pinType: "JSON", kind: "target" },
+      { id: "collision_report", label: "Collision Report", pinType: "JSON", kind: "target" },
+      { id: "snapshot", label: "Initial Snapshot", pinType: "JSON", kind: "target" },
+      { id: "context_report", label: "Collection Reconciliation", pinType: "JSON", kind: "target" },
+      { id: "prediction_report", label: "Prediction Report", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [
+      { id: "action", label: "Guarded Action", pinType: "JSON", kind: "source" },
+      { id: "decision", label: "Execution Decision", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "Execution Guard", validationPolicy: "full", requireInitialSnapshot: false, maxSnapshotAgeSec: 5 },
+  },
+
+  execution_observe: {
+    type: "execution_observe", label: "Execution Observe", category: "Spatial", width: 340,
+    inputs: [{ id: "command_id", label: "Command ID", pinType: "TEXT", kind: "target" }],
+    outputs: [
+      { id: "execution", label: "Execution", pinType: "JSON", kind: "source" },
+      { id: "completed", label: "Completed", pinType: "JSON", kind: "source" },
+    ],
+    defaults: {
+      label: "Execution Observe", omniverseEndpoint: "ws://host.docker.internal:9910/omniverse",
+      robotPrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+      commandId: "", timeoutSec: 5,
+    },
+  },
+
+  fanuc_state_read: {
+    type: "fanuc_state_read",
+    label: "FANUC State Read",
+    category: "Spatial",
+    width: 340,
+    inputs: [],
+    outputs: [
+      { id: "state", label: "Arm Observation", pinType: "JSON", kind: "source" },
+      { id: "raw_state", label: "Raw Bridge State", pinType: "JSON", kind: "source" },
+    ],
+    defaults: {
+      label: "FANUC State Read",
+      omniverseEndpoint: "ws://host.docker.internal:9910/omniverse",
+      robotPrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+      timeoutSec: 5,
+    },
+  },
+
+  world_state_build: {
+    type: "world_state_build",
+    label: "World State Build",
+    category: "Spatial",
+    width: 340,
+    inputs: [
+      { id: "scan", label: "Scan", pinType: "JSON", kind: "target" },
+      { id: "episode_id", label: "Episode ID", pinType: "TEXT", kind: "target" },
+      { id: "scene_version", label: "Scene Version", pinType: "TEXT", kind: "target" },
+    ],
+    outputs: [
+      { id: "world_state", label: "World State", pinType: "JSON", kind: "source" },
+      { id: "prediction_ready", label: "Prediction Ready", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "World State Build", episodeId: "", sceneVersion: "" },
+  },
+
   scene_context_reset: {
     type: "scene_context_reset",
     label: "Scene Context Reset",
@@ -514,7 +670,6 @@ export const NODE_DEF_BY_TYPE: Record<string, NodeDef> = {
     defaults: {
       label: "Spatial Memory Save",
       memoryPath: "spatial_memory/spatial_memory.jsonl",
-      success: true,
     },
   },
 
@@ -689,6 +844,7 @@ export const NODE_DEF_BY_TYPE: Record<string, NodeDef> = {
     defaults: {
       label: "Robot Execute Node",
       executor: "robot-executor",
+      commandId: "",
       mode: "omniverse", // simulate | unity | omniverse | ros
 
       // simulate

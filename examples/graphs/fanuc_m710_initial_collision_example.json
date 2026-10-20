@@ -1,0 +1,171 @@
+{
+  "schema": "vlagraph.fanuc_collision_diagnostic_input.v1",
+  "source": "synthetic_initial_sweep_regression",
+  "note": "Synthetic proxy and recorded snapshot for offline diagnostics only; not live robot evidence.",
+  "action": {
+    "schema": "vlagraph.fanuc_m710ic20l.action.v1",
+    "command": "apply_fanuc_trajectory",
+    "unit": "degree",
+    "joint_names": [
+      "J1",
+      "J2",
+      "J3",
+      "J4",
+      "J5",
+      "J6"
+    ],
+    "joint_trajectory": [
+      {
+        "time_sec": 2,
+        "joint_positions": [
+          90,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "motion_type": "J",
+        "termination": "FINE"
+      },
+      {
+        "time_sec": 4,
+        "joint_positions": [
+          90,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "motion_type": "J",
+        "termination": "FINE"
+      }
+    ]
+  },
+  "scene": {
+    "schema": "vlagraph.fanuc_collision_scene.v1",
+    "scene_id": "test",
+    "scene_version": "v1",
+    "robot_model_version": "test_proxy",
+    "geometry_source": "configured_proxy",
+    "kinematics_source": "project_m710_configuration",
+    "frame": "right_handed_z_up_m",
+    "base_position": [
+      0,
+      0,
+      0
+    ],
+    "base_orientation_wxyz": [
+      1,
+      0,
+      0,
+      0
+    ],
+    "link_capsules": [
+      {
+        "id": "tool_proxy",
+        "joint_index": 5,
+        "start_local": [
+          0.1,
+          0,
+          0
+        ],
+        "end_local": [
+          0.1,
+          0,
+          0
+        ],
+        "radius_m": 0.05
+      }
+    ],
+    "excluded_self_pairs": [],
+    "obstacles": [
+      {
+        "id": "box",
+        "min": [
+          2,
+          -0.05,
+          1.85
+        ],
+        "max": [
+          2.1,
+          0.05,
+          1.96
+        ]
+      }
+    ]
+  },
+  "snapshot": {
+    "schema": "vlagraph.fanuc_snapshot.v1",
+    "episode_id": "synthetic-episode",
+    "state_version": 1,
+    "sim_time": 10,
+    "physics_step": 600,
+    "prim_path": "/World/FANUC",
+    "observed_at": 0,
+    "synchronized_joint_snapshot": true,
+    "prediction_ready": false,
+    "geometry": {
+      "meters_per_unit": 1,
+      "up_axis": "Z",
+      "stage_identifier": "test",
+      "physics_synchronized": false
+    },
+    "raw_state": {
+      "prim_path": "/World/FANUC",
+      "physics_ready": true,
+      "motion_active": false
+    },
+    "axes": [
+      {
+        "name": "J1",
+        "position": -1.5707963267948966,
+        "target_position": 0,
+        "velocity": 0,
+        "unit": "rad",
+        "virtual": false
+      },
+      {
+        "name": "J2",
+        "position": 0,
+        "target_position": 0,
+        "velocity": 0,
+        "unit": "rad",
+        "virtual": false
+      },
+      {
+        "name": "J3",
+        "position": 0,
+        "target_position": 0,
+        "velocity": 0,
+        "unit": "rad",
+        "virtual": false
+      },
+      {
+        "name": "J4",
+        "position": 0,
+        "target_position": 0,
+        "velocity": 0,
+        "unit": "rad",
+        "virtual": false
+      },
+      {
+        "name": "J5",
+        "position": 0,
+        "target_position": 0,
+        "velocity": 0,
+        "unit": "rad",
+        "virtual": false
+      },
+      {
+        "name": "J6",
+        "position": 0,
+        "target_position": 0,
+        "velocity": 0,
+        "unit": "rad",
+        "virtual": false
+      }
+    ]
+  }
+}

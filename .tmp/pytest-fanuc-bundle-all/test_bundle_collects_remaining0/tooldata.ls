@@ -1,0 +1,2 @@
+ROBOT_NAME,m20ia
+POSE,start,0,0,0,0,0,0

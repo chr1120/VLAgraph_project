@@ -1,0 +1,330 @@
+{
+  "scene": {
+    "schema": "vlagraph.fanuc_collision_scene.v1",
+    "scene_id": "C:/Users/0/Desktop/VLAPROJECT/open_manipulator_description/urdf/TEST/Test8.usd",
+    "scene_version": "cff677264ea4f3aa8912d7d8243957aae5b192bb2624e03c7187e94df4c0607c",
+    "robot_model_version": "usd_robot_aabb_capsules_v2",
+    "geometry_source": "configured_proxy",
+    "kinematics_source": "project_m710_configuration",
+    "frame": "right_handed_z_up_m",
+    "inventory_digest": "cff677264ea4f3aa8912d7d8243957aae5b192bb2624e03c7187e94df4c0607c",
+    "robot_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+    "source_meters_per_unit": 1.0,
+    "source_up_axis": "Z",
+    "base_position": [
+      71.22813824462891,
+      140.41265869140625,
+      0.4337100088596344
+    ],
+    "base_orientation_wxyz": [
+      0.7071067690849305,
+      0.0,
+      0.0,
+      0.7071067932881644
+    ],
+    "link_capsules": [
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+        "attachment": "joint",
+        "start_local": [
+          0.09699999168515205,
+          -0.024999970570206642,
+          0.0
+        ],
+        "end_local": [
+          0.09699999168515205,
+          0.024999970570206642,
+          0.0
+        ],
+        "radius_m": 0.025180328572086245,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/J6_link/j6_1/j6_1",
+        "enclosure": "transformed_collision_aabb",
+        "joint_index": 5
+      },
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+        "attachment": "joint",
+        "start_local": [
+          -0.09379994124174118,
+          0.006625000387430191,
+          -0.005000000819563866
+        ],
+        "end_local": [
+          0.09399998188018799,
+          0.006625000387430191,
+          -0.005000000819563866
+        ],
+        "radius_m": 0.07117776240047628,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/J5_link/j5_1/j5_1",
+        "enclosure": "transformed_collision_aabb",
+        "joint_index": 4
+      },
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+        "attachment": "joint",
+        "start_local": [
+          0.3440000116825104,
+          -0.005850017070770264,
+          0.0
+        ],
+        "end_local": [
+          1.8619999885559082,
+          -0.005850017070770264,
+          0.0
+        ],
+        "radius_m": 0.10792976072410149,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/J4_link/j4_1/j4_1",
+        "enclosure": "transformed_collision_aabb",
+        "joint_index": 3
+      },
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+        "attachment": "joint",
+        "start_local": [
+          -0.1329765021800995,
+          -0.028622902929782867,
+          0.0924999937415123
+        ],
+        "end_local": [
+          0.3440000116825104,
+          -0.028622902929782867,
+          0.0924999937415123
+        ],
+        "radius_m": 0.2908061214937091,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/J3_link/j3_1/j3_1",
+        "enclosure": "transformed_collision_aabb",
+        "joint_index": 2
+      },
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+        "attachment": "joint",
+        "start_local": [
+          7.599592208862305e-06,
+          0.142000000923872,
+          -0.15800000727176677
+        ],
+        "end_local": [
+          7.599592208862305e-06,
+          0.142000000923872,
+          1.2599999904632568
+        ],
+        "radius_m": 0.19394696006131695,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/J2_link/j2_1/j2_1",
+        "enclosure": "transformed_collision_aabb",
+        "joint_index": 1
+      },
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+        "attachment": "joint",
+        "start_local": [
+          0.038999997079372406,
+          -0.2919408977031708,
+          -0.09824999421834957
+        ],
+        "end_local": [
+          0.038999997079372406,
+          0.3400000035762787,
+          -0.09824999421834957
+        ],
+        "radius_m": 0.3913116980789148,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/J1_link/j1_1/j1_1",
+        "enclosure": "transformed_collision_aabb",
+        "joint_index": 0
+      },
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+        "attachment": "base",
+        "start_local": [
+          -0.3384999930858612,
+          -0.0010000020265579224,
+          0.13300000131130213
+        ],
+        "end_local": [
+          0.22499999403953552,
+          -0.0010000020265579224,
+          0.13300000131130213
+        ],
+        "radius_m": 0.3063749622710174,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/base_link/base_1/base_1",
+        "enclosure": "transformed_collision_aabb"
+      },
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+        "attachment": "base",
+        "start_local": [
+          -0.10000000149011612,
+          0.0,
+          0.024999999999999967
+        ],
+        "end_local": [
+          0.10000000149011612,
+          0.0,
+          0.024999999999999967
+        ],
+        "radius_m": 0.10307864217641806,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/external_axis_base/box",
+        "enclosure": "transformed_collision_aabb"
+      },
+      {
+        "id": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box",
+        "attachment": "world",
+        "start_local": [
+          71.17813824217242,
+          140.41265869140625,
+          0.4087100088596343
+        ],
+        "end_local": [
+          71.2781382470854,
+          140.41265869140625,
+          0.4087100088596343
+        ],
+        "radius_m": 0.05590270180122951,
+        "source_prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Geometry/world/external_axis_rail/box",
+        "enclosure": "transformed_collision_aabb"
+      }
+    ],
+    "obstacles": [],
+    "excluded_self_pairs": [],
+    "coverage": "authored_mapped_robot_collision_bounds",
+    "padding_m": 0.0,
+    "omitted_robot_colliders": [],
+    "physics_synchronized": false,
+    "geometry_coverage": {
+      "scope": "active_enabled_collision_prims_in_inventory",
+      "enabled_robot_colliders": 9,
+      "included_robot_colliders": 9,
+      "unmapped_robot_colliders": [],
+      "all_enabled_robot_colliders_mapped": true,
+      "capsules_by_attachment": {
+        "joint": 6,
+        "base": 2,
+        "world": 1
+      },
+      "static_obstacle_count": 0,
+      "unmodeled_moving_obstacles": [],
+      "boundables_without_collision_api": 5721,
+      "disabled_collision_prims": [],
+      "tool_coverage": "unverified",
+      "environment_coverage": "unverified",
+      "full_cell_coverage_verified": false
+    },
+    "physical_collision_verified": false,
+    "execution_ready": false,
+    "unchecked": [
+      "base_and_tool_coverage",
+      "environment_collision_coverage",
+      "contact_skin_defaults",
+      "initial_motion_before_first_frame",
+      "dynamic_obstacles",
+      "physical_rollout"
+    ],
+    "external_axis": {
+      "direction_world": [
+        -0.9999999999999993,
+        -3.422854177870249e-08,
+        0.0
+      ],
+      "reference_position_m": 0.0,
+      "source_joint_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Physics/external_axis_joint"
+    }
+  },
+  "binding_report": {
+    "schema": "vlagraph.fanuc_usd_binding.v1",
+    "inventory_digest": "cff677264ea4f3aa8912d7d8243957aae5b192bb2624e03c7187e94df4c0607c",
+    "kinematics_match": true,
+    "errors": [],
+    "joints": [
+      {
+        "joint": "J1",
+        "origin_error_m": 2.38418573772492e-09,
+        "signed_axis_error": 0.0
+      },
+      {
+        "joint": "J2",
+        "origin_error_m": 5.960464483090178e-09,
+        "signed_axis_error": 0.0
+      },
+      {
+        "joint": "J3",
+        "origin_error_m": 2.3841857821338408e-08,
+        "signed_axis_error": 0.0
+      },
+      {
+        "joint": "J4",
+        "origin_error_m": 2.384185793236071e-09,
+        "signed_axis_error": 0.0
+      },
+      {
+        "joint": "J5",
+        "origin_error_m": 4.768371586472142e-08,
+        "signed_axis_error": 0.0
+      },
+      {
+        "joint": "J6",
+        "origin_error_m": 0.0,
+        "signed_axis_error": 0.0
+      }
+    ],
+    "composition_samples": [
+      {
+        "joint_angles_rad": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "max_transform_error": 4.1723251298364517e-08
+      },
+      {
+        "joint_angles_rad": [
+          0.2,
+          -0.3,
+          0.4,
+          -0.5,
+          0.6,
+          -0.7
+        ],
+        "max_transform_error": 5.770340205657476e-08
+      },
+      {
+        "joint_angles_rad": [
+          -0.4,
+          0.5,
+          -0.6,
+          0.7,
+          -0.8,
+          0.9
+        ],
+        "max_transform_error": 2.6916979312119338e-08
+      }
+    ],
+    "position_tolerance_m": 1e-06,
+    "rotation_tolerance": 1e-06,
+    "base_position": [
+      71.22813824462891,
+      140.41265869140625,
+      0.4337100088596344
+    ],
+    "base_orientation_wxyz": [
+      0.7071067690849305,
+      0.0,
+      0.0,
+      0.7071067932881644
+    ],
+    "external_axis": {
+      "direction_world": [
+        -0.9999999999999993,
+        -3.422854177870249e-08,
+        0.0
+      ],
+      "reference_position_m": 0.0,
+      "source_joint_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot/Physics/external_axis_joint"
+    },
+    "pose_source": "usd_default_time",
+    "physics_synchronized": false,
+    "physical_collision_verified": false,
+    "execution_ready": false
+  }
+}

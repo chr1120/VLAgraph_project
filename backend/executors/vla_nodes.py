@@ -2594,6 +2594,9 @@ def _omniverse_execute(data: Dict[str, Any], action: Any) -> Dict[str, Any]:
     }
     if prompt_context:
         request_payload.update(prompt_context)
+    command_id = data.get("commandId") or (payload.get("command_id") if isinstance(payload, dict) else None)
+    if command_id:
+        request_payload["command_id"] = str(command_id)
     _maybe_log_omniverse_payload(request_id, command, normalized_action, request_payload)
 
     attempted_errors: List[str] = []
@@ -2845,6 +2848,26 @@ def exec_robot_execute(
     action = inputs.get("action")
     mode = str(data.get("mode", "simulate")).lower().strip()
 
+    if _coerce_bool(data.get("requireExecutionGuard"), False):
+        from backend.world_model.fanuc_preflight import action_fingerprint
+        sources = [context.get(edge.get("source"), {}) for edge in edges
+                   if edge.get("target") == node["id"] and edge.get("targetHandle") == "action"]
+        guard = sources[0] if len(sources) == 1 and isinstance(sources[0], dict) else {}
+        decision = guard.get("decision") if isinstance(guard.get("decision"), dict) else {}
+        valid = False
+        try:
+            valid = (guard.get("type") == "execution_guard_result" and guard.get("approved") is True
+                     and guard.get("action_digest") == action_fingerprint(action))
+        except (TypeError, ValueError):
+            pass
+        if decision.get("validation_policy") == "static_simulation" and mode != "omniverse":
+            valid = False
+        if not valid:
+            result = {"ok": False, "skipped": True, "mode": mode,
+                      "message": "Execution guard blocked the action or authorization is missing.",
+                      "guard_decision": guard.get("decision")}
+            return {"ok": False, "skipped": True, "result": result, "message": result["message"]}
+
     if action is None:
         return {
             "result": {
@@ -2856,6 +2879,10 @@ def exec_robot_execute(
 
     action_payload = _extract_action_payload(action)
     if isinstance(action_payload, dict):
+        if action_payload.get("type") == "execution_blocked":
+            result = {"ok": False, "skipped": True, "mode": mode,
+                      "message": "Execution blocked by trajectory validation.", "reasons": action_payload.get("reasons", [])}
+            return {"ok": False, "skipped": True, "result": result, "message": result["message"]}
         action_error = action_payload.get("error")
         if str(action_payload.get("type", "")).strip().lower() == "error" or action_error:
             return {

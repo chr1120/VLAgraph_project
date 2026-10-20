@@ -1,0 +1,76 @@
+{
+  "schema": "vlagraph.fanuc_validation_bundle.v1",
+  "created_at": "2026-10-20T07:23:47.590182+00:00",
+  "status": "blocked",
+  "source_path": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-final\\test_bundle_collects_remaining0\\source.LS",
+  "usd_path": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-final\\test_bundle_collects_remaining0\\missing.usd",
+  "collection_completed": false,
+  "execution_validation_completed": false,
+  "phases": {
+    "calibration": {
+      "status": "collected",
+      "artifact": "calibration.json"
+    },
+    "alignment": {
+      "status": "error",
+      "message": "Alignment evidence does not match any applicable calibration candidate"
+    },
+    "geometry": {
+      "status": "error",
+      "message": "\n\tError in 'pxrInternal_v0_25_8__pxrReserved__::UsdStage::Open' at line 1043 in file D:\\a\\OpenUSD\\OpenUSD\\pxr\\usd\\usd\\stage.cpp : 'Failed to open layer @C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-final\\test_bundle_collects_remaining0\\missing.usd@'"
+    },
+    "execute": {
+      "status": "collected",
+      "artifact": "execute.json"
+    },
+    "collision": {
+      "status": "collected",
+      "artifact": "collision.json"
+    },
+    "live": {
+      "status": "collected",
+      "artifact": "live.json"
+    }
+  },
+  "blockers": [
+    "controller_ik_base_tcp_external_axis_calibration_unverified",
+    "tool_and_environment_collision_coverage_unverified",
+    "physical_rollout_and_command_completion_unverified",
+    "no_applicable_calibration_candidate",
+    "base_alignment_reference_measurements_missing_or_failed",
+    "source_ls_preflight_failed",
+    "source_ls_collision_not_clear",
+    "synchronized_live_snapshot_and_geometry_unavailable",
+    "phase_error:alignment",
+    "phase_error:geometry"
+  ],
+  "motion_requested": false,
+  "execution_ready": false,
+  "execute_boundary_status": "blocked_as_expected",
+  "checks": {
+    "calibration_candidates": [
+      {
+        "path": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-final\\test_bundle_collects_remaining0\\tooldata.ls",
+        "status": "rejected"
+      },
+      {
+        "path": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-final\\test_bundle_collects_remaining0\\missing.ls",
+        "status": "error"
+      }
+    ],
+    "alignment": "error",
+    "geometry": {
+      "collider_count": null,
+      "full_cell_coverage_verified": false
+    },
+    "ls_preflight": "failed",
+    "collision": "blocked_preflight",
+    "live": "not_requested"
+  },
+  "read_only_commands": [],
+  "preflight_errors_by_code": {
+    "non_increasing_time": 1,
+    "cnt_blending_unverified": 1
+  },
+  "unmodeled_source_instruction_count": 0
+}

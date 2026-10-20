@@ -1,0 +1,296 @@
+{
+  "schema": "vlagraph.fanuc_ls_geometry_diagnostic.v1",
+  "status": "completed",
+  "execution_requested": false,
+  "network_commands_sent": [],
+  "action": {
+    "schema": "vlagraph.fanuc_m710ic20l.action.v1",
+    "source_program": {
+      "name": "JOINTONLY",
+      "path": "C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-suite\\test_cli_geometry_gate_preserv0\\program.LS"
+    },
+    "source_instruction_audit": {
+      "schema": "vlagraph.fanuc_ls_instruction_audit.v1",
+      "source_sha256": "950f447fa51248845fdb7899b5a2def4481012dd8f3fcbd7833c155684ed236e",
+      "recognized_counts": {
+        "motion": 3
+      },
+      "unmodeled": [],
+      "issues": [],
+      "source_program_semantics_verified": false
+    },
+    "type": "fanuc_m710ic20l_trajectory",
+    "command": "apply_fanuc_trajectory",
+    "target_embodiment": "FANUC_M710IC_20L",
+    "unit": "degree",
+    "joint_names": [
+      "J1",
+      "J2",
+      "J3",
+      "J4",
+      "J5",
+      "J6"
+    ],
+    "seconds_per_frame": 1.3333333333333333,
+    "total_duration_sec": 4.0,
+    "joint_trajectory": [
+      {
+        "time_sec": 2.0,
+        "unit": "degree",
+        "joint_names": [
+          "J1",
+          "J2",
+          "J3",
+          "J4",
+          "J5",
+          "J6"
+        ],
+        "joint_positions": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "joint_target_map": {
+          "J1": 0.0,
+          "J2": 0.0,
+          "J3": 0.0,
+          "J4": 0.0,
+          "J5": 0.0,
+          "J6": 0.0
+        },
+        "external_axis_targets_m": {},
+        "source_position_id": 1,
+        "source_line": 1,
+        "motion_type": "J",
+        "termination": "FINE",
+        "active_uf": null,
+        "active_ut": null,
+        "position_uf": 0,
+        "position_ut": 1,
+        "config": null,
+        "speed": 25.0,
+        "speed_unit": "%",
+        "cnt_percent": 0,
+        "external_axes_mm": {}
+      },
+      {
+        "time_sec": 3.0,
+        "unit": "degree",
+        "joint_names": [
+          "J1",
+          "J2",
+          "J3",
+          "J4",
+          "J5",
+          "J6"
+        ],
+        "joint_positions": [
+          10.0,
+          -20.0,
+          30.0,
+          -40.0,
+          50.0,
+          -60.0
+        ],
+        "joint_target_map": {
+          "J1": 10.0,
+          "J2": -20.0,
+          "J3": 30.0,
+          "J4": -40.0,
+          "J5": 50.0,
+          "J6": -60.0
+        },
+        "external_axis_targets_m": {},
+        "source_position_id": 2,
+        "source_line": 2,
+        "motion_type": "J",
+        "termination": "FINE",
+        "active_uf": null,
+        "active_ut": null,
+        "position_uf": 0,
+        "position_ut": 1,
+        "config": null,
+        "speed": 50.0,
+        "speed_unit": "%",
+        "cnt_percent": 0,
+        "external_axes_mm": {}
+      },
+      {
+        "time_sec": 4.0,
+        "unit": "degree",
+        "joint_names": [
+          "J1",
+          "J2",
+          "J3",
+          "J4",
+          "J5",
+          "J6"
+        ],
+        "joint_positions": [
+          -15.0,
+          25.0,
+          -35.0,
+          45.0,
+          -55.0,
+          65.0
+        ],
+        "joint_target_map": {
+          "J1": -15.0,
+          "J2": 25.0,
+          "J3": -35.0,
+          "J4": 45.0,
+          "J5": -55.0,
+          "J6": 65.0
+        },
+        "external_axis_targets_m": {},
+        "source_position_id": 3,
+        "source_line": 3,
+        "motion_type": "J",
+        "termination": "FINE",
+        "active_uf": null,
+        "active_ut": null,
+        "position_uf": 0,
+        "position_ut": 1,
+        "config": null,
+        "speed": 75.0,
+        "speed_unit": "%",
+        "cnt_percent": 0,
+        "external_axes_mm": {}
+      }
+    ],
+    "initial_pose": null,
+    "initial_pose_duration_sec": 0.0,
+    "initial_pose_hold_sec": 0.0,
+    "return_to_initial_pose_on_complete": true,
+    "initial_pose_return_sec": 0.0,
+    "preview_only": true,
+    "execution_enabled": false,
+    "execution_ready": false,
+    "ik_failures": 0,
+    "skipped_cartesian_frames": 0,
+    "skipped_unresolved_frames": 0,
+    "requires_uf_ut_calibration": false,
+    "cartesian_mode": "relative_uf_ut_ik",
+    "cartesian_position_scale": 1.0,
+    "cartesian_axis_signs": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "joint_axis_signs": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "initial_joint_axis_signs": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "external_axis_vectors": {
+      "E1": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "external_axis_joint_names": {},
+    "external_axis_root_motion_enabled": true,
+    "external_axis_affects_ik": false,
+    "cartesian_orientation_scale": 1.0,
+    "timing_mode": "fixed_total",
+    "trajectory_time_scale": 1.0,
+    "calibrated_uframes": [],
+    "calibrated_utools": [],
+    "ik_position_tolerance_m": 0.001,
+    "ik_orientation_tolerance_deg": 1.0,
+    "ik_orientation_weight": 0.75,
+    "ik_max_joint_delta_deg": 140.0,
+    "direct_joint_frames": 3,
+    "skipped_unresolved_details": [],
+    "skipped_cartesian_details": [],
+    "initial_settings_applied": false,
+    "initial_settings_source_path": null,
+    "initial_joint_seed_applied": false,
+    "initial_pose_frame_applied": false,
+    "initial_external_axes_mm": {},
+    "trailing_external_axis_return": {
+      "trimmed_frames": 0
+    },
+    "frame_time_sanitization": {
+      "adjusted_frames": 0,
+      "min_step_sec": 0.001
+    },
+    "calibrated_cartesian_frames": 0,
+    "relative_cartesian_frames": 0
+  },
+  "report": {
+    "schema": "vlagraph.fanuc_collision_report.v1",
+    "status": "clear",
+    "action_digest": "109601691297558c0777fb565e1f2e6d5adf105b46fc05e9384da52e7faefedd",
+    "scene_digest": "e37213eabb2b1c2382c14d99dcb8229f95d9c8d93051d4a0337add6357f531ad",
+    "scene_id": "test",
+    "scene_version": "v1",
+    "robot_model_version": "test_proxy",
+    "geometry_source": "configured_proxy",
+    "inventory_digest": null,
+    "source_coverage": "configured_proxies",
+    "snapshot_ref": null,
+    "initial_segment_checked": false,
+    "checked_time_range_sec": [
+      2.0,
+      4.0
+    ],
+    "kinematics_source": "project_m710_configuration",
+    "geometry_tolerance_m": 1e-07,
+    "coverage": "configured_capsules_and_static_aabbs",
+    "samples_checked": 41,
+    "min_sampled_clearance_m": 32.109204752173824,
+    "margin_m": 0.01,
+    "contacts": [],
+    "unresolved_intervals": [],
+    "pair_diagnostics": [
+      {
+        "pair": [
+          "tool_proxy",
+          "far"
+        ],
+        "kind": "environment",
+        "min_sampled_clearance_m": 32.109204752173824,
+        "min_time_sec": 2.5,
+        "samples_checked": 41,
+        "margin_violation_samples": 0
+      }
+    ],
+    "contacts_limit": 100,
+    "self_pairs_checked": 0,
+    "excluded_self_pairs": [],
+    "capsules_by_attachment": {
+      "joint": 1,
+      "base": 0,
+      "world": 0
+    },
+    "source_geometry_coverage": null,
+    "unmodeled_geometry": [],
+    "between_samples_certified": true,
+    "physical_collision_verified": false,
+    "execution_ready": false,
+    "unchecked": [
+      "initial_motion_before_first_frame",
+      "actual_mesh_coverage",
+      "dynamic_obstacles",
+      "physical_rollout",
+      "physical_base_alignment",
+      "live_state_at_dispatch"
+    ]
+  }
+}

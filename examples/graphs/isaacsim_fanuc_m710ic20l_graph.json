@@ -3,7 +3,10 @@
     {
       "id": "fanuc-m710-file",
       "type": "dataset_upload",
-      "position": { "x": 60, "y": 120 },
+      "position": {
+        "x": 60,
+        "y": 120
+      },
       "data": {
         "label": "FANUC M-710 LS 파일 업로드",
         "datasetPath": "",
@@ -17,13 +20,21 @@
     {
       "id": "fanuc-m710-parse",
       "type": "fanuc_ls_parse",
-      "position": { "x": 390, "y": 120 },
-      "data": { "label": "Parse FANUC LS" }
+      "position": {
+        "x": 390,
+        "y": 120
+      },
+      "data": {
+        "label": "Parse FANUC LS"
+      }
     },
     {
       "id": "fanuc-m710-prepare",
       "type": "fanuc_m710_prepare",
-      "position": { "x": 730, "y": 120 },
+      "position": {
+        "x": 730,
+        "y": 120
+      },
       "data": {
         "label": "Prepare M-710 J1-J6",
         "secondsPerFrame": 3,
@@ -37,13 +48,21 @@
         "previewOnly": false,
         "enableExecution": true,
         "solveCartesianIk": true,
-        "requireAllIk": false,
+        "requireAllIk": true,
         "cartesianPositionScale": 1.0,
         "cartesianAxisSigns": "1,1,1",
         "jointAxisSigns": "1,1,1,1,1,1",
         "initialJointAxisSigns": "1,1,1,1,1,1",
-        "externalAxisVectors": { "E1": [-1, 0, 0] },
-        "externalAxisJointNames": { "E1": "externalAxisJoint" },
+        "externalAxisVectors": {
+          "E1": [
+            -1,
+            0,
+            0
+          ]
+        },
+        "externalAxisJointNames": {
+          "E1": "externalAxisJoint"
+        },
         "externalAxisRootMotionEnabled": true,
         "externalAxisAffectsIk": false,
         "cartesianOrientationScale": 1.0,
@@ -59,13 +78,21 @@
     {
       "id": "fanuc-m710-preview",
       "type": "print",
-      "position": { "x": 1080, "y": 40 },
-      "data": { "label": "Safety Summary" }
+      "position": {
+        "x": 1520,
+        "y": -180
+      },
+      "data": {
+        "label": "M-710 Detailed Validation Report"
+      }
     },
     {
       "id": "fanuc-m710-execute",
       "type": "robot_execute",
-      "position": { "x": 1080, "y": 240 },
+      "position": {
+        "x": 1940,
+        "y": 240
+      },
       "data": {
         "label": "Execute FANUC M-710 in Isaac Sim",
         "executor": "robot-executor",
@@ -80,22 +107,433 @@
         "omniversePrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
         "omniverseCommand": "apply_fanuc_trajectory",
         "omniverseTimeoutSec": 30,
-        "omniverseWaitForResponse": true
+        "omniverseWaitForResponse": true,
+        "requireExecutionGuard": true
       }
     },
     {
       "id": "fanuc-m710-result",
       "type": "print",
-      "position": { "x": 1450, "y": 240 },
-      "data": { "label": "M-710 Execution Result" }
+      "position": {
+        "x": 2320,
+        "y": 240
+      },
+      "data": {
+        "label": "M-710 Execution Result"
+      }
+    },
+    {
+      "id": "fanuc-m710-validate",
+      "type": "fanuc_trajectory_validate",
+      "position": {
+        "x": 1100,
+        "y": 120
+      },
+      "data": {
+        "label": "FANUC Trajectory Preflight",
+        "maxVelocity": {},
+        "maxAcceleration": {}
+      }
+    },
+    {
+      "id": "fanuc-m710-guard",
+      "type": "execution_guard",
+      "position": {
+        "x": 1520,
+        "y": 180
+      },
+      "data": {
+        "label": "Execution Guard",
+        "validationPolicy": "full",
+        "requireWorldContext": true,
+        "requireInitialSnapshot": true
+      }
+    },
+    {
+      "id": "fanuc-m710-decision",
+      "type": "print",
+      "position": {
+        "x": 1940,
+        "y": -120
+      },
+      "data": {
+        "label": "M-710 Execution Decision"
+      }
+    },
+    {
+      "id": "fanuc-m710-collision",
+      "type": "fanuc_collision_check",
+      "position": {
+        "x": 1100,
+        "y": 500
+      },
+      "data": {
+        "label": "FANUC Geometry Collision",
+        "enabled": true,
+        "scene": {},
+        "maxStepSec": 0.05,
+        "marginM": 0.01,
+        "maxSamples": 10000
+      }
+    },
+    {
+      "id": "fanuc-m710-collision-result",
+      "type": "print",
+      "position": {
+        "x": 1520,
+        "y": 600
+      },
+      "data": {
+        "label": "Print Geometry Collision Report"
+      }
+    },
+    {
+      "id": "fanuc-m710-segments",
+      "type": "print",
+      "position": {
+        "x": 1520,
+        "y": -480
+      },
+      "data": {
+        "label": "M-710 LS Segment Review"
+      }
+    },
+    {
+      "id": "fanuc-m710-world-snapshot",
+      "type": "fanuc_snapshot_read",
+      "position": {
+        "x": 60,
+        "y": 850
+      },
+      "data": {
+        "label": "fanuc_snapshot_read",
+        "omniverseEndpoint": "ws://172.16.110.116:9910/omniverse",
+        "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+        "timeoutSec": 5
+      }
+    },
+    {
+      "id": "fanuc-m710-world-scan",
+      "type": "scene_scan",
+      "position": {
+        "x": 60,
+        "y": 1150
+      },
+      "data": {
+        "label": "scene_scan",
+        "omniverseEndpoint": "ws://172.16.110.116:9910/omniverse",
+        "omniversePrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+        "sceneRootPath": "/World",
+        "maxObjects": 4096,
+        "timeoutSec": 5
+      }
+    },
+    {
+      "id": "fanuc-m710-world-geometry",
+      "type": "fanuc_usd_geometry_read",
+      "position": {
+        "x": 60,
+        "y": 1450
+      },
+      "data": {
+        "label": "fanuc_usd_geometry_read",
+        "source": "bridge",
+        "omniverseEndpoint": "ws://172.16.110.116:9910/omniverse",
+        "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+        "rootPath": "/World",
+        "maxColliders": 4096,
+        "timeoutSec": 5
+      }
+    },
+    {
+      "id": "fanuc-m710-world-context",
+      "type": "fanuc_world_context",
+      "position": {
+        "x": 510,
+        "y": 850
+      },
+      "data": {
+        "label": "fanuc_world_context",
+        "memoryPath": "spatial_memory/spatial_memory.jsonl",
+        "maxMemoryAgeSec": 86400,
+        "maxLiveAgeSec": 5,
+        "positionToleranceM": 0.02
+      }
+    },
+    {
+      "id": "fanuc-m710-world-prediction",
+      "type": "fanuc_world_prediction",
+      "position": {
+        "x": 510,
+        "y": 1150
+      },
+      "data": {
+        "label": "fanuc_world_prediction"
+      }
+    },
+    {
+      "id": "fanuc-m710-world-context-result",
+      "type": "print",
+      "position": {
+        "x": 510,
+        "y": 1450
+      },
+      "data": {
+        "label": "Collection reconciliation"
+      }
+    },
+    {
+      "id": "fanuc-m710-world-prediction-result",
+      "type": "print",
+      "position": {
+        "x": 960,
+        "y": 850
+      },
+      "data": {
+        "label": "World prediction availability"
+      }
     }
   ],
   "edges": [
-    { "id": "fanuc-m710-e-file-parse", "source": "fanuc-m710-file", "target": "fanuc-m710-parse", "sourceHandle": "dataset", "targetHandle": "dataset", "animated": true },
-    { "id": "fanuc-m710-e-initial-file-parse", "source": "fanuc-m710-file", "target": "fanuc-m710-parse", "sourceHandle": "initialSettings", "targetHandle": "initialSettings", "animated": true },
-    { "id": "fanuc-m710-e-parse-prepare", "source": "fanuc-m710-parse", "target": "fanuc-m710-prepare", "sourceHandle": "program", "targetHandle": "program", "animated": true },
-    { "id": "fanuc-m710-e-prepare-preview", "source": "fanuc-m710-prepare", "target": "fanuc-m710-preview", "sourceHandle": "summary", "targetHandle": "input", "animated": true },
-    { "id": "fanuc-m710-e-prepare-execute", "source": "fanuc-m710-prepare", "target": "fanuc-m710-execute", "sourceHandle": "action", "targetHandle": "action", "animated": true },
-    { "id": "fanuc-m710-e-execute-result", "source": "fanuc-m710-execute", "target": "fanuc-m710-result", "sourceHandle": "result", "targetHandle": "input", "animated": true }
+    {
+      "id": "fanuc-m710-e-file-parse",
+      "source": "fanuc-m710-file",
+      "target": "fanuc-m710-parse",
+      "sourceHandle": "dataset",
+      "targetHandle": "dataset",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-initial-file-parse",
+      "source": "fanuc-m710-file",
+      "target": "fanuc-m710-parse",
+      "sourceHandle": "initialSettings",
+      "targetHandle": "initialSettings",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-parse-prepare",
+      "source": "fanuc-m710-parse",
+      "target": "fanuc-m710-prepare",
+      "sourceHandle": "program",
+      "targetHandle": "program",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-execute-result",
+      "source": "fanuc-m710-execute",
+      "target": "fanuc-m710-result",
+      "sourceHandle": "result",
+      "targetHandle": "input",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-prepare-validate",
+      "source": "fanuc-m710-prepare",
+      "target": "fanuc-m710-validate",
+      "sourceHandle": "action",
+      "targetHandle": "action",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-validate-preview",
+      "source": "fanuc-m710-validate",
+      "target": "fanuc-m710-preview",
+      "sourceHandle": "report",
+      "targetHandle": "input",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-prepare-guard",
+      "source": "fanuc-m710-prepare",
+      "target": "fanuc-m710-guard",
+      "sourceHandle": "action",
+      "targetHandle": "action",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-validate-guard",
+      "source": "fanuc-m710-validate",
+      "target": "fanuc-m710-guard",
+      "sourceHandle": "report",
+      "targetHandle": "report",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-guard-decision",
+      "source": "fanuc-m710-guard",
+      "target": "fanuc-m710-decision",
+      "sourceHandle": "decision",
+      "targetHandle": "input",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-guard-execute",
+      "source": "fanuc-m710-guard",
+      "target": "fanuc-m710-execute",
+      "sourceHandle": "action",
+      "targetHandle": "action",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-prepare-collision",
+      "source": "fanuc-m710-prepare",
+      "target": "fanuc-m710-collision",
+      "sourceHandle": "action",
+      "targetHandle": "action",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-collision-guard",
+      "source": "fanuc-m710-collision",
+      "target": "fanuc-m710-guard",
+      "sourceHandle": "collision_report",
+      "targetHandle": "collision_report",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-collision-result",
+      "source": "fanuc-m710-collision",
+      "target": "fanuc-m710-collision-result",
+      "sourceHandle": "collision_report",
+      "targetHandle": "input",
+      "animated": true
+    },
+    {
+      "id": "fanuc-m710-e-validate-segments",
+      "source": "fanuc-m710-validate",
+      "target": "fanuc-m710-segments",
+      "sourceHandle": "segment_report",
+      "targetHandle": "input",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-scan-world-context-scan",
+      "source": "fanuc-m710-world-scan",
+      "sourceHandle": "scan",
+      "target": "fanuc-m710-world-context",
+      "targetHandle": "scan",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-geometry-world-context-inventory",
+      "source": "fanuc-m710-world-geometry",
+      "sourceHandle": "inventory",
+      "target": "fanuc-m710-world-context",
+      "targetHandle": "inventory",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-context-collision-scene",
+      "source": "fanuc-m710-world-context",
+      "sourceHandle": "scene",
+      "target": "fanuc-m710-collision",
+      "targetHandle": "scene",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-context-world-prediction-scene",
+      "source": "fanuc-m710-world-context",
+      "sourceHandle": "scene",
+      "target": "fanuc-m710-world-prediction",
+      "targetHandle": "scene",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-context-guard-context_report",
+      "source": "fanuc-m710-world-context",
+      "sourceHandle": "context_report",
+      "target": "fanuc-m710-guard",
+      "targetHandle": "context_report",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-context-world-prediction-context_report",
+      "source": "fanuc-m710-world-context",
+      "sourceHandle": "context_report",
+      "target": "fanuc-m710-world-prediction",
+      "targetHandle": "context_report",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-context-world-context-result-input",
+      "source": "fanuc-m710-world-context",
+      "sourceHandle": "context_report",
+      "target": "fanuc-m710-world-context-result",
+      "targetHandle": "input",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-prepare-world-prediction-action",
+      "source": "fanuc-m710-prepare",
+      "sourceHandle": "action",
+      "target": "fanuc-m710-world-prediction",
+      "targetHandle": "action",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-collision-world-prediction-collision_report",
+      "source": "fanuc-m710-collision",
+      "sourceHandle": "collision_report",
+      "target": "fanuc-m710-world-prediction",
+      "targetHandle": "collision_report",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-prediction-guard-prediction_report",
+      "source": "fanuc-m710-world-prediction",
+      "sourceHandle": "prediction_report",
+      "target": "fanuc-m710-guard",
+      "targetHandle": "prediction_report",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-prediction-world-prediction-result-input",
+      "source": "fanuc-m710-world-prediction",
+      "sourceHandle": "prediction_report",
+      "target": "fanuc-m710-world-prediction-result",
+      "targetHandle": "input",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-snapshot-world-context-snapshot",
+      "source": "fanuc-m710-world-snapshot",
+      "sourceHandle": "snapshot",
+      "target": "fanuc-m710-world-context",
+      "targetHandle": "snapshot",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-snapshot-validate-snapshot",
+      "source": "fanuc-m710-world-snapshot",
+      "sourceHandle": "snapshot",
+      "target": "fanuc-m710-validate",
+      "targetHandle": "snapshot",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-snapshot-collision-snapshot",
+      "source": "fanuc-m710-world-snapshot",
+      "sourceHandle": "snapshot",
+      "target": "fanuc-m710-collision",
+      "targetHandle": "snapshot",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-snapshot-guard-snapshot",
+      "source": "fanuc-m710-world-snapshot",
+      "sourceHandle": "snapshot",
+      "target": "fanuc-m710-guard",
+      "targetHandle": "snapshot",
+      "animated": true
+    },
+    {
+      "id": "fanuc-wm-world-snapshot-world-prediction-snapshot",
+      "source": "fanuc-m710-world-snapshot",
+      "sourceHandle": "snapshot",
+      "target": "fanuc-m710-world-prediction",
+      "targetHandle": "snapshot",
+      "animated": true
+    }
   ]
 }

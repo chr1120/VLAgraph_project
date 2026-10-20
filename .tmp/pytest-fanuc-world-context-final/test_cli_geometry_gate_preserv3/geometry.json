@@ -1,0 +1,9 @@
+{
+  "schema": "vlagraph.fanuc_ls_geometry_diagnostic.v1",
+  "status": "blocked_source_semantics",
+  "execution_requested": false,
+  "network_commands_sent": [],
+  "action": null,
+  "report": null,
+  "message": "Source instructions require review; no partial program is exported."
+}

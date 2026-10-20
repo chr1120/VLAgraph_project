@@ -1523,6 +1523,9 @@ type GraphTemplateId =
   | "gr00t"
   | "omy3m"
   | "fanuc_m710"
+  | "fanuc_m710_world_observe"
+  | "fanuc_m710_snapshot"
+  | "fanuc_m710_preflight"
   | "fanuc_omy3m"
   | "motion"
   | "rgbd_follow"
@@ -2193,7 +2196,6 @@ const spatialCollectionTemplateNodes: Node[] = [
     data: {
       label: "Spatial Memory Save",
       memoryPath: "spatial_memory/spatial_memory.jsonl",
-      success: true,
     },
   },
   {
@@ -2693,7 +2695,7 @@ const fanucM710TemplateNodes: Node[] = [
       previewOnly: false,
       enableExecution: true,
       solveCartesianIk: true,
-      requireAllIk: false,
+      requireAllIk: true,
       cartesianPositionScale: 1.0,
       cartesianAxisSigns: "1,1,1",
       jointAxisSigns: "1,1,1,1,1,1",
@@ -2713,17 +2715,42 @@ const fanucM710TemplateNodes: Node[] = [
     },
   },
   {
+    id: "fanuc-m710-validate", type: "fanuc_trajectory_validate", position: { x: 1100, y: 120 },
+    data: createNodeData("fanuc_trajectory_validate"),
+  },
+  {
+    id: "fanuc-m710-guard", type: "execution_guard", position: { x: 1520, y: 180 },
+    data: { ...createNodeData("execution_guard"), requireWorldContext: true, requireInitialSnapshot: true },
+  },
+  {
+    id: "fanuc-m710-collision", type: "fanuc_collision_check", position: { x: 1100, y: 500 },
+    data: { ...createNodeData("fanuc_collision_check"), enabled: true },
+  },
+  {
+    id: "fanuc-m710-collision-result", type: "print", position: { x: 1520, y: 600 },
+    data: { label: "M-710 기하 충돌 결과" },
+  },
+  {
+    id: "fanuc-m710-segments", type: "print", position: { x: 1520, y: -480 },
+    data: { label: "M-710 LS 구간별 검사" },
+  },
+  {
+    id: "fanuc-m710-decision", type: "print", position: { x: 1940, y: -120 },
+    data: { label: "M-710 실행 판단" },
+  },
+  {
     id: "fanuc-m710-preview",
     type: "print",
-    position: { x: 1080, y: 40 },
-    data: { label: "M-710 실행 전 확인" },
+    position: { x: 1520, y: -180 },
+    data: { label: "M-710 상세 검사 결과" },
   },
   {
     id: "fanuc-m710-execute",
     type: "robot_execute",
-    position: { x: 1080, y: 240 },
+    position: { x: 1940, y: 240 },
     data: {
       label: "FANUC M-710 Isaac Sim 실행",
+      requireExecutionGuard: true,
       executor: "robot-executor",
       mode: "omniverse",
       dryRun: false,
@@ -2742,18 +2769,86 @@ const fanucM710TemplateNodes: Node[] = [
   {
     id: "fanuc-m710-result",
     type: "print",
-    position: { x: 1450, y: 240 },
+    position: { x: 2320, y: 240 },
     data: { label: "M-710 실행 결과" },
   },
 ];
 
+const fanucWorldEndpoint = "ws://172.16.110.116:9910/omniverse";
+fanucM710TemplateNodes.push(
+  { id: "fanuc-m710-world-snapshot", type: "fanuc_snapshot_read", position: { x: 60, y: 850 },
+    data: { ...createNodeData("fanuc_snapshot_read"), omniverseEndpoint: fanucWorldEndpoint } },
+  { id: "fanuc-m710-world-scan", type: "scene_scan", position: { x: 60, y: 1120 },
+    data: { ...createNodeData("scene_scan"), omniverseEndpoint: fanucWorldEndpoint,
+      omniversePrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot", maxObjects: 4096 } },
+  { id: "fanuc-m710-world-geometry", type: "fanuc_usd_geometry_read", position: { x: 60, y: 1420 },
+    data: { ...createNodeData("fanuc_usd_geometry_read"), omniverseEndpoint: fanucWorldEndpoint } },
+  { id: "fanuc-m710-world-context", type: "fanuc_world_context", position: { x: 500, y: 1000 },
+    data: createNodeData("fanuc_world_context") },
+  { id: "fanuc-m710-world-prediction", type: "fanuc_world_prediction", position: { x: 1520, y: 950 },
+    data: createNodeData("fanuc_world_prediction") },
+  { id: "fanuc-m710-world-context-result", type: "print", position: { x: 950, y: 1250 }, data: { label: "Collection 대조 결과" } },
+  { id: "fanuc-m710-world-prediction-result", type: "print", position: { x: 1940, y: 950 }, data: { label: "월드모델 예측 상태" } },
+);
+
 const fanucM710TemplateEdges: Edge[] = [
+  ...[
+    ["world-scan", "scan", "world-context", "scan"],
+    ["world-geometry", "inventory", "world-context", "inventory"],
+    ["world-snapshot", "snapshot", "world-context", "snapshot"],
+    ["world-snapshot", "snapshot", "validate", "snapshot"],
+    ["world-snapshot", "snapshot", "collision", "snapshot"],
+    ["world-snapshot", "snapshot", "guard", "snapshot"],
+    ["world-snapshot", "snapshot", "world-prediction", "snapshot"],
+    ["world-context", "scene", "collision", "scene"],
+    ["world-context", "scene", "world-prediction", "scene"],
+    ["world-context", "context_report", "guard", "context_report"],
+    ["world-context", "context_report", "world-prediction", "context_report"],
+    ["world-context", "context_report", "world-context-result", "input"],
+    ["prepare", "action", "world-prediction", "action"],
+    ["collision", "collision_report", "world-prediction", "collision_report"],
+    ["world-prediction", "prediction_report", "guard", "prediction_report"],
+    ["world-prediction", "prediction_report", "world-prediction-result", "input"],
+  ].map(([source, sourceHandle, target, targetHandle]) => ({
+    id: `fanuc-wm-${source}-${target}-${targetHandle}`, source: `fanuc-m710-${source}`, target: `fanuc-m710-${target}`,
+    sourceHandle, targetHandle, animated: true,
+  })),
   { id: "fanuc-m710-e-file-parse", source: "fanuc-m710-file", target: "fanuc-m710-parse", sourceHandle: "dataset", targetHandle: "dataset", animated: true },
   { id: "fanuc-m710-e-initial-file-parse", source: "fanuc-m710-file", target: "fanuc-m710-parse", sourceHandle: "initialSettings", targetHandle: "initialSettings", animated: true },
   { id: "fanuc-m710-e-parse-prepare", source: "fanuc-m710-parse", target: "fanuc-m710-prepare", sourceHandle: "program", targetHandle: "program", animated: true },
-  { id: "fanuc-m710-e-prepare-preview", source: "fanuc-m710-prepare", target: "fanuc-m710-preview", sourceHandle: "summary", targetHandle: "input", animated: true },
-  { id: "fanuc-m710-e-prepare-execute", source: "fanuc-m710-prepare", target: "fanuc-m710-execute", sourceHandle: "action", targetHandle: "action", animated: true },
+  { id: "fanuc-m710-e-prepare-validate", source: "fanuc-m710-prepare", target: "fanuc-m710-validate", sourceHandle: "action", targetHandle: "action", animated: true },
+  { id: "fanuc-m710-e-validate-preview", source: "fanuc-m710-validate", target: "fanuc-m710-preview", sourceHandle: "report", targetHandle: "input", animated: true },
+  { id: "fanuc-m710-e-validate-segments", source: "fanuc-m710-validate", target: "fanuc-m710-segments", sourceHandle: "segment_report", targetHandle: "input", animated: true },
+  { id: "fanuc-m710-e-prepare-guard", source: "fanuc-m710-prepare", target: "fanuc-m710-guard", sourceHandle: "action", targetHandle: "action", animated: true },
+  { id: "fanuc-m710-e-validate-guard", source: "fanuc-m710-validate", target: "fanuc-m710-guard", sourceHandle: "report", targetHandle: "report", animated: true },
+  { id: "fanuc-m710-e-prepare-collision", source: "fanuc-m710-prepare", target: "fanuc-m710-collision", sourceHandle: "action", targetHandle: "action", animated: true },
+  { id: "fanuc-m710-e-collision-guard", source: "fanuc-m710-collision", target: "fanuc-m710-guard", sourceHandle: "collision_report", targetHandle: "collision_report", animated: true },
+  { id: "fanuc-m710-e-collision-result", source: "fanuc-m710-collision", target: "fanuc-m710-collision-result", sourceHandle: "collision_report", targetHandle: "input", animated: true },
+  { id: "fanuc-m710-e-guard-decision", source: "fanuc-m710-guard", target: "fanuc-m710-decision", sourceHandle: "decision", targetHandle: "input", animated: true },
+  { id: "fanuc-m710-e-guard-execute", source: "fanuc-m710-guard", target: "fanuc-m710-execute", sourceHandle: "action", targetHandle: "action", animated: true },
   { id: "fanuc-m710-e-execute-result", source: "fanuc-m710-execute", target: "fanuc-m710-result", sourceHandle: "result", targetHandle: "input", animated: true },
+];
+
+const fanucWorldObserveTemplateNodes: Node[] = [
+  {
+    id: "fanuc-state", type: "fanuc_state_read", position: { x: 80, y: 100 },
+    data: createNodeData("fanuc_state_read"),
+  },
+  {
+    id: "fanuc-scan", type: "scene_scan", position: { x: 80, y: 380 },
+    data: {
+      ...createNodeData("scene_scan"), label: "FANUC Work Cell Scan",
+      omniverseEndpoint: "ws://host.docker.internal:9910/omniverse",
+      omniversePrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+    },
+  },
+  { id: "fanuc-state-print", type: "print", position: { x: 540, y: 100 }, data: { label: "Print Arm Observation" } },
+  { id: "fanuc-scan-print", type: "print", position: { x: 540, y: 380 }, data: { label: "Print Work Cell Scan" } },
+];
+
+const fanucWorldObserveTemplateEdges: Edge[] = [
+  { id: "fanuc-state-out", source: "fanuc-state", target: "fanuc-state-print", sourceHandle: "state", targetHandle: "input" },
+  { id: "fanuc-scan-out", source: "fanuc-scan", target: "fanuc-scan-print", sourceHandle: "scan", targetHandle: "input" },
 ];
 
 const fanucOmy3mTemplateNodes: Node[] = [
@@ -2879,6 +2974,41 @@ const GRAPH_TEMPLATES: Record<GraphTemplateId, GraphTemplate> = {
     description: "Parse FANUC LS joint records and execute validated J1-J6 trajectories through the dedicated Isaac Sim bridge.",
     nodes: fanucM710TemplateNodes,
     edges: fanucM710TemplateEdges,
+  },
+  fanuc_m710_preflight: {
+    id: "fanuc_m710_preflight",
+    label: "FANUC M-710 LS Preflight (Dev)",
+    description: "Parse LS and report trajectory constraints without sending motion.",
+    nodes: [
+      ...fanucM710TemplateNodes.filter((node) => ["fanuc-m710-file", "fanuc-m710-parse", "fanuc-m710-prepare"].includes(node.id))
+        .map((node) => node.id === "fanuc-m710-prepare"
+          ? { ...node, data: { ...node.data, previewOnly: true, enableExecution: false, requireAllIk: true } }
+          : node),
+      { id: "validate", type: "fanuc_trajectory_validate", position: { x: 1100, y: 120 }, data: createNodeData("fanuc_trajectory_validate") },
+      { id: "report", type: "print", position: { x: 1520, y: 120 }, data: { label: "Print Preflight Report" } },
+    ],
+    edges: [
+      ...fanucM710TemplateEdges.filter((edge) => edge.target === "fanuc-m710-parse" || edge.target === "fanuc-m710-prepare"),
+      { id: "prepared-validate", source: "fanuc-m710-prepare", target: "validate", sourceHandle: "action", targetHandle: "action" },
+      { id: "validate-report", source: "validate", target: "report", sourceHandle: "report", targetHandle: "input" },
+    ],
+  },
+  fanuc_m710_snapshot: {
+    id: "fanuc_m710_snapshot",
+    label: "FANUC M-710 Physics Snapshot",
+    description: "Read synchronized joints and physics clock after attaching the FANUC adapter.",
+    nodes: [
+      { id: "snapshot", type: "fanuc_snapshot_read", position: { x: 80, y: 180 }, data: createNodeData("fanuc_snapshot_read") },
+      { id: "print", type: "print", position: { x: 500, y: 180 }, data: { label: "Print Snapshot" } },
+    ],
+    edges: [{ id: "snapshot-out", source: "snapshot", target: "print", sourceHandle: "snapshot", targetHandle: "input" }],
+  },
+  fanuc_m710_world_observe: {
+    id: "fanuc_m710_world_observe",
+    label: "FANUC M-710 World Observe",
+    description: "Read M-710 joint state and work cell geometry without executing motion.",
+    nodes: fanucWorldObserveTemplateNodes,
+    edges: fanucWorldObserveTemplateEdges,
   },
   fanuc_omy3m: {
     id: "fanuc_omy3m",

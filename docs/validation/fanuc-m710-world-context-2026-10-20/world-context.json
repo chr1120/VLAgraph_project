@@ -1,0 +1,208 @@
+{
+  "schema": "vlagraph.fanuc_execute_offline_review.v1",
+  "boundary_status": "review_failed",
+  "graph_error_count": 7,
+  "report": null,
+  "segment_report": null,
+  "prepare_summary": {
+    "source_frames": 73,
+    "executable_joint_frames": 73,
+    "direct_joint_frames": 2,
+    "calibrated_cartesian_frames": 0,
+    "relative_cartesian_frames": 71,
+    "skipped_cartesian_frames": 0,
+    "skipped_unresolved_frames": 0,
+    "ik_solved_frames": 71,
+    "ik_failures": 0,
+    "skipped_unresolved_details": [],
+    "skipped_cartesian_details": [],
+    "execution_ready": true,
+    "preview_only": true,
+    "total_duration_sec": 21.594045,
+    "seconds_per_frame": 3.0,
+    "timing_mode": "source_speed",
+    "trajectory_time_scale": 1.0,
+    "cartesian_axis_signs": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "joint_axis_signs": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "initial_joint_axis_signs": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "external_axis_vectors": {
+      "E1": [
+        -1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "external_axis_joint_names": {
+      "E1": "externalAxisJoint"
+    },
+    "external_axis_root_motion_enabled": true,
+    "external_axis_affects_ik": false,
+    "initial_settings_applied": false,
+    "initial_settings_source_path": null,
+    "initial_joint_seed_applied": false,
+    "initial_pose_frame_applied": false,
+    "initial_pose_duration_sec": 0.0,
+    "initial_pose_hold_sec": 0.0,
+    "return_to_initial_pose_on_complete": true,
+    "initial_pose_return_sec": 0.0,
+    "initial_external_axes_mm": {},
+    "trailing_external_axis_return": {
+      "trimmed_frames": 0
+    },
+    "frame_time_sanitization": {
+      "adjusted_frames": 0,
+      "min_step_sec": 0.001
+    },
+    "calibrated_uframes": [],
+    "calibrated_utools": []
+  },
+  "guard": {
+    "ok": true,
+    "type": "execution_guard_result",
+    "action": {
+      "type": "execution_blocked",
+      "reasons": [
+        {
+          "code": "invalid_guard_input",
+          "message": "Prepared action and validation report are required"
+        }
+      ]
+    },
+    "approved": false,
+    "action_digest": null,
+    "decision": {
+      "approved": false,
+      "validation_policy": "full",
+      "reasons": [
+        {
+          "code": "invalid_guard_input",
+          "message": "Prepared action and validation report are required"
+        }
+      ],
+      "collision_checked": false,
+      "physical_rollout_checked": false,
+      "collision_geometry": null,
+      "initial_snapshot_age_sec": null,
+      "unchecked": []
+    }
+  },
+  "execute": {
+    "ok": false,
+    "skipped": true,
+    "result": {
+      "ok": false,
+      "skipped": true,
+      "mode": "omniverse",
+      "message": "Execution guard blocked the action or authorization is missing.",
+      "guard_decision": {
+        "approved": false,
+        "validation_policy": "full",
+        "reasons": [
+          {
+            "code": "invalid_guard_input",
+            "message": "Prepared action and validation report are required"
+          }
+        ],
+        "collision_checked": false,
+        "physical_rollout_checked": false,
+        "collision_geometry": null,
+        "initial_snapshot_age_sec": null,
+        "unchecked": []
+      }
+    },
+    "message": "Execution guard blocked the action or authorization is missing."
+  },
+  "network_commands_sent": [
+    "capture_world_state",
+    "scan_scene",
+    "get_collision_geometry"
+  ],
+  "motion_requested": false,
+  "calibration_candidates_applied": false,
+  "live_collection_context_requested": true,
+  "context_report": null,
+  "prediction_report": null,
+  "collision_report": null,
+  "node_errors": {
+    "fanuc-m710-world-snapshot": {
+      "ok": false,
+      "snapshot": null,
+      "message": "FANUC capture_world_state rejected or response identity mismatch: {'ok': False, 'applied': False, 'request_id': 'fanuc-world-d03c6cee2ac046319e957d4250374b1a', 'message': 'FANUC command failed: FANUC target must contain J1, J2, J3, J4, J5, J6, externalAxisJoint or 7 positions'}"
+    },
+    "fanuc-m710-world-geometry": {
+      "ok": false,
+      "inventory": null,
+      "message": "FANUC get_collision_geometry rejected or response identity mismatch: {'ok': False, 'applied': False, 'request_id': 'fanuc-world-3f8e85f2d4184a829a236635df1b9973', 'message': 'FANUC command failed: FANUC target must contain J1, J2, J3, J4, J5, J6, externalAxisJoint or 7 positions'}"
+    },
+    "fanuc-m710-world-context": {
+      "ok": false,
+      "context_report": null,
+      "scene": null,
+      "execution_ready": false,
+      "message": "1 validation error for FanucPhysicsSnapshot\n  Input should be a valid dictionary or instance of FanucPhysicsSnapshot [type=model_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.11/v/model_type"
+    },
+    "fanuc-m710-validate": {
+      "ok": false,
+      "report": null,
+      "segment_report": null,
+      "preview_action": null,
+      "execution_ready": false,
+      "message": "Connected initial snapshot is missing"
+    },
+    "fanuc-m710-collision": {
+      "ok": false,
+      "collision_report": null,
+      "message": "Connected collision scene is missing or invalid"
+    },
+    "fanuc-m710-world-prediction": {
+      "ok": false,
+      "prediction_report": null,
+      "execution_ready": false,
+      "message": "World context report is required"
+    },
+    "fanuc-m710-execute": {
+      "ok": false,
+      "skipped": true,
+      "result": {
+        "ok": false,
+        "skipped": true,
+        "mode": "omniverse",
+        "message": "Execution guard blocked the action or authorization is missing.",
+        "guard_decision": {
+          "approved": false,
+          "validation_policy": "full",
+          "reasons": [
+            {
+              "code": "invalid_guard_input",
+              "message": "Prepared action and validation report are required"
+            }
+          ],
+          "collision_checked": false,
+          "physical_rollout_checked": false,
+          "collision_geometry": null,
+          "initial_snapshot_age_sec": null,
+          "unchecked": []
+        }
+      },
+      "message": "Execution guard blocked the action or authorization is missing."
+    }
+  }
+}

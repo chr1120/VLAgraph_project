@@ -1,0 +1,19 @@
+FANUC M-710iC/20L validation closeout
+Created: 2026-10-20T07:21:08.720133+00:00
+Collection completed: False
+Execution validation completed: False
+Motion requested: False
+Execute boundary: blocked_as_expected
+
+Unresolved conditions:
+- controller_ik_base_tcp_external_axis_calibration_unverified
+- tool_and_environment_collision_coverage_unverified
+- physical_rollout_and_command_completion_unverified
+- base_alignment_reference_measurements_missing_or_failed
+- source_ls_preflight_failed
+- source_ls_collision_not_clear
+- synchronized_live_snapshot_and_geometry_unavailable
+- phase_error:geometry
+
+See summary.json for check results and individual artifact paths.
+Exit code 1 means unresolved validation conditions remain.

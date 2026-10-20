@@ -1,0 +1,132 @@
+{
+  "schema": "vlagraph.fanuc_observation_validation.v1",
+  "endpoint": "ws://127.0.0.1:9910/omniverse",
+  "ok": false,
+  "commands_sent": [
+    "get_state",
+    "scan_scene",
+    "capture_world_state",
+    "get_collision_geometry"
+  ],
+  "motion_requested": false,
+  "arm": {
+    "request_id": "fanuc-observe-b5a3ffa6b49f4e878f31fafb3e1fd5da",
+    "observed_at": 1792476038.234009,
+    "capture_duration_sec": 0.01600000000325963,
+    "prim_path": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+    "physics_ready": true,
+    "motion_active": false,
+    "joints": [
+      {
+        "name": "J1",
+        "kind": "revolute",
+        "unit": "rad",
+        "position": 2.0462280190258753e-06,
+        "target_position": 9.648668992667808e-07,
+        "dof_index": 1,
+        "virtual": false
+      },
+      {
+        "name": "J2",
+        "kind": "revolute",
+        "unit": "rad",
+        "position": 0.00021866694441996515,
+        "target_position": 0.00010440171899972484,
+        "dof_index": 2,
+        "virtual": false
+      },
+      {
+        "name": "J3",
+        "kind": "revolute",
+        "unit": "rad",
+        "position": -8.090373739833012e-05,
+        "target_position": -3.8669368223054335e-05,
+        "dof_index": 3,
+        "virtual": false
+      },
+      {
+        "name": "J4",
+        "kind": "revolute",
+        "unit": "rad",
+        "position": -4.7313568529716576e-07,
+        "target_position": -2.2287200351911451e-07,
+        "dof_index": 4,
+        "virtual": false
+      },
+      {
+        "name": "J5",
+        "kind": "revolute",
+        "unit": "rad",
+        "position": 2.4347333038576835e-08,
+        "target_position": 1.1363045615553347e-08,
+        "dof_index": 5,
+        "virtual": false
+      },
+      {
+        "name": "J6",
+        "kind": "revolute",
+        "unit": "rad",
+        "position": 7.337271068497131e-11,
+        "target_position": -1.3870431712914577e-11,
+        "dof_index": 6,
+        "virtual": false
+      }
+    ],
+    "external_axes": [
+      {
+        "name": "externalAxisJoint",
+        "kind": "prismatic",
+        "unit": "m",
+        "position": -2.8284179620641225e-07,
+        "target_position": -9.362159403281112e-08,
+        "dof_index": 0,
+        "virtual": false
+      }
+    ],
+    "sim_time": null,
+    "missing_fields": [
+      "synchronized_physics_snapshot",
+      "sim_time",
+      "joint_velocities",
+      "tcp_pose",
+      "base_pose",
+      "uf_ut_calibration",
+      "collision_shapes",
+      "command_completion"
+    ],
+    "prediction_ready": false,
+    "completion_verified": false
+  },
+  "scene": {
+    "scene_id": "scene_2b9beed519",
+    "timestamp": 1792476038.3631506,
+    "object_count": 256,
+    "meters_per_unit": null,
+    "up_axis": null,
+    "observation_quality": {
+      "units_known": false,
+      "up_axis_known": false,
+      "sim_time_known": false,
+      "coverage": "unknown",
+      "duplicate_prim_paths": [],
+      "invalid_object_positions": []
+    }
+  },
+  "errors": {},
+  "limitations": [
+    "get_state and scan_scene are separate observations, not a synchronized physics snapshot",
+    "motion_active=false does not verify per-command completion or task success",
+    "missing stage units and axis must be supplied by the bridge before world-state conversion",
+    "USD geometry uses default-time transforms; it is not a synchronized physics rollout"
+  ],
+  "snapshot_validation": {
+    "ok": false,
+    "snapshot": null,
+    "message": "FANUC capture_world_state rejected or response identity mismatch: {'ok': False, 'applied': False, 'request_id': 'fanuc-world-ee711ab2ba0c47f890fbc79b94472de2', 'message': 'FANUC command failed: FANUC target must contain J1, J2, J3, J4, J5, J6, externalAxisJoint or 7 positions'}"
+  },
+  "geometry_validation": {
+    "ok": false,
+    "inventory": null,
+    "message": "FANUC get_collision_geometry rejected or response identity mismatch: {'ok': False, 'applied': False, 'request_id': 'fanuc-world-cb6a65f7387a453c9265d7e4095770a8', 'message': 'FANUC command failed: FANUC target must contain J1, J2, J3, J4, J5, J6, externalAxisJoint or 7 positions'}"
+  }
+}

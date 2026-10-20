@@ -1,0 +1,930 @@
+{
+  "schema": "vlagraph.fanuc_observation_validation.v1",
+  "endpoint": "ws://127.0.0.1:9910/omniverse",
+  "ok": false,
+  "commands_sent": [
+    "get_state",
+    "scan_scene",
+    "capture_world_state",
+    "get_collision_geometry"
+  ],
+  "motion_requested": false,
+  "arm": {
+    "request_id": null,
+    "observed_at": null,
+    "capture_duration_sec": null,
+    "prim_path": null,
+    "physics_ready": null,
+    "motion_active": null,
+    "joints": null,
+    "external_axes": null,
+    "sim_time": null,
+    "missing_fields": null,
+    "prediction_ready": null,
+    "completion_verified": null
+  },
+  "scene": {
+    "scene_id": null,
+    "timestamp": null,
+    "object_count": null,
+    "meters_per_unit": null,
+    "up_axis": null,
+    "observation_quality": null
+  },
+  "errors": {},
+  "limitations": [
+    "get_state and scan_scene are separate observations, not a synchronized physics snapshot",
+    "motion_active=false does not verify per-command completion or task success",
+    "missing stage units and axis must be supplied by the bridge before world-state conversion",
+    "USD geometry uses default-time transforms; it is not a synchronized physics rollout"
+  ],
+  "snapshot_validation": {
+    "ok": true,
+    "snapshot": {}
+  },
+  "geometry_validation": {
+    "ok": true,
+    "inventory": {
+      "schema": "vlagraph.usd_collision_inventory.v1",
+      "source": "composed_usd_default_time",
+      "stage_identifier": "anon:000001FA47F7C700:tmp.usda",
+      "robot_prim_path": "/World/Robot",
+      "root_path": "/World",
+      "meters_per_unit": 1.0,
+      "up_axis": "Z",
+      "output_world_frame": "right_handed_z_up_m",
+      "colliders": [
+        {
+          "prim_path": "/World/Robot/link1/shape",
+          "type": "Cube",
+          "role": "robot",
+          "rigid_body_path": "/World/Robot/link1",
+          "rigid_body_enabled": true,
+          "kinematic_enabled": false,
+          "robot_joint": "J1",
+          "local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.05000000074505806,
+              -0.05000000074505806
+            ],
+            "max": [
+              0.05000000074505806,
+              0.05000000074505806,
+              0.05000000074505806
+            ]
+          },
+          "world_aabb_m_zup": {
+            "min": [
+              9.899999998509884,
+              19.949999999254942,
+              29.849999997764826
+            ],
+            "max": [
+              10.100000001490116,
+              20.050000000745058,
+              30.150000002235174
+            ]
+          },
+          "collision_approximation": null,
+          "bound_source": "collision_api_intrinsic_extent",
+          "world_transform_stage": [
+            [
+              -2.220446049250313e-16,
+              1.0000000000000002,
+              0.0,
+              0.0
+            ],
+            [
+              -2.0000000000000004,
+              -4.440892098500626e-16,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              3.0,
+              0.0
+            ],
+            [
+              10.0,
+              20.0,
+              30.0,
+              1.0
+            ]
+          ],
+          "contact_offset_stage": null,
+          "body_local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.10000000149011612,
+              -0.15000000223517418
+            ],
+            "max": [
+              0.05000000074505806,
+              0.10000000149011612,
+              0.15000000223517418
+            ]
+          }
+        },
+        {
+          "prim_path": "/World/Robot/link2/shape",
+          "type": "Cube",
+          "role": "robot",
+          "rigid_body_path": "/World/Robot/link2",
+          "rigid_body_enabled": true,
+          "kinematic_enabled": false,
+          "robot_joint": "J2",
+          "local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.05000000074505806,
+              -0.05000000074505806
+            ],
+            "max": [
+              0.05000000074505806,
+              0.05000000074505806,
+              0.05000000074505806
+            ]
+          },
+          "world_aabb_m_zup": {
+            "min": [
+              9.899999998509884,
+              19.949999999254942,
+              29.849999997764826
+            ],
+            "max": [
+              10.100000001490116,
+              20.050000000745058,
+              30.150000002235174
+            ]
+          },
+          "collision_approximation": null,
+          "bound_source": "collision_api_intrinsic_extent",
+          "world_transform_stage": [
+            [
+              -2.220446049250313e-16,
+              1.0000000000000002,
+              0.0,
+              0.0
+            ],
+            [
+              -2.0000000000000004,
+              -4.440892098500626e-16,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              3.0,
+              0.0
+            ],
+            [
+              10.0,
+              20.0,
+              30.0,
+              1.0
+            ]
+          ],
+          "contact_offset_stage": null,
+          "body_local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.10000000149011612,
+              -0.15000000223517418
+            ],
+            "max": [
+              0.05000000074505806,
+              0.10000000149011612,
+              0.15000000223517418
+            ]
+          }
+        },
+        {
+          "prim_path": "/World/Robot/link3/shape",
+          "type": "Cube",
+          "role": "robot",
+          "rigid_body_path": "/World/Robot/link3",
+          "rigid_body_enabled": true,
+          "kinematic_enabled": false,
+          "robot_joint": "J3",
+          "local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.05000000074505806,
+              -0.05000000074505806
+            ],
+            "max": [
+              0.05000000074505806,
+              0.05000000074505806,
+              0.05000000074505806
+            ]
+          },
+          "world_aabb_m_zup": {
+            "min": [
+              9.899999998509884,
+              19.949999999254942,
+              29.849999997764826
+            ],
+            "max": [
+              10.100000001490116,
+              20.050000000745058,
+              30.150000002235174
+            ]
+          },
+          "collision_approximation": null,
+          "bound_source": "collision_api_intrinsic_extent",
+          "world_transform_stage": [
+            [
+              -2.220446049250313e-16,
+              1.0000000000000002,
+              0.0,
+              0.0
+            ],
+            [
+              -2.0000000000000004,
+              -4.440892098500626e-16,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              3.0,
+              0.0
+            ],
+            [
+              10.0,
+              20.0,
+              30.0,
+              1.0
+            ]
+          ],
+          "contact_offset_stage": null,
+          "body_local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.10000000149011612,
+              -0.15000000223517418
+            ],
+            "max": [
+              0.05000000074505806,
+              0.10000000149011612,
+              0.15000000223517418
+            ]
+          }
+        },
+        {
+          "prim_path": "/World/Robot/link4/shape",
+          "type": "Cube",
+          "role": "robot",
+          "rigid_body_path": "/World/Robot/link4",
+          "rigid_body_enabled": true,
+          "kinematic_enabled": false,
+          "robot_joint": "J4",
+          "local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.05000000074505806,
+              -0.05000000074505806
+            ],
+            "max": [
+              0.05000000074505806,
+              0.05000000074505806,
+              0.05000000074505806
+            ]
+          },
+          "world_aabb_m_zup": {
+            "min": [
+              9.899999998509884,
+              19.949999999254942,
+              29.849999997764826
+            ],
+            "max": [
+              10.100000001490116,
+              20.050000000745058,
+              30.150000002235174
+            ]
+          },
+          "collision_approximation": null,
+          "bound_source": "collision_api_intrinsic_extent",
+          "world_transform_stage": [
+            [
+              -2.220446049250313e-16,
+              1.0000000000000002,
+              0.0,
+              0.0
+            ],
+            [
+              -2.0000000000000004,
+              -4.440892098500626e-16,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              3.0,
+              0.0
+            ],
+            [
+              10.0,
+              20.0,
+              30.0,
+              1.0
+            ]
+          ],
+          "contact_offset_stage": null,
+          "body_local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.10000000149011612,
+              -0.15000000223517418
+            ],
+            "max": [
+              0.05000000074505806,
+              0.10000000149011612,
+              0.15000000223517418
+            ]
+          }
+        },
+        {
+          "prim_path": "/World/Robot/link5/shape",
+          "type": "Cube",
+          "role": "robot",
+          "rigid_body_path": "/World/Robot/link5",
+          "rigid_body_enabled": true,
+          "kinematic_enabled": false,
+          "robot_joint": "J5",
+          "local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.05000000074505806,
+              -0.05000000074505806
+            ],
+            "max": [
+              0.05000000074505806,
+              0.05000000074505806,
+              0.05000000074505806
+            ]
+          },
+          "world_aabb_m_zup": {
+            "min": [
+              9.899999998509884,
+              19.949999999254942,
+              29.849999997764826
+            ],
+            "max": [
+              10.100000001490116,
+              20.050000000745058,
+              30.150000002235174
+            ]
+          },
+          "collision_approximation": null,
+          "bound_source": "collision_api_intrinsic_extent",
+          "world_transform_stage": [
+            [
+              -2.220446049250313e-16,
+              1.0000000000000002,
+              0.0,
+              0.0
+            ],
+            [
+              -2.0000000000000004,
+              -4.440892098500626e-16,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              3.0,
+              0.0
+            ],
+            [
+              10.0,
+              20.0,
+              30.0,
+              1.0
+            ]
+          ],
+          "contact_offset_stage": null,
+          "body_local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.10000000149011612,
+              -0.15000000223517418
+            ],
+            "max": [
+              0.05000000074505806,
+              0.10000000149011612,
+              0.15000000223517418
+            ]
+          }
+        },
+        {
+          "prim_path": "/World/Robot/link6/shape",
+          "type": "Cube",
+          "role": "robot",
+          "rigid_body_path": "/World/Robot/link6",
+          "rigid_body_enabled": true,
+          "kinematic_enabled": false,
+          "robot_joint": "J6",
+          "local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.05000000074505806,
+              -0.05000000074505806
+            ],
+            "max": [
+              0.05000000074505806,
+              0.05000000074505806,
+              0.05000000074505806
+            ]
+          },
+          "world_aabb_m_zup": {
+            "min": [
+              9.899999998509884,
+              19.949999999254942,
+              29.849999997764826
+            ],
+            "max": [
+              10.100000001490116,
+              20.050000000745058,
+              30.150000002235174
+            ]
+          },
+          "collision_approximation": null,
+          "bound_source": "collision_api_intrinsic_extent",
+          "world_transform_stage": [
+            [
+              -2.220446049250313e-16,
+              1.0000000000000002,
+              0.0,
+              0.0
+            ],
+            [
+              -2.0000000000000004,
+              -4.440892098500626e-16,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              3.0,
+              0.0
+            ],
+            [
+              10.0,
+              20.0,
+              30.0,
+              1.0
+            ]
+          ],
+          "contact_offset_stage": null,
+          "body_local_aabb_stage": {
+            "min": [
+              -0.05000000074505806,
+              -0.10000000149011612,
+              -0.15000000223517418
+            ],
+            "max": [
+              0.05000000074505806,
+              0.10000000149011612,
+              0.15000000223517418
+            ]
+          }
+        }
+      ],
+      "joint_bindings": {
+        "J1": {
+          "joint_path": "/World/Robot/J1",
+          "body0": [
+            "/World/Robot/base"
+          ],
+          "body1": "/World/Robot/link1",
+          "axis": "X",
+          "local_pos0_stage": [
+            0.0,
+            0.0,
+            0.5649999976158142
+          ],
+          "local_pos1_stage": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_rot0_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_rot1_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "lower_limit_deg": -180.0,
+          "upper_limit_deg": 180.0
+        },
+        "J2": {
+          "joint_path": "/World/Robot/J2",
+          "body0": [
+            "/World/Robot/link1"
+          ],
+          "body1": "/World/Robot/link2",
+          "axis": "Y",
+          "local_pos0_stage": [
+            0.15000000596046448,
+            0.0,
+            0.0
+          ],
+          "local_pos1_stage": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_rot0_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_rot1_wxyz": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "lower_limit_deg": -90.0,
+          "upper_limit_deg": 135.0
+        },
+        "J3": {
+          "joint_path": "/World/Robot/J3",
+          "body0": [
+            "/World/Robot/link2"
+          ],
+          "body1": "/World/Robot/link3",
+          "axis": "Y",
+          "local_pos0_stage": [
+            0.0,
+            0.0,
+            1.149999976158142
+          ],
+          "local_pos1_stage": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_rot0_wxyz": [
+            0.0,
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "local_rot1_wxyz": [
+            0.0,
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "lower_limit_deg": -80.5,
+          "upper_limit_deg": 205.0
+        },
+        "J4": {
+          "joint_path": "/World/Robot/J4",
+          "body0": [
+            "/World/Robot/link3"
+          ],
+          "body1": "/World/Robot/link4",
+          "axis": "X",
+          "local_pos0_stage": [
+            0.0,
+            0.0,
+            0.1899999976158142
+          ],
+          "local_pos1_stage": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_rot0_wxyz": [
+            0.0,
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "local_rot1_wxyz": [
+            0.0,
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "lower_limit_deg": -200.0,
+          "upper_limit_deg": 200.0
+        },
+        "J5": {
+          "joint_path": "/World/Robot/J5",
+          "body0": [
+            "/World/Robot/link4"
+          ],
+          "body1": "/World/Robot/link5",
+          "axis": "Y",
+          "local_pos0_stage": [
+            1.7999999523162842,
+            0.0,
+            0.0
+          ],
+          "local_pos1_stage": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_rot0_wxyz": [
+            0.0,
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "local_rot1_wxyz": [
+            0.0,
+            -1.0,
+            0.0,
+            0.0
+          ],
+          "lower_limit_deg": -140.0,
+          "upper_limit_deg": 140.0
+        },
+        "J6": {
+          "joint_path": "/World/Robot/J6",
+          "body0": [
+            "/World/Robot/link5"
+          ],
+          "body1": "/World/Robot/link6",
+          "axis": "X",
+          "local_pos0_stage": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_pos1_stage": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "local_rot0_wxyz": [
+            0.0,
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "local_rot1_wxyz": [
+            0.0,
+            0.0,
+            -1.0,
+            0.0
+          ],
+          "lower_limit_deg": -450.0,
+          "upper_limit_deg": 450.0
+        }
+      },
+      "joint_collider_coverage": {
+        "J1": [
+          "/World/Robot/link1/shape"
+        ],
+        "J2": [
+          "/World/Robot/link2/shape"
+        ],
+        "J3": [
+          "/World/Robot/link3/shape"
+        ],
+        "J4": [
+          "/World/Robot/link4/shape"
+        ],
+        "J5": [
+          "/World/Robot/link5/shape"
+        ],
+        "J6": [
+          "/World/Robot/link6/shape"
+        ]
+      },
+      "auxiliary_joint_bindings": [],
+      "body_world_transforms_stage": {
+        "/World/Robot/base": [
+          [
+            -2.220446049250313e-16,
+            1.0000000000000002,
+            0.0,
+            0.0
+          ],
+          [
+            -1.0000000000000002,
+            -2.220446049250313e-16,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            20.0,
+            30.0,
+            1.0
+          ]
+        ],
+        "/World/Robot/link1": [
+          [
+            -2.220446049250313e-16,
+            1.0000000000000002,
+            0.0,
+            0.0
+          ],
+          [
+            -1.0000000000000002,
+            -2.220446049250313e-16,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            20.0,
+            30.0,
+            1.0
+          ]
+        ],
+        "/World/Robot/link2": [
+          [
+            -2.220446049250313e-16,
+            1.0000000000000002,
+            0.0,
+            0.0
+          ],
+          [
+            -1.0000000000000002,
+            -2.220446049250313e-16,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            20.0,
+            30.0,
+            1.0
+          ]
+        ],
+        "/World/Robot/link3": [
+          [
+            -2.220446049250313e-16,
+            1.0000000000000002,
+            0.0,
+            0.0
+          ],
+          [
+            -1.0000000000000002,
+            -2.220446049250313e-16,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            20.0,
+            30.0,
+            1.0
+          ]
+        ],
+        "/World/Robot/link4": [
+          [
+            -2.220446049250313e-16,
+            1.0000000000000002,
+            0.0,
+            0.0
+          ],
+          [
+            -1.0000000000000002,
+            -2.220446049250313e-16,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            20.0,
+            30.0,
+            1.0
+          ]
+        ],
+        "/World/Robot/link5": [
+          [
+            -2.220446049250313e-16,
+            1.0000000000000002,
+            0.0,
+            0.0
+          ],
+          [
+            -1.0000000000000002,
+            -2.220446049250313e-16,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            20.0,
+            30.0,
+            1.0
+          ]
+        ],
+        "/World/Robot/link6": [
+          [
+            -2.220446049250313e-16,
+            1.0000000000000002,
+            0.0,
+            0.0
+          ],
+          [
+            -1.0000000000000002,
+            -2.220446049250313e-16,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            10.0,
+            20.0,
+            30.0,
+            1.0
+          ]
+        ]
+      },
+      "missing_joint_bindings": [],
+      "missing_joint_colliders": [],
+      "disabled_collision_prims": [],
+      "unsupported_collision_prims": [],
+      "unloaded_payloads": [],
+      "composition_errors": [],
+      "issues": [],
+      "truncated": false,
+      "boundables_without_collision_api": 0,
+      "robot_joint_collision_coverage_complete": true,
+      "proxy_scene_ready": false,
+      "physical_collision_verified": false,
+      "execution_ready": false,
+      "unchecked": [
+        "project_fk_to_usd_joint_frame_binding",
+        "base_and_tool_coverage",
+        "contact_skin_defaults",
+        "environment_collision_coverage",
+        "physical_snapshot_synchronization",
+        "physical_rollout"
+      ],
+      "static_obstacle_candidates": [],
+      "inventory_digest": "bea2296a4cf8e9b812153b0e7e9cc8605b7b96895b07e1f546812609e95678d0"
+    }
+  },
+  "usd_proxy_validation": {
+    "ok": false,
+    "message": "USD/FK binding failed: [{'joint': 'J1', 'message': 'USD joint origin or signed axis differs from project FK'}]"
+  }
+}

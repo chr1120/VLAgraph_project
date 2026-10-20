@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {
+      "id": "scan", "type": "scene_scan", "position": {"x": 80, "y": 180},
+      "data": {
+        "label": "Isaac Sim Scene Scan",
+        "omniverseEndpoint": "ws://host.docker.internal:9900/omniverse",
+        "omniversePrimPath": "/World/GR00T_Humanoid", "sceneRootPath": "/World",
+        "maxObjects": 256, "timeoutSec": 15
+      }
+    },
+    {
+      "id": "build", "type": "world_state_build", "position": {"x": 460, "y": 180},
+      "data": {"label": "World State Build (Observation)", "episodeId": "observation-001", "sceneVersion": "scene-v1"}
+    },
+    {
+      "id": "print", "type": "print", "position": {"x": 850, "y": 180},
+      "data": {"label": "Print Normalized Observation"}
+    }
+  ],
+  "edges": [
+    {"id": "scan-build", "source": "scan", "target": "build", "sourceHandle": "scan", "targetHandle": "scan"},
+    {"id": "build-print", "source": "build", "target": "print", "sourceHandle": "world_state", "targetHandle": "input"}
+  ]
+}

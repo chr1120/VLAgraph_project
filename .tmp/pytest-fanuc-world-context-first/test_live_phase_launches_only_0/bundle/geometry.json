@@ -1,0 +1,4 @@
+{
+  "status": "error",
+  "message": "\n\tError in 'pxrInternal_v0_25_8__pxrReserved__::UsdStage::Open' at line 1043 in file D:\\a\\OpenUSD\\OpenUSD\\pxr\\usd\\usd\\stage.cpp : 'Failed to open layer @C:\\Users\\0\\Desktop\\vla_chr\\VLAgraph_project\\.tmp\\pytest-fanuc-world-context-first\\test_live_phase_launches_only_0\\missing.usd@'"
+}
