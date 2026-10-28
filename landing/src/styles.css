@@ -514,6 +514,64 @@ img { display: block; max-width: 100%; }
   z-index: 1;
 }
 
+.simulation-launch-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  width: 100%;
+  min-height: 82px;
+  padding: 18px 20px;
+  border: 1px solid rgba(126, 234, 255, 0.24);
+  border-radius: 18px;
+  color: white;
+  background: linear-gradient(135deg, rgba(11, 42, 63, 0.92), rgba(18, 28, 54, 0.92));
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.simulation-launch-card:hover:not(:disabled) {
+  transform: translateY(-3px);
+  border-color: rgba(126, 234, 255, 0.72);
+}
+
+.simulation-launch-card:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.simulation-launch-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.simulation-launch-copy strong {
+  font-size: 1.05rem;
+}
+
+.simulation-launch-card .demo-launch-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 13px;
+  border-radius: 999px;
+  background: rgba(126, 234, 255, 0.12);
+  border: 1px solid rgba(126, 234, 255, 0.4);
+}
+
+.simulation-launch-message {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--line);
+  font-size: 0.82rem;
+}
+
 .auth-backdrop {
   position: fixed;
   inset: 0;

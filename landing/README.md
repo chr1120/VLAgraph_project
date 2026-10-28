@@ -23,6 +23,35 @@
 
 종료할 때는 같은 폴더 지정과 Compose 파일로 `docker compose --project-directory landing -f landing/docker-compose.yml down`을 실행합니다. 계정 데이터는 `auth_data` 볼륨에 보관됩니다. 비밀번호 재설정 이메일을 사용하려면 `.env`의 SMTP 설정도 입력해야 합니다.
 
+## Isaac Sim 실행 버튼 사용
+
+로그인 화면의 기존 시연 카드 아래에 추가된 **시뮬레이션 화면 열기** 버튼은 Windows 호스트에서 실행되는 로컬 런처에 요청합니다. Docker 컨테이너에서 직접 Windows Isaac Sim 실행 파일을 실행하지 않도록 분리한 구성입니다.
+
+1. `landing/.env`에 Docker 백엔드와 로컬 런처가 공유할 임의의 긴 토큰을 설정합니다.
+
+   ```dotenv
+   OMNIVERSE_LAUNCH_TOKEN=replace-with-a-long-random-launch-token
+   ```
+
+2. `scripts/start-isaac-sim.ps1`에서 Isaac Sim 실행 파일과 선택적으로 열 Stage/USD 경로를 수정합니다.
+
+   ```powershell
+   $Executable = "C:\Path\To\isaac-sim.bat"
+   $ScenePath = "C:\Path\To\scene.usd"
+   $ExtraArguments = @()
+   ```
+
+3. 새 PowerShell 창에서 토큰과 함께 로컬 런처를 실행합니다.
+
+   ```powershell
+   $env:OMNIVERSE_LAUNCH_TOKEN = "landing/.env와 동일한 토큰"
+   .\scripts\start-omniverse-launcher.ps1
+   ```
+
+4. 랜딩 서비스와 기존 그래프 앱을 실행한 뒤 로그인하고 **시뮬레이션 화면 열기**를 누릅니다. 승인된 로그인 사용자만 실행 API를 호출할 수 있습니다.
+
+로컬 런처는 `127.0.0.1:9188`에서만 요청을 받습니다. 실행 경로는 브라우저가 임의로 입력할 수 없으며, `start-isaac-sim.ps1`에서 운영자가 관리합니다. 런처가 실행 중이지 않으면 화면에 연결 실패 메시지가 표시됩니다.
+
 ## 구성
 
 - **프런트엔드:** React 18, Vite
