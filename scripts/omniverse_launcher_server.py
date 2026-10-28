@@ -62,7 +62,7 @@ class LauncherHandler(BaseHTTPRequestHandler):
             self._write_json(500, {"ok": False, "message": f"Failed to start Isaac Sim: {error}"})
             return
 
-        self._write_json(200, {"ok": True, "message": "Omniverse 시뮬레이션 실행을 요청했습니다."})
+        self._write_json(200, {"ok": True, "message": "시뮬레이션 폴더를 열었습니다."})
 
     def log_message(self, format: str, *args) -> None:
         print(f"[omniverse-launcher] {format % args}", flush=True)

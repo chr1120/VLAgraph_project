@@ -1,22 +1,9 @@
-# Modify these paths before starting Omniverse Isaac Sim.
-$Executable = "C:\Users\0\AppData\Local\ov\pkg\isaac-sim-4.5.0\isaac-sim.bat"
-$ScenePath = ""
-$ExtraArguments = @()
+$FolderPath = "C:\Users\0\Desktop\vla_chr\VLAgraph_project"
 
-if (-not (Test-Path -LiteralPath $Executable)) {
-    Write-Error "Isaac Sim executable was not found: $Executable"
+if (-not (Test-Path -LiteralPath $FolderPath -PathType Container)) {
+    Write-Error "Folder was not found: $FolderPath"
     exit 1
 }
 
-$argumentList = @()
-if (-not [string]::IsNullOrWhiteSpace($ScenePath)) {
-    if (-not (Test-Path -LiteralPath $ScenePath)) {
-        Write-Error "Isaac Sim scene was not found: $ScenePath"
-        exit 1
-    }
-    $argumentList += $ScenePath
-}
-$argumentList += $ExtraArguments
-
-Start-Process -FilePath $Executable -ArgumentList $argumentList
-Write-Output "Isaac Sim launch requested: $Executable"
+Start-Process -FilePath "explorer.exe" -ArgumentList $FolderPath
+Write-Output "Folder opened: $FolderPath"

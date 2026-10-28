@@ -188,7 +188,7 @@ def ensure_admin_accounts(settings: Settings) -> None:
             else:
                 connection.execute(
                     "UPDATE users SET is_admin = true, status = 'approved' WHERE id = %s",
-                    (account["id"],),
+                    (account[0],),
                 )
         connection.commit()
 

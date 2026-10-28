@@ -396,12 +396,13 @@ img { display: block; max-width: 100%; }
 
 .demo-entry {
   display: flex;
-  justify-content: flex-end;
+  justify-content: stretch;
+  width: 100%;
   padding-top: 24px;
 }
 
 .demo-entry .hero-side {
-  width: min(100%, 680px);
+  width: 100%;
   align-items: stretch;
   top: 0;
 }
@@ -423,6 +424,38 @@ img { display: block; max-width: 100%; }
   grid-column: 2;
   grid-row: 1 / 3;
   margin-top: 0;
+}
+
+.demo-entry .demo-launch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.demo-launch-grid > .demo-launch-card {
+  grid-column: 1;
+}
+
+.demo-launch-grid > .simulation-launch-card {
+  grid-column: 2;
+}
+
+.demo-launch-grid > .demo-launch-card,
+.demo-launch-grid > .simulation-launch-card {
+  height: 150px;
+  min-height: 150px;
+  width: 100%;
+}
+
+.demo-entry .simulation-launch-card {
+  padding: 28px;
+}
+
+.demo-launch-grid .simulation-launch-copy strong {
+  font-size: clamp(1.55rem, 2.2vw, 2rem);
+  line-height: 1.18;
+  letter-spacing: -0.07em;
 }
 
 .mini-pill {
@@ -1078,6 +1111,20 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 640px) {
+  .demo-entry .demo-launch-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-launch-grid > .demo-launch-card,
+  .demo-launch-grid > .simulation-launch-card {
+    grid-column: 1;
+  }
+
+  .demo-launch-grid > .demo-launch-card,
+  .demo-launch-grid > .simulation-launch-card {
+    height: 150px;
+  }
+
   .page,
   .topbar {
     padding-left: 18px;

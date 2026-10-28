@@ -554,11 +554,11 @@ function App() {
       })
       const payload = await response.json().catch(() => ({}))
       if (!response.ok) {
-        throw new Error(payload.detail || '시뮬레이션을 실행하지 못했습니다.')
+        throw new Error(payload.detail || '시뮬레이션 폴더를 열지 못했습니다.')
       }
-      setSimulationMessage(payload.message || 'Omniverse 시뮬레이션 실행을 요청했습니다.')
+      setSimulationMessage(payload.message || '시뮬레이션 폴더를 열었습니다.')
     } catch (error) {
-      setSimulationMessage(error.message || '시뮬레이션 실행 서비스에 연결할 수 없습니다.')
+      setSimulationMessage(error.message || '시뮬레이션 폴더 실행 서비스에 연결할 수 없습니다.')
     } finally {
       setSimulationLaunching(false)
     }
@@ -627,34 +627,35 @@ function App() {
             <section className="demo-entry">
               <div className="hero-side">
                 <div className="mini-pill">AutoMES Telstar</div>
-                <a
-                  className="demo-launch-card"
-                  href={GRAPH_APP_URL}
-                  aria-label="VLAgraph 시연 화면 열기"
-                >
-                  <span className="demo-launch-kicker">LIVE DEMO</span>
-                  <span className="demo-launch-title">로봇 AI 워크플로우<br />시연 화면</span>
-                  <span className="demo-launch-action">
-                    시연 화면 열기
-                    <Icon name="arrow" size={17} />
-                  </span>
-                </a>
-                <button
-                  className="simulation-launch-card"
-                  type="button"
-                  onClick={handleLaunchSimulation}
-                  disabled={simulationLaunching}
-                  aria-label="Omniverse 시뮬레이션 화면 실행"
-                >
-                  <span className="simulation-launch-copy">
-                    <span className="demo-launch-kicker">OMNIVERSE</span>
-                    <strong>{simulationLaunching ? '시뮬레이션 실행 중...' : '시뮬레이션 화면 열기'}</strong>
-                  </span>
-                  <span className="demo-launch-action">
-                    <Icon name="play" size={17} />
-                    실행
-                  </span>
-                </button>
+                <div className="demo-launch-grid">
+                  <a
+                    className="demo-launch-card"
+                    href={GRAPH_APP_URL}
+                    aria-label="VLAgraph 시연 화면 열기"
+                  >
+                    <span className="demo-launch-kicker">LIVE DEMO</span>
+                    <span className="demo-launch-title">로봇 AI 워크플로우<br />시연 화면</span>
+                    <span className="demo-launch-action">
+                      시연 화면 열기
+                      <Icon name="arrow" size={17} />
+                    </span>
+                  </a>
+                  <button
+                    className="simulation-launch-card"
+                    type="button"
+                    onClick={handleLaunchSimulation}
+                    disabled={simulationLaunching}
+                    aria-label="INDUSPHERE 실행"
+                  >
+                    <span className="simulation-launch-copy">
+                      <span className="demo-launch-kicker">INDUSPHERE</span>
+                      <strong>{simulationLaunching ? 'INDUSPHERE 실행 중...' : 'INDUSPHERE 실행'}</strong>
+                    </span>
+                    <span className="demo-launch-action">
+                      <Icon name="play" size={17} />
+                    </span>
+                  </button>
+                </div>
                 {simulationMessage && <div className="simulation-launch-message">{simulationMessage}</div>}
               </div>
             </section>
