@@ -3,11 +3,14 @@ import logging
 import secrets
 import smtplib
 import ssl
+import json
 from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from typing import Annotated
 from uuid import UUID
+from urllib.error import HTTPError, URLError
 from urllib.parse import quote
+from urllib.request import Request as UrlRequest, urlopen
 
 import jwt
 import psycopg
@@ -251,6 +254,41 @@ def logout(response: Response, request: Request) -> None:
 @app.get("/api/auth/me", response_model=UserResponse)
 def me(user: Annotated[dict, Depends(current_user)]) -> dict:
     return user
+
+
+@app.post("/api/simulation/launch")
+def launch_omniverse_simulation(
+    request: Request,
+    user: Annotated[dict, Depends(current_user)],
+) -> dict:
+    del user
+    settings: Settings = request.app.state.settings
+    launcher_url = settings.omniverse_launcher_url
+    launcher_token = settings.omniverse_launch_token
+
+    if not launcher_url:
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="Omniverse launcher is not configured")
+    if not launcher_token:
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail="Omniverse launcher token is not configured")
+
+    payload = json.dumps({}).encode("utf-8")
+    launcher_request = UrlRequest(
+        launcher_url,
+        data=payload,
+        headers={"Content-Type": "application/json", "Authorization": f"Bearer {launcher_token}"},
+        method="POST",
+    )
+
+    try:
+        with urlopen(launcher_request, timeout=10) as response:
+            result = json.loads(response.read().decode("utf-8"))
+    except HTTPError as error:
+        body = error.read().decode("utf-8", errors="replace")
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=f"Omniverse launcher error: {body[:300]}") from error
+    except (URLError, TimeoutError, OSError) as error:
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail="Omniverse launcher is not reachable") from error
+
+    return result
 
 
 @app.get("/api/auth/admin/users", response_model=list[UserResponse])

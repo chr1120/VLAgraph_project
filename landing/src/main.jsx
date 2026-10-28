@@ -523,6 +523,8 @@ function App() {
   const [user, setUser] = useState(null)
   const [authLoaded, setAuthLoaded] = useState(false)
   const [showProfile, setShowProfile] = useState(false)
+  const [simulationLaunching, setSimulationLaunching] = useState(false)
+  const [simulationMessage, setSimulationMessage] = useState('')
 
   useEffect(() => {
     fetch(`${API_BASE_URL}/api/auth/me`, { credentials: 'include' })
@@ -540,6 +542,26 @@ function App() {
       credentials: 'include'
     }).catch(() => {})
     setUser(null)
+  }
+
+  const handleLaunchSimulation = async () => {
+    setSimulationLaunching(true)
+    setSimulationMessage('')
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/simulation/launch`, {
+        method: 'POST',
+        credentials: 'include',
+      })
+      const payload = await response.json().catch(() => ({}))
+      if (!response.ok) {
+        throw new Error(payload.detail || '시뮬레이션을 실행하지 못했습니다.')
+      }
+      setSimulationMessage(payload.message || 'Omniverse 시뮬레이션 실행을 요청했습니다.')
+    } catch (error) {
+      setSimulationMessage(error.message || '시뮬레이션 실행 서비스에 연결할 수 없습니다.')
+    } finally {
+      setSimulationLaunching(false)
+    }
   }
 
   return (
@@ -617,6 +639,23 @@ function App() {
                     <Icon name="arrow" size={17} />
                   </span>
                 </a>
+                <button
+                  className="simulation-launch-card"
+                  type="button"
+                  onClick={handleLaunchSimulation}
+                  disabled={simulationLaunching}
+                  aria-label="Omniverse 시뮬레이션 화면 실행"
+                >
+                  <span className="simulation-launch-copy">
+                    <span className="demo-launch-kicker">OMNIVERSE</span>
+                    <strong>{simulationLaunching ? '시뮬레이션 실행 중...' : '시뮬레이션 화면 열기'}</strong>
+                  </span>
+                  <span className="demo-launch-action">
+                    <Icon name="play" size={17} />
+                    실행
+                  </span>
+                </button>
+                {simulationMessage && <div className="simulation-launch-message">{simulationMessage}</div>}
               </div>
             </section>
           </Reveal>
