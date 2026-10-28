@@ -1,0 +1,49 @@
+{
+  "robots": [
+    {
+      "prim_path": "/World/AMR", "articulation_path": "/World/AMR",
+      "robot_kind": "amr", "model": "Example differential AMR", "base_motion": "planar",
+      "mobile_base": {"drive_type": "differential", "footprint_radius_m": 0.4},
+      "wheel_config": {
+        "radius_m": 0.1, "separation_m": 0.5,
+        "dof_names": ["left_wheel_joint", "right_wheel_joint"], "signs": [1, 1]
+      },
+      "joint_bindings": [
+        {"name": "left_wheel", "dof_name": "left_wheel_joint", "kind": "revolute"},
+        {"name": "right_wheel", "dof_name": "right_wheel_joint", "kind": "revolute"}
+      ]
+    },
+    {
+      "prim_path": "/World/FANUC", "articulation_path": "/World/FANUC",
+      "robot_kind": "articulated_arm", "manufacturer": "FANUC", "model": "M-710iC/20L",
+      "base_motion": "fixed",
+      "joint_bindings": [
+        {"name": "J1", "dof_name": "J1", "kind": "revolute"},
+        {"name": "J2", "dof_name": "J2", "kind": "revolute"},
+        {"name": "J3", "dof_name": "J3", "kind": "revolute"},
+        {"name": "J4", "dof_name": "J4", "kind": "revolute"},
+        {"name": "J5", "dof_name": "J5", "kind": "revolute"},
+        {"name": "J6", "dof_name": "J6", "kind": "revolute"}
+      ]
+    }
+  ],
+  "ground_prim_paths": ["/World/GroundPlane"],
+  "navigation_map": {
+    "stage_identifier": "mixed_cell.usd", "frame": "right_handed_z_up_m",
+    "resolution_m": 0.5, "origin_m": [-2, -2],
+    "cells": [
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    ]
+  }
+}

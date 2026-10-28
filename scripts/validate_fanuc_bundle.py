@@ -39,7 +39,7 @@ def review_execute(ls_path, *, world_context=False, endpoint=None, memory_path=N
         graph["nodes"] = [node for node in graph["nodes"] if node["id"] in offline_ids]
         graph["edges"] = [edge for edge in graph["edges"] if edge["source"] in offline_ids and edge["target"] in offline_ids]
     allowed = {"dataset_upload", "fanuc_ls_parse", "fanuc_m710_prepare", "fanuc_trajectory_validate",
-               "execution_guard", "robot_execute", "fanuc_collision_check", "print"}
+               "execution_guard", "robot_execute", "fanuc_collision_check", "print", "robot_setup"}
     if world_context:
         if not endpoint or not memory_path:
             raise ValueError("World context diagnostic requires an explicit endpoint and memory path")
@@ -47,6 +47,8 @@ def review_execute(ls_path, *, world_context=False, endpoint=None, memory_path=N
     if any(node["type"] not in allowed for node in graph["nodes"]):
         raise ValueError("Execute template contains a node unsupported by offline review")
     nodes = {node["id"]: node for node in graph["nodes"]}
+    if world_context and "fanuc-m710-setup" in nodes:
+        nodes["fanuc-m710-setup"]["data"].update(omniverseEndpoint=endpoint, memoryPath=str(memory_path))
     nodes["fanuc-m710-file"]["data"].update(datasetPath=str(ls_path.resolve()), initialSettingsEnabled=False,
                                              initialSettingsPath="")
     # Unreviewed controller transforms are never silently injected into Prepare.

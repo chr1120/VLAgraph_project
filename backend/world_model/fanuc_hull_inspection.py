@@ -56,7 +56,9 @@ def _points_in_anchor(stage, inventory, source, anchors):
 
 
 def _world_points(points, anchor, scene, positions):
-    from backend.executors.fanuc_nodes import M710_JOINT_ORIGINS, M710_JOINT_AXES, _rotation as rotate_axis
+    from backend.executors.fanuc_nodes import _rotation as rotate_axis
+    from .robot_profiles import profile_arrays
+    M710_JOINT_ORIGINS, M710_JOINT_AXES, _, _ = profile_arrays(scene.get("robot_profile"))
 
     if anchor["attachment"] == "world":
         return points.copy()

@@ -17,6 +17,7 @@ from backend.runtime.runner import GraphRunCancelled, run_graph
 
 
 FINAL_SESSION_STATES = {"completed", "cancelled", "error"}
+AMR_TERMINAL_STATES = {"completed", "cancelled", "failed", "blocked"}
 DEFAULT_UNITY_WAYPOINT_SPEED = 1.5
 LOCOMOTION_UNITY_COMMANDS = {
     "apply_humanoid_step",
@@ -1303,6 +1304,10 @@ class GraphRuntimeManager:
             },
             "last_result": session.get("last_result"),
             "last_result_at": session.get("last_result_at"),
+            "amr_commands": [{key: copy.deepcopy(value) for key, value in command.items()
+                              if key not in {"props", "deadline"}}
+                             for command in session.get("amr_commands", {}).values()],
+            "fanuc_commands": list(copy.deepcopy(session.get("fanuc_commands", {})).values()),
             "logs": list(session.get("logs", [])),
         }
 
@@ -1369,6 +1374,8 @@ class GraphRuntimeManager:
             self._append_logs(session, f"[LIVE frame {frame}] Cycle started")
 
     def _store_node_event(self, session_id: str, iteration: int, event: Dict[str, Any]) -> None:
+        self._record_amr_result(session_id, event)
+        self._record_fanuc_result(session_id, event)
         with self._lock:
             session = self._sessions.get(session_id)
             if session is None:
@@ -1385,6 +1392,8 @@ class GraphRuntimeManager:
             )
 
     def _store_live_node_event(self, session_id: str, frame: int, event: Dict[str, Any]) -> None:
+        self._record_amr_result(session_id, event)
+        self._record_fanuc_result(session_id, event)
         with self._lock:
             session = self._sessions.get(session_id)
             if session is None:
@@ -1427,8 +1436,151 @@ class GraphRuntimeManager:
             session["active_node_id"] = None
             session["active_node_type"] = None
 
+    def _begin_amr_node(self, session_id: str, event: Dict[str, Any]) -> None:
+        node = event["node"]
+        with self._lock:
+            session = self._sessions[session_id]
+            if session.get("cancel_requested"):
+                raise GraphRunCancelled("Runtime cancelled before node execution.")
+            session.update(active_node_id=node["id"], active_node_type=node.get("type"), updated_at=_now())
+            if node.get("type") != "amr_navigate" or node.get("data", {}).get("enableExecution") is not True:
+                return
+            props = node.setdefault("data", {})
+            if node["id"] in session["amr_auto_id_nodes"]:
+                props["commandId"] = f"amr-{session_id}-{uuid4().hex}"
+            command_id = props["commandId"]
+            session["amr_commands"][node["id"]] = {
+                "node_id": node["id"], "command_id": command_id, "props": copy.deepcopy(props),
+                "status": "submitting", "completion_verified": False,
+                "deadline": time.monotonic() + min(600, max(1, _coerce_float(props.get("navigationTimeoutSec"), 120))) + 10,
+            }
+
+    def _record_amr_result(self, session_id: str, event: Dict[str, Any]) -> None:
+        if event.get("node_type") != "amr_navigate":
+            return
+        with self._lock:
+            session = self._sessions.get(session_id)
+            command = session.get("amr_commands", {}).get(event.get("node_id")) if session else None
+            if command is None:
+                return
+            result = event.get("result") or {}
+            execution = result.get("execution")
+            if isinstance(execution, dict) and execution.get("command_id") == command["command_id"]:
+                if command["status"] not in AMR_TERMINAL_STATES:
+                    command.update(status=execution.get("status", "unknown"),
+                                   completion_verified=execution.get("completion_verified") is True,
+                                   execution=copy.deepcopy(execution))
+            elif command["status"] not in AMR_TERMINAL_STATES:
+                command["status"] = "unknown"
+            cancelled = bool(session.get("cancel_requested"))
+        # A cancellation can arrive while navigate is in flight, before the
+        # bridge knows its ID. Retry stop after submission returns as well.
+        if cancelled:
+            logs = self._stop_amr_commands(session_id)
+            with self._lock:
+                self._append_logs(self._sessions[session_id], *logs)
+
+    def _update_amr_execution(self, session_id, node_id, command_id, execution):
+        if not isinstance(execution, dict) or execution.get("command_id") != command_id:
+            raise ValueError("AMR status/stop response command identity mismatch")
+        if execution.get("status") not in AMR_TERMINAL_STATES | {"running", "stopping"}:
+            raise ValueError("Unknown AMR command status")
+        with self._lock:
+            command = self._sessions[session_id]["amr_commands"][node_id]
+            if command["command_id"] == command_id and command["status"] not in AMR_TERMINAL_STATES:
+                command.update(status=execution["status"], completion_verified=execution.get("completion_verified") is True,
+                               execution=copy.deepcopy(execution))
+
+    def _stop_amr_commands(self, session_id):
+        from backend.executors.amr_nodes import bridge_request
+        with self._lock:
+            commands = copy.deepcopy(list(self._sessions.get(session_id, {}).get("amr_commands", {}).values()))
+        logs = []
+        for command in commands:
+            if command["status"] in AMR_TERMINAL_STATES:
+                continue
+            try:
+                props = {**command["props"], "timeoutSec": 3}
+                response = bridge_request(props, "amr_stop", command_id=command["command_id"])
+                if response.get("ok") is not True:
+                    raise ValueError(response.get("message", "AMR stop rejected"))
+                self._update_amr_execution(session_id, command["node_id"], command["command_id"], response.get("execution"))
+                logs.append(f"[SESSION] AMR stop {command['command_id']}: {response['execution']['status']}")
+            except Exception as exc:
+                logs.append(f"[SESSION WARNING] AMR stop unconfirmed for {command['command_id']}: {exc}")
+        return logs
+
+    async def _wait_for_amr_commands(self, session_id):
+        from backend.executors.amr_nodes import bridge_request
+        while True:
+            if self._is_cancel_requested(session_id):
+                raise GraphRunCancelled("Runtime cancelled while waiting for AMR completion.")
+            with self._lock:
+                commands = copy.deepcopy(list(self._sessions[session_id]["amr_commands"].values()))
+            pending = False
+            for command in commands:
+                if command["status"] in AMR_TERMINAL_STATES:
+                    if command["status"] != "completed" or not command["completion_verified"]:
+                        raise RuntimeError(f"AMR {command['command_id']} ended without verified arrival: {command['status']}")
+                    continue
+                pending = True
+                if time.monotonic() >= command["deadline"]:
+                    raise RuntimeError(f"AMR completion timeout: {command['command_id']}")
+                response = await asyncio.to_thread(bridge_request, command["props"], "amr_status", command_id=command["command_id"])
+                if response.get("ok") is not True:
+                    raise RuntimeError(response.get("message", "AMR status rejected"))
+                self._update_amr_execution(session_id, command["node_id"], command["command_id"], response.get("execution"))
+            if not pending:
+                return
+            await asyncio.sleep(.1)
+
+    def _record_fanuc_result(self, session_id, event):
+        payload = event.get("result") or {}
+        with self._lock:
+            session = self._sessions[session_id]
+            commands = session.setdefault("fanuc_commands", {})
+            if event.get("node_type") == "robot_execute":
+                result = payload.get("result") or {}
+                request = result.get("request") or {}
+                if request.get("command") == "apply_fanuc_trajectory" and request.get("command_id") and result.get("endpoint"):
+                    commands[request["command_id"]] = {
+                        "command_id": request["command_id"], "node_id": event["node_id"],
+                        "prim_path": request.get("prim_path"), "endpoint": result["endpoint"], "status": "submitted",
+                    }
+            if event.get("node_type") == "execution_observe":
+                execution = payload.get("execution") or {}
+                command = commands.get(execution.get("command_id"))
+                if command and execution.get("prim_path") == command["prim_path"]:
+                    command["status"] = execution.get("status", command["status"])
+            cancelled = session.get("cancel_requested")
+        if cancelled:
+            logs = self._stop_fanuc_commands(session_id)
+            with self._lock:
+                self._append_logs(self._sessions[session_id], *logs)
+
+    def _stop_fanuc_commands(self, session_id):
+        from backend.executors.world_model_nodes import _fanuc_observation_request
+        with self._lock:
+            commands = copy.deepcopy(list(self._sessions.get(session_id, {}).get("fanuc_commands", {}).values()))
+        logs = []
+        for command in commands:
+            if command["status"] in {"completed", "failed", "cancelled"}:
+                continue
+            try:
+                response = _fanuc_observation_request({"omniverseEndpoint": command["endpoint"], "timeoutSec": 3},
+                    "stop_command", command_id=command["command_id"], prim_path=command["prim_path"])
+                record = response.get("execution") or {}
+                if record.get("command_id") != command["command_id"] or record.get("prim_path") != command["prim_path"] or record.get("status") not in {"completed", "failed", "cancelled"}:
+                    raise ValueError("Targeted FANUC stop was not confirmed")
+                with self._lock:
+                    self._sessions[session_id]["fanuc_commands"][command["command_id"]]["status"] = record["status"]
+                logs.append(f"[SESSION] FANUC stop {command['command_id']}: {record['status']}")
+            except Exception as exc:
+                logs.append(f"[SESSION WARNING] FANUC stop unconfirmed for {command['command_id']}: {exc}")
+        return logs
+
     def _send_cancel_stop_commands(self, session_id: str, graph: Dict[str, Any]) -> List[str]:
-        stop_logs: List[str] = []
+        stop_logs: List[str] = self._stop_amr_commands(session_id) + self._stop_fanuc_commands(session_id)
         try:
             from backend.executors.vla_nodes import _omniverse_execute
         except Exception as exc:
@@ -1495,6 +1647,10 @@ class GraphRuntimeManager:
             "options": normalized_options,
             "last_result": None,
             "last_result_at": None,
+            "amr_commands": {},
+            "fanuc_commands": {},
+            "amr_auto_id_nodes": {node["id"] for node in prepared_graph.get("nodes", [])
+                                  if node.get("type") == "amr_navigate" and not node.get("data", {}).get("commandId")},
             "logs": [
                 "[SESSION] 그래프 런타임을 메모리에 적재했습니다.",
             ] + prepare_logs,
@@ -1658,13 +1814,19 @@ class GraphRuntimeManager:
                         current_iter,
                         event,
                     ),
+                    on_node_start=lambda event: self._begin_amr_node(session_id, event),
                     stop_requested=lambda sid=session_id: self._is_cancel_requested(sid),
                 )
 
                 self._store_result(session_id, iteration, result)
 
+                if self._is_cancel_requested(session_id):
+                    raise GraphRunCancelled("Runtime cancelled after node execution.")
+
                 if _result_has_errors(result) and not bool(options.get("continue_on_error", False)):
                     raise RuntimeError("그래프 실행 중 오류가 발생해 런타임을 중지했습니다.")
+
+                await self._wait_for_amr_commands(session_id)
 
                 if _result_requests_terminate(graph, result):
                     self._set_status(
@@ -1739,10 +1901,27 @@ class GraphRuntimeManager:
                 error=str(exc),
             )
         finally:
+            stop_logs = await asyncio.to_thread(self._stop_amr_commands, session_id)
+            stop_logs += await asyncio.to_thread(self._stop_fanuc_commands, session_id)
+            with self._lock:
+                session = self._sessions.get(session_id, {})
+                unresolved = [command["command_id"] for command in session.get("amr_commands", {}).values()
+                              if command["status"] not in AMR_TERMINAL_STATES]
+                original_error = session.get("error")
+                unresolved_fanuc = [command["command_id"] for command in session.get("fanuc_commands", {}).values()
+                                    if command["status"] not in {"completed", "failed", "cancelled"}]
+            if unresolved:
+                detail = "AMR stop unconfirmed: " + ", ".join(unresolved)
+                self._set_status(session_id, "error", "AMR 정지 여부를 확인하지 못해 런타임을 오류 상태로 종료했습니다.",
+                                 error=f"{original_error}; {detail}" if original_error else detail)
+            if unresolved_fanuc:
+                detail = "FANUC stop unconfirmed: " + ", ".join(unresolved_fanuc)
+                self._set_status(session_id, "error", "FANUC 정지 여부를 확인하지 못했습니다.", error=detail)
             cleanup_logs = _reset_graph_runtime_state(graph) if isinstance(graph, dict) else []
             with self._lock:
                 session = self._sessions.get(session_id)
                 if session is not None:
+                    self._append_logs(session, *stop_logs)
                     if cleanup_logs:
                         self._append_logs(session, *cleanup_logs)
                     session["task"] = None
@@ -1773,6 +1952,7 @@ class GraphRuntimeManager:
                     current_frame,
                     event,
                 ),
+                on_node_start=lambda event: self._begin_amr_node(session_id, event),
                 stop_requested=lambda sid=session_id: self._is_cancel_requested(sid),
                 initial_context=live_context,
             )
@@ -1780,8 +1960,13 @@ class GraphRuntimeManager:
             result["iteration_count"] = 1
             self._store_live_result(session_id, frame, result)
 
+            if self._is_cancel_requested(session_id):
+                raise GraphRunCancelled("Runtime cancelled after live node execution.")
+
             if _result_has_errors(result) and not bool(options.get("continue_on_error", False)):
                 raise RuntimeError("라이브 RGB-D 프레임 처리 중 오류가 발생해 런타임을 중지했습니다.")
+
+            await self._wait_for_amr_commands(session_id)
 
             if _result_requests_terminate(graph, result):
                 self._set_status(

@@ -139,8 +139,10 @@ def _external_axis(inventory, base_path):
     return external
 
 
-def validate_fanuc_usd_binding(inventory):
-    from backend.executors.fanuc_nodes import M710_JOINT_ORIGINS, M710_JOINT_AXES, M710_JOINT_LIMITS, _rotation as rotate
+def validate_fanuc_usd_binding(inventory, *, profile=None):
+    from backend.executors.fanuc_nodes import _rotation as rotate
+    from .robot_profiles import profile_arrays
+    M710_JOINT_ORIGINS, M710_JOINT_AXES, M710_JOINT_LIMITS, _ = profile_arrays(profile)
 
     units = _check_inventory(inventory)
     joints = inventory["joint_bindings"]
@@ -261,8 +263,8 @@ def _attachment_frames(inventory):
     return anchors
 
 
-def build_fanuc_usd_proxy(inventory, *, padding_m=0.0, excluded_self_pairs=None):
-    report = validate_fanuc_usd_binding(inventory)
+def build_fanuc_usd_proxy(inventory, *, padding_m=0.0, excluded_self_pairs=None, profile=None):
+    report = validate_fanuc_usd_binding(inventory, profile=profile)
     if not report["kinematics_match"]:
         raise ValueError(f"USD/FK binding failed: {report['errors']}")
     if isinstance(padding_m, bool) or not isinstance(padding_m, (int, float)) or not math.isfinite(padding_m) or not 0 <= padding_m <= 0.1:
@@ -326,7 +328,8 @@ def build_fanuc_usd_proxy(inventory, *, padding_m=0.0, excluded_self_pairs=None)
         raise ValueError("Static obstacle count exceeds collision engine limit")
     scene = {"schema": "vlagraph.fanuc_collision_scene.v1", "scene_id": inventory["stage_identifier"],
              "scene_version": inventory["inventory_digest"], "robot_model_version": "usd_robot_aabb_capsules_v2",
-             "geometry_source": "configured_proxy", "kinematics_source": "project_m710_configuration",
+             **({"robot_profile": profile} if profile is not None else {}),
+             "geometry_source": "configured_proxy", "kinematics_source": "serial_arm_profile" if profile is not None else "project_m710_configuration",
              "frame": "right_handed_z_up_m", "inventory_digest": inventory["inventory_digest"],
              "robot_prim_path": inventory["robot_prim_path"], "source_meters_per_unit": units,
              "source_up_axis": inventory["up_axis"],

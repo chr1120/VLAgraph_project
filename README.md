@@ -28,7 +28,75 @@
 - OpenVLA FineTune
 - Print
 
+## 로봇 설정 노드
+
+**Load → FANUC M-710iC/20L Execute → 덮어쓰기**를 누르면 **로봇 설정** 노드가 포함된 그래프를 불러옵니다. 덮어쓰기는 현재 그래프 편집 내용을 선택한 템플릿으로 교체합니다. 노드만 추가하려면 왼쪽 **Nodes → COMMON → 로봇 설정**을 누르고 필요한 설정 핀을 연결합니다. 모델·인스턴스 ID·브리지 주소·로봇 prim·Collection 기억 경로를 이 노드에서 지정하고, 연결된 준비·관측·충돌 문맥·Guard·Execute가 같은 설정을 사용합니다. 기존 저장 그래프는 자동으로 재배선하지 않습니다.
+
+| 설정 방식 | 사용법 |
+| --- | --- |
+| 기본 프로파일 | 기존 M-710iC/20L 구조를 사용하고 설치별 주소·prim·보정값을 지정 |
+| USD 자동 읽기 | 백엔드가 접근할 수 있는 USD와 로봇 prim 지정. 사용자 정의 6축은 모델명·새 프로파일 ID·J6 기준점 오프셋도 입력 |
+| 수동 프로파일 JSON | 기본 프로파일 JSON을 받아 수정하거나, 설정/프로파일 JSON 파일을 불러오기 |
+
+설정은 Inspector의 **설정 JSON 내보내기**로 보관하고 다른 노드·실행에서 다시 불러올 수 있습니다. 예시는 [로봇 설정 파일](examples/graphs/fanuc_m710_robot_settings.json), 구조 필드는 [M-710 프로파일](frontend/public/robot_profiles/fanuc_m710ic20l.json)을 참고하세요. `prepareSettings`에는 UF/UT·IK seed·외부축·시간 설정을 입력할 수 있습니다. 설정 노드에 입력한 값이 연결된 개별 노드 값보다 우선합니다.
+
+자동 USD 읽기 의존성은 Docker 백엔드 이미지에 기본 포함됩니다. 호스트 Python으로 실행할 때는 `python -m pip install -r backend/requirements-usd.txt`로 설치합니다. Docker에서 제외하려면 `docker compose build --build-arg INSTALL_USD=false backend`를 사용합니다. 파일과 참조 asset은 **백엔드 프로세스/컨테이너에서** 접근 가능해야 합니다. 현재 자동 입력은 USD만 지원하며 URDF 직접 읽기는 포함하지 않습니다. 자동 추출이나 프로파일 불러오기가 TCP·작업 셀 보정·물리 실행 인증을 대신하지 않습니다.
+
+지원 범위는 기본 M-710 및 지원 가능한 직렬 6축 구조의 **프로파일 기반 계산·진단**입니다. 임의의 고정 회전·다축·다른 제조사의 제어기는 추가 어댑터가 필요합니다. 사용자 정의 모델의 실제 전송은 차단하며, 기본 M-710의 기존 `full` 정책과 물리 미검증 차단도 유지합니다. 이동 로봇·휴머노이드·다른 제조사의 실행 어댑터는 아직 이 노드의 구현 범위가 아닙니다.
+
+## Docker 의존성 설치 오류
+
+`RUN pip install ...` 오류가 나면 마지막 `exit code: 1` 앞의 실제 패키지 오류를 확인합니다. MediaPipe 0.10.21은 protobuf 4.x와 NumPy 1.x가 필요한 현재 구성이므로 [backend/requirements.txt](backend/requirements.txt)에 동작 확인한 protobuf·NumPy·JAX·OpenCV 버전을 고정했습니다. [Dockerfile](backend/Dockerfile)은 다운로드 재시도·시간 제한·pip 캐시와 `pip check`를 적용합니다.
+
+```powershell
+docker compose build backend
+docker compose up -d
+```
+
+다른 폴더/Compose 프로젝트로 실행 중이면 해당 프로젝트와 설정 파일을 유지해 재빌드합니다. `down -v`나 볼륨 삭제는 필요하지 않습니다.
+
+화면에 최신 노드가 없는데 이 작업 폴더의 코드에는 있는 경우, 다른 프로젝트 폴더에서 이미지를 빌드했는지 확인합니다. 현재 실행 중인 `openvla_backend`·`openvla_frontend`의 프로젝트·볼륨 설정을 유지하면서 **이 작업 폴더의 소스**로 반영하려면 다음을 실행합니다.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\reload-workspace-docker.ps1
+```
+
+이 스크립트는 기존 컨테이너의 Compose 설정을 읽고 빌드 경로만 현재 작업 폴더로 지정합니다. 이후 화면을 Ctrl+F5로 새로고침하고 Load에서 템플릿을 불러옵니다.
+
+9174 프론트는 최신인데 공유 9000 백엔드에 `robot_setup` 등이 없으면 **백엔드만** 갱신합니다.
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\reload-workspace-docker.ps1 -BackendOnly
+```
+
+`-BackendOnly`는 기존 백엔드의 Compose 프로젝트·데이터 마운트를 유지하고 `--no-deps backend`로 재빌드합니다. 9173·9174 프론트와 추론·학습 컨테이너는 재생성하지 않습니다. 기존 CORS 허용 주소를 보존하면서 `http://localhost:9174`와 `http://127.0.0.1:9174`를 추가합니다. 9000은 두 프론트가 공유하므로 갱신된 백엔드가 두 화면의 요청을 처리합니다. `/health`의 `node_types`에서 `robot_setup` 등록 여부를 확인할 수 있습니다.
+
+## 그래프 UI와 Bundle Selected Graph
+
+`vla_chr\VLAgraph_project`의 UI는 비교 프로젝트의 **GRAPH / RUN 툴바**, **Nodes / Graphs 탭**, **Load 창** 흐름을 사용합니다. 기존 센서·FANUC·월드모델 노드는 유지합니다.
+
+1. **New Graph**는 빈 캔버스를 만듭니다. **Load**에서 템플릿을 고르고 **덮어쓰기** 또는 **추가하기**를 선택합니다. 추가한 그래프는 독립된 노드·연결 ID를 사용합니다. 덮어쓰기나 새 그래프 생성 전에 필요한 편집 내용은 **Save**로 저장하세요.
+2. 왼쪽 **Graphs** 탭에서 대상 그래프를 선택한 뒤 **Bundle Selected Graph**를 누릅니다. 해당 그래프 전체가 카드 하나로 접힙니다. 캔버스의 개별 노드 다중 선택과는 별개입니다.
+3. **Show Nodes**로 내부 그래프를 열어 노드·연결을 편집합니다. 노드를 선택하면 오른쪽 Inspector에서 로봇 설정도 변경할 수 있습니다. **Unbundle**은 원래 노드를 다시 펼칩니다. 노드 추가와 그래프 사이의 연결 편집은 Unbundle 후 진행합니다.
+4. **Run Graph는 캔버스 전체의 실제 노드**를 실행합니다. 번들 카드는 표시용이며, 내부 노드 ID·핀·외부 연결·FANUC Guard 검사는 보존됩니다. 접힌 그래프의 외부 연결은 삭제할 수 없는 점선으로 표시합니다. 실행 중에는 구조와 설정 변경을 잠급니다.
+5. **Save**는 번들 내부까지 포함한 `vlagraph-workspace.json`을 다운로드합니다. **Load → JSON import**로 복원합니다. 중복 ID·알 수 없는 노드 유형·없는 연결 대상·잘못된 번들 구성을 거부합니다. 자동 저장은 하지 않습니다.
+
+별도로 실행 중인 수정 대상 프론트는 **http://localhost:9174**입니다. 비교 프로젝트의 9173과 구분해 갱신하려면 다음 명령을 사용합니다.
+
+```powershell
+docker compose -p vlagraph_current -f docker-compose.yml -f docker-compose.current.yml up -d --build --no-deps frontend
+```
+
+프론트 검증은 `frontend` 폴더에서 `node --test tests/*.test.mjs`와 `npm.cmd run build`를 실행합니다. `GRAPH_API_BASE=http://localhost:9000` 환경변수를 지정하면 로봇을 움직이지 않는 Prompt→Print 백엔드 연동 검증도 함께 실행합니다.
+
 ## 실행
+
+한 씬의 여러 로봇을 공유 월드 상태에서 병렬 추론하려면 [다중 로봇 가이드](docs/multi-robot-world-inference-ko.md)와 [FANUC 2대·AMR 2대 예제 그래프](examples/graphs/multi_robot_world_inference_graph.json)를 사용하세요. 로봇별 작업·모델·센서를 연결하고 AMR 동시 제어 및 FANUC 후보의 준비·기존 Guard 경로를 제공합니다.
+
+FANUC·AMR 라이브 관측과 차동구동 AMR의 시뮬레이션 주행은 [실행 가이드](docs/amr-live-world-model-ko.md)를 참고하세요. [라이브 주행 그래프](examples/graphs/amr_live_navigation_graph.json)는 관측·점유 격자 경로 계획·주행을 연결하며 기본값은 미리보기입니다. Isaac Sim 쪽에서 설정 파일과 `start_world_model_bridge.py` launcher를 사용해야 합니다.
+
+기본 Compose 프로젝트 이름은 `docker-compose.yml`의 `name: vlagraph`로 고정합니다. 폴더를 이동하거나 복사해도 기존 `finetune_stub` 등 같은 프로젝트의 컨테이너를 이어서 관리합니다. `container name is already in use`가 나오면 별도로 지정한 `-p` 또는 `COMPOSE_PROJECT_NAME`을 확인하세요. 기존 전체 스택은 `vlagraph`를 사용합니다. 9174 전용 프론트는 위의 `-p vlagraph_current ... --no-deps frontend` 명령으로 갱신합니다.
+
 ```bash
 docker compose up --build
 ```

@@ -7,6 +7,7 @@ import csv
 from pathlib import Path
 from typing import Any, Dict, List
 import numpy as np
+from backend.world_model.robot_profiles import M710_PROFILE, configured_data, profile_arrays, validate_profile
 
 from backend.executors.omy3m_nodes import _dataset_root, _host_path, _json_safe, _safe_name
 
@@ -42,19 +43,8 @@ OMY3M_JOINT_AXES = np.asarray(
 M710_KINEMATICS_SOURCE = (
     "fanuc_robot/fanuc_description/m710ic_20l_4/payloads/Physics/physics.usda"
 )
-M710_JOINT_ORIGINS = np.asarray(
-    [[0, 0, 0.565], [0.15, 0, 0], [0, 0, 1.15], [0, 0, 0.19], [1.8, 0, 0], [0, 0, 0]],
-    dtype=float,
-)
-M710_JOINT_AXES = np.asarray(
-    [[0, 0, 1], [0, 1, 0], [0, -1, 0], [-1, 0, 0], [0, -1, 0], [-1, 0, 0]],
-    dtype=float,
-)
-M710_TOOL_OFFSET = np.asarray([0.1, 0, 0], dtype=float)
-M710_ZERO_TCP_POSITION = np.asarray([2.05, 0.0, 1.905], dtype=float)
-M710_JOINT_LIMITS = np.radians(
-    np.asarray([[-180, 180], [-90, 135], [-80.5, 205], [-200, 200], [-140, 140], [-450, 450]])
-)
+M710_JOINT_ORIGINS, M710_JOINT_AXES, M710_JOINT_LIMITS, M710_TOOL_OFFSET = profile_arrays()
+M710_ZERO_TCP_POSITION = np.sum(M710_JOINT_ORIGINS, axis=0) + M710_TOOL_OFFSET
 
 
 def _incoming_values(node_id: str, edges: List[Dict[str, Any]], context: Dict[str, Any]) -> Dict[str, Any]:
@@ -388,7 +378,9 @@ def exec_fanuc_m710_prepare(
 ) -> Dict[str, Any]:
     """Convert FANUC joint and relative Cartesian records to M-710 targets."""
     inputs = _incoming_values(node["id"], edges, context)
-    data = _props(node)
+    data, robot_config = configured_data(node, context, edges, "prepare")
+    profile = validate_profile(robot_config["profile"] if robot_config else None)
+    _, _, _, tool_offset = profile_arrays(profile)
     program = inputs.get("program")
     if not isinstance(program, dict):
         raise ValueError("FANUC program input is required")
@@ -475,7 +467,7 @@ def exec_fanuc_m710_prepare(
     anchor_by_frame: Dict[tuple[Any, Any], tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]] = {}
     elapsed_time = 0.0
     previous_joints: np.ndarray | None = seed.copy() if initial_joints_deg else None
-    previous_tcp: np.ndarray | None = _m710_fk(seed)[0] if initial_joints_deg else None
+    previous_tcp: np.ndarray | None = _m710_fk(seed, profile)[0] if initial_joints_deg else None
     external_axis_root_origin_m: np.ndarray | None = (
         _external_axis_offset_m(initial_external_axes_mm, external_axis_vectors)
         if initial_external_axes_mm
@@ -558,7 +550,7 @@ def exec_fanuc_m710_prepare(
                 )
                 cartesian_mode = "calibrated_uf_ik"
             elif frame_key not in anchor_by_frame:
-                current_position, current_rotation = _m710_fk(seed)
+                current_position, current_rotation = _m710_fk(seed, profile)
                 anchor_by_frame[frame_key] = (source_position_m.copy(), source_rotation.copy(), current_position, current_rotation)
                 source_origin, source_orientation, target_origin, target_orientation = anchor_by_frame[frame_key]
                 target_position = target_origin + (source_position_m - source_origin) * position_scale * cartesian_axis_signs
@@ -573,7 +565,7 @@ def exec_fanuc_m710_prepare(
                 cartesian_mode = "relative_uf_ut_ik"
             if isinstance(frame_ut, int) and frame_ut in utool_transforms:
                 tool_origin, tool_rotation = utool_transforms[frame_ut]
-                target_position = target_position - target_rotation @ tool_origin + target_rotation @ M710_TOOL_OFFSET
+                target_position = target_position - target_rotation @ tool_origin + target_rotation @ tool_offset
                 target_rotation = target_rotation @ tool_rotation.T
             solution = _solve_m710_ik(
                 target_position,
@@ -584,6 +576,7 @@ def exec_fanuc_m710_prepare(
                 orientation_tolerance=ik_orientation_tolerance,
                 orientation_weight=orientation_weight,
                 max_joint_delta=ik_max_joint_delta,
+                profile=profile,
             )
             if not solution["ok"]:
                 ik_failures += 1
@@ -592,7 +585,7 @@ def exec_fanuc_m710_prepare(
                 continue
             seed = np.asarray(solution["joint_positions"])
             values = np.degrees(seed).tolist()
-            next_tcp, _ = _m710_fk(seed)
+            next_tcp, _ = _m710_fk(seed, profile)
             if use_source_timing:
                 elapsed_time += _motion_duration_seconds(
                     frame,
@@ -662,7 +655,7 @@ def exec_fanuc_m710_prepare(
                 f"FANUC P[{frame.get('position_id')}] contains non-finite joint values"
             )
         next_joints = np.radians(np.asarray(values))
-        next_tcp, _ = _m710_fk(next_joints)
+        next_tcp, _ = _m710_fk(next_joints, profile)
         if use_source_timing:
             elapsed_time += _motion_duration_seconds(
                 frame,
@@ -809,12 +802,15 @@ def exec_fanuc_m710_prepare(
     )
     effective_preview_only = preview_only or not enable_execution or not execution_ready
     action = {
-        "schema": "vlagraph.fanuc_m710ic20l.action.v1",
+        "schema": "vlagraph.fanuc_m710ic20l.action.v1" if profile == M710_PROFILE else "vlagraph.fanuc_serial_arm.action.v1",
+        **({"robot_profile": profile, "robot_config_digest": robot_config["digest"],
+            "robot_instance_id": robot_config["instance_id"],
+            "robot_prim_path": robot_config["connection"]["robot_prim_path"]} if robot_config else {}),
         "source_program": {"name": program.get("program_name"), "path": program.get("source_path")},
         "source_instruction_audit": program.get("instruction_audit"),
-        "type": "fanuc_m710ic20l_trajectory",
+        "type": "fanuc_m710ic20l_trajectory" if profile == M710_PROFILE else "fanuc_serial_arm_trajectory",
         "command": "apply_fanuc_trajectory",
-        "target_embodiment": "FANUC_M710IC_20L",
+        "target_embodiment": "FANUC_M710IC_20L" if profile == M710_PROFILE else profile["id"],
         "unit": "degree",
         "joint_names": joint_names,
         "seconds_per_frame": seconds_per_frame,
@@ -1249,13 +1245,14 @@ def _scale_rotation(rotation: np.ndarray, scale: float) -> np.ndarray:
     return _rotation(axis, angle * scale)
 
 
-def _m710_fk(joints: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+def _m710_fk(joints: np.ndarray, profile=None) -> tuple[np.ndarray, np.ndarray]:
+    origins, axes, _, tool = profile_arrays(profile)
     rotation = np.eye(3)
     position = np.zeros(3)
-    for origin, axis, angle in zip(M710_JOINT_ORIGINS, M710_JOINT_AXES, joints):
+    for origin, axis, angle in zip(origins, axes, joints):
         position = position + rotation @ origin
         rotation = rotation @ _rotation(axis, float(angle))
-    return position + rotation @ M710_TOOL_OFFSET, rotation
+    return position + rotation @ tool, rotation
 
 
 def _nearest_limited_equivalent(angle: float, seed: float, lower: float, upper: float) -> float:
@@ -1267,14 +1264,15 @@ def _nearest_limited_equivalent(angle: float, seed: float, lower: float, upper: 
     return min(valid, key=lambda value: abs(value - seed))
 
 
-def _nearest_m710_branch(joints: np.ndarray, seed: np.ndarray) -> np.ndarray:
+def _nearest_m710_branch(joints: np.ndarray, seed: np.ndarray, profile=None) -> np.ndarray:
+    limits = profile_arrays(profile)[2]
     return np.asarray(
         [
             _nearest_limited_equivalent(
                 float(angle),
                 float(seed[index]),
-                float(M710_JOINT_LIMITS[index, 0]),
-                float(M710_JOINT_LIMITS[index, 1]),
+                float(limits[index, 0]),
+                float(limits[index, 1]),
             )
             for index, angle in enumerate(joints)
         ],
@@ -1292,9 +1290,11 @@ def _solve_m710_ik(
     orientation_tolerance: float = math.radians(1.0),
     orientation_weight: float = 0.75,
     max_joint_delta: float | None = math.radians(140.0),
+    profile=None,
 ) -> Dict[str, Any]:
+    limits = profile_arrays(profile)[2]
     seed_np = np.asarray(seed, dtype=float)
-    joints = np.clip(seed_np, M710_JOINT_LIMITS[:, 0], M710_JOINT_LIMITS[:, 1])
+    joints = np.clip(seed_np, limits[:, 0], limits[:, 1])
     damping = 0.025
     epsilon = 1e-5
     position_error = float("inf")
@@ -1302,7 +1302,7 @@ def _solve_m710_ik(
     converged = False
     iteration = 0
     for iteration in range(max(1, max_iterations)):
-        current_position, current_rotation = _m710_fk(joints)
+        current_position, current_rotation = _m710_fk(joints, profile)
         pos_error = np.asarray(target_position) - current_position
         rot_error = _orientation_error(current_rotation, target_rotation)
         position_error = float(np.linalg.norm(pos_error))
@@ -1315,15 +1315,15 @@ def _solve_m710_ik(
         for index in range(6):
             perturbed = joints.copy()
             perturbed[index] += epsilon
-            next_position, next_rotation = _m710_fk(perturbed)
+            next_position, next_rotation = _m710_fk(perturbed, profile)
             jacobian[:3, index] = (next_position - current_position) / epsilon
             jacobian[3:, index] = (
                 _orientation_error(current_rotation, next_rotation) / epsilon * orientation_weight
             )
         lhs = jacobian @ jacobian.T + (damping * damping) * np.eye(6)
         delta = jacobian.T @ np.linalg.solve(lhs, error)
-        joints = np.clip(joints + np.clip(delta, -0.12, 0.12), M710_JOINT_LIMITS[:, 0], M710_JOINT_LIMITS[:, 1])
-        joints = _nearest_m710_branch(joints, seed_np)
+        joints = np.clip(joints + np.clip(delta, -0.12, 0.12), limits[:, 0], limits[:, 1])
+        joints = _nearest_m710_branch(joints, seed_np, profile)
     joint_delta = np.abs(joints - seed_np)
     branch_preserved = bool(max_joint_delta is None or np.max(joint_delta) <= max_joint_delta)
     return {

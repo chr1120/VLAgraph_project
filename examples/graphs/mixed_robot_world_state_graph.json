@@ -1,0 +1,48 @@
+{
+  "nodes": [
+    {
+      "id": "source", "type": "robot_state", "position": {"x": 80, "y": 180},
+      "data": {
+        "label": "FANUC + AMR (Synthetic Observation)",
+        "robotState": {
+          "scene_id": "mixed-robot-example", "meters_per_unit": 1, "up_axis": "Z",
+          "robots": [
+            {
+              "prim_path": "/World/FANUC", "position": [0, 0, 0],
+              "robot_kind": "articulated_arm", "manufacturer": "FANUC", "model": "M-710iC/20L",
+              "base_motion": "fixed", "orientation_xyzw": [0, 0, 0, 1],
+              "linear_velocity": [0, 0, 0], "angular_velocity_rad_s": [0, 0, 0],
+              "joints": [
+                {"name": "J1", "kind": "revolute", "unit": "rad", "position": 0, "velocity": 0},
+                {"name": "J2", "kind": "revolute", "unit": "rad", "position": 0, "velocity": 0},
+                {"name": "J3", "kind": "revolute", "unit": "rad", "position": 0, "velocity": 0},
+                {"name": "J4", "kind": "revolute", "unit": "rad", "position": 0, "velocity": 0},
+                {"name": "J5", "kind": "revolute", "unit": "rad", "position": 0, "velocity": 0},
+                {"name": "J6", "kind": "revolute", "unit": "rad", "position": 0, "velocity": 0}
+              ]
+            },
+            {
+              "prim_path": "/World/AMR", "position": [3, 0, 0], "robot_kind": "amr",
+              "base_motion": "planar", "orientation_xyzw": [0, 0, 0, 1],
+              "linear_velocity": [0.2, 0, 0], "angular_velocity_rad_s": [0, 0, 0.1],
+              "mobile_base": {
+                "drive_type": "differential", "footprint_radius_m": 0.4,
+                "navigation_frame": "map", "localization_valid": true
+              }
+            }
+          ],
+          "objects": [{"prim_path": "/World/Box", "position": [5, 0, 0], "size": [1, 1, 1]}]
+        }
+      }
+    },
+    {
+      "id": "build", "type": "world_state_build", "position": {"x": 460, "y": 180},
+      "data": {"label": "Mixed Robot World State", "episodeId": "synthetic-example", "sceneVersion": "v1"}
+    },
+    {"id": "print", "type": "print", "position": {"x": 850, "y": 180}, "data": {"label": "Print World State"}}
+  ],
+  "edges": [
+    {"id": "source-build", "source": "source", "target": "build", "sourceHandle": "state", "targetHandle": "scan"},
+    {"id": "build-print", "source": "build", "target": "print", "sourceHandle": "world_state", "targetHandle": "input"}
+  ]
+}

@@ -24,13 +24,15 @@ def snapshot_reference(snapshot):
 
 
 def validate_fanuc_trajectory(action: dict[str, Any], *, config=None, snapshot=None):
-    from backend.executors.fanuc_nodes import M710_JOINT_LIMITS
+    from .robot_profiles import validate_profile, profile_arrays
     from .fanuc import FanucPhysicsSnapshot
 
     config = config or {}
     errors, warnings, normalized, segments = [], [], [], []
     required = [f"J{i}" for i in range(1, 7)]
-    limits = {name: list(M710_JOINT_LIMITS[i]) for i, name in enumerate(required)}
+    profile = validate_profile(action.get("robot_profile") if isinstance(action, dict) else None)
+    profile_limits = profile_arrays(profile)[2]
+    limits = {name: list(profile_limits[i]) for i, name in enumerate(required)}
     limits["externalAxisJoint"] = [-10.0, 10.0]
     unchecked = ["environment_collision", "self_collision", "singularity", "physical_rollout", "live_state_freshness"]
 
@@ -66,7 +68,9 @@ def validate_fanuc_trajectory(action: dict[str, Any], *, config=None, snapshot=N
             unchecked.append({"check": key, "unconfigured_axes": missing})
     if not isinstance(action, dict):
         raise ValueError("FANUC action must be an object")
-    if action.get("schema") != "vlagraph.fanuc_m710ic20l.action.v1" or action.get("command") != "apply_fanuc_trajectory":
+    if (action.get("schema") not in {"vlagraph.fanuc_m710ic20l.action.v1", "vlagraph.fanuc_serial_arm.action.v1"}
+            or action.get("command") != "apply_fanuc_trajectory"
+            or action.get("schema") == "vlagraph.fanuc_serial_arm.action.v1" and not action.get("robot_profile")):
         error("unsupported_action_contract")
     try:
         json.dumps(action, allow_nan=False)
@@ -223,7 +227,8 @@ def validate_fanuc_trajectory(action: dict[str, Any], *, config=None, snapshot=N
         "action_digest": action_fingerprint(action) if not any(item["code"] == "non_json_or_non_finite_action" for item in errors) else None,
         "validation_config": {"maxVelocity": velocities, "maxAcceleration": accelerations},
         "execution_ready": False, "collision_checked": False,
-        "limit_source": "project_m710_configuration", "interpolation": "dedicated_bridge_joint_smoothstep",
+        "limit_source": profile["source"], "robot_profile_digest": action_fingerprint(profile),
+        "interpolation": "dedicated_bridge_joint_smoothstep",
         "errors": errors, "warnings": warnings, "unchecked": unchecked,
         "snapshot_ref": snapshot_ref, "normalized_trajectory": normalized, "segments": segments,
         "preview_action": preview,

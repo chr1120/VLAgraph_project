@@ -434,6 +434,8 @@ def normalize_scene_scan_response(response: Dict[str, Any], fallback_scene_id: s
 
     objects = scan.get("objects") if isinstance(scan.get("objects"), list) else []
     robot = _as_dict(scan.get("robot"))
+    if not robot and isinstance(scan.get("robots"), list) and scan["robots"]:
+        robot = _as_dict(scan["robots"][0])
     obstacles = scan.get("obstacles") if isinstance(scan.get("obstacles"), list) else []
     normalized = {
         **scan,
@@ -490,7 +492,8 @@ def inspect_scene_scan(scan: Dict[str, Any]) -> Dict[str, Any]:
 def exec_scene_scan(node: Dict[str, Any], context: Dict[str, Any], edges: List[Dict[str, Any]]) -> Dict[str, Any]:
     from websocket import create_connection
 
-    props = _props(node)
+    from backend.world_model.robot_profiles import configured_data
+    props, _ = configured_data(node, context, edges, "read")
     inputs = _incoming_values(node["id"], edges, context)
     state = _as_dict(inputs.get("state") or props.get("state"))
     endpoint = _text(

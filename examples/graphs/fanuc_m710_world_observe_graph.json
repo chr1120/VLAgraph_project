@@ -1,26 +1,72 @@
 {
   "nodes": [
     {
-      "id": "fanuc-state", "type": "fanuc_state_read", "position": {"x": 80, "y": 100},
+      "id": "fanuc-state",
+      "type": "fanuc_state_read",
+      "position": {
+        "x": 80,
+        "y": 100
+      },
       "data": {
-        "label": "FANUC State Read", "omniverseEndpoint": "ws://host.docker.internal:9910/omniverse",
+        "label": "FANUC State Read",
+        "omniverseEndpoint": "ws://host.docker.internal:9910/omniverse",
         "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
         "timeoutSec": 5
       }
     },
     {
-      "id": "fanuc-scan", "type": "scene_scan", "position": {"x": 80, "y": 380},
+      "id": "fanuc-scan",
+      "type": "scene_scan",
+      "position": {
+        "x": 80,
+        "y": 380
+      },
       "data": {
-        "label": "FANUC Work Cell Scan", "omniverseEndpoint": "ws://host.docker.internal:9910/omniverse",
+        "label": "FANUC Work Cell Scan",
+        "omniverseEndpoint": "ws://host.docker.internal:9910/omniverse",
         "omniversePrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
-        "sceneRootPath": "/World", "maxObjects": 256, "timeoutSec": 5
+        "sceneRootPath": "/World",
+        "maxObjects": 256,
+        "timeoutSec": 5
       }
     },
-    {"id": "fanuc-state-print", "type": "print", "position": {"x": 540, "y": 100}, "data": {"label": "Print Arm Observation"}},
-    {"id": "fanuc-scan-print", "type": "print", "position": {"x": 540, "y": 380}, "data": {"label": "Print Work Cell Scan"}}
+    {
+      "id": "fanuc-state-print",
+      "type": "print",
+      "position": {
+        "x": 540,
+        "y": 100
+      },
+      "data": {
+        "label": "Print Arm Observation"
+      }
+    },
+    {
+      "id": "fanuc-scan-print",
+      "type": "print",
+      "position": {
+        "x": 540,
+        "y": 380
+      },
+      "data": {
+        "label": "Print Work Cell Scan"
+      }
+    }
   ],
   "edges": [
-    {"id": "fanuc-state-out", "source": "fanuc-state", "target": "fanuc-state-print", "sourceHandle": "state", "targetHandle": "input"},
-    {"id": "fanuc-scan-out", "source": "fanuc-scan", "target": "fanuc-scan-print", "sourceHandle": "scan", "targetHandle": "input"}
+    {
+      "id": "fanuc-state-out",
+      "source": "fanuc-state",
+      "target": "fanuc-state-print",
+      "sourceHandle": "state",
+      "targetHandle": "input"
+    },
+    {
+      "id": "fanuc-scan-out",
+      "source": "fanuc-scan",
+      "target": "fanuc-scan-print",
+      "sourceHandle": "scan",
+      "targetHandle": "input"
+    }
   ]
 }

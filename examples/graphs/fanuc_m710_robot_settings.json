@@ -1,0 +1,18 @@
+{
+  "schema": "vlagraph.robot_setup.settings.v1",
+  "settings": {
+    "label": "?? ??",
+    "robotModel": "fanuc_m710ic20l",
+    "settingsMode": "preset",
+    "instanceId": "fanuc_01",
+    "omniverseEndpoint": "ws://172.16.110.116:9910/omniverse",
+    "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+    "memoryPath": "spatial_memory/spatial_memory.jsonl",
+    "usdPath": "",
+    "customProfileId": "",
+    "customModelName": "",
+    "toolOffsetM": [],
+    "manualProfile": {},
+    "prepareSettings": {}
+  }
+}

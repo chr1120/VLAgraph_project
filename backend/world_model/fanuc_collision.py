@@ -52,7 +52,10 @@ def segment_segment_distance(a, b, c, d):
 
 
 def check_fanuc_collision(action, scene, *, max_step_sec=0.05, margin_m=0.01, max_samples=10000, snapshot=None):
-    from backend.executors.fanuc_nodes import M710_JOINT_ORIGINS, M710_JOINT_AXES, _rotation
+    from backend.executors.fanuc_nodes import _rotation
+    from .robot_profiles import profile_arrays, validate_profile
+    profile = validate_profile(action.get("robot_profile"))
+    M710_JOINT_ORIGINS, M710_JOINT_AXES, _, _ = profile_arrays(profile)
 
     def number(value):
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
@@ -76,8 +79,10 @@ def check_fanuc_collision(action, scene, *, max_step_sec=0.05, margin_m=0.01, ma
         raise ValueError("Explicit FANUC collision scene is required")
     if scene.get("frame") != "right_handed_z_up_m" or scene.get("geometry_source") != "configured_proxy":
         raise ValueError("Only configured meter/Z-up proxies are supported")
-    if scene.get("kinematics_source") != "project_m710_configuration":
-        raise ValueError("Proxy geometry must explicitly use project_m710_configuration kinematics")
+    if scene.get("kinematics_source") not in {"project_m710_configuration", "serial_arm_profile"}:
+        raise ValueError("Proxy geometry must explicitly identify its kinematics")
+    if validate_profile(scene.get("robot_profile")) != profile:
+        raise ValueError("Collision scene and action use different robot profiles")
     source_coverage = scene.get("geometry_coverage")
     unmodeled_geometry = []
     if source_coverage is not None:
@@ -268,7 +273,8 @@ def check_fanuc_collision(action, scene, *, max_step_sec=0.05, margin_m=0.01, ma
             "inventory_digest": scene.get("inventory_digest"), "source_coverage": scene.get("coverage", "configured_proxies"),
             "snapshot_ref": preflight["snapshot_ref"], "initial_segment_checked": snapshot is not None,
             "checked_time_range_sec": [trajectory[0]["time_sec"], trajectory[-1]["time_sec"]],
-            "kinematics_source": "project_m710_configuration", "geometry_tolerance_m": tolerance,
+            "kinematics_source": scene["kinematics_source"], "robot_profile_digest": action_fingerprint(profile),
+            "geometry_tolerance_m": tolerance,
             "coverage": "configured_capsules_and_static_aabbs", "samples_checked": checked,
             "min_sampled_clearance_m": minimum, "margin_m": margin_m,
             "contacts": contacts, "unresolved_intervals": unresolved,

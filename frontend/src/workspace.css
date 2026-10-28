@@ -1,0 +1,69 @@
+/* Graph controls and dialogs, scoped separately from sensor/robot node styles. */
+.canvas-shell .topbar { flex-wrap: wrap; padding: 5px 4px; gap: 8px; }
+.topbar-group {
+  display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+  padding: 4px 7px; border: 1px solid #253c55; border-radius: 9px;
+  background: #0b1a2b; color: #dceaff;
+}
+.topbar-group-label { font-size: 9px; font-weight: 700; letter-spacing: .08em; color: #8ea7c5; margin-right: 3px; }
+.topbar-group .primary-btn, .topbar-group .secondary-btn { margin: 0; min-height: 28px; padding: 5px 10px; border: 1px solid #2b4766; border-radius: 6px; font-size: 11px; line-height: 16px; }
+.topbar-group .primary-btn { background: #1b4b7d; border-color: #3874ad; color: #f0f7ff; }
+.topbar-group .secondary-btn { background: #10243b; color: #dceaff; border-color: #2b4766; }
+.topbar-group .primary-btn:hover:not(:disabled) { background: #245d95; border-color: #5b9ad4; }
+.topbar-group .secondary-btn:hover:not(:disabled) { background: #193653; border-color: #4c719a; }
+.topbar-group button:focus-visible { outline: 2px solid #7db7f0; outline-offset: 2px; }
+.topbar-group button:disabled { background: #0c1b2c; border-color: #23374e; color: #667d97; opacity: 1; }
+.sidebar-tabs { display: flex; gap: 6px; padding: 5px; border: 1px solid #2b415d; border-radius: 10px; background: #07111e; }
+.sidebar-tabs button { flex: 1; border: 0; padding: 9px; border-radius: 7px; color: #9db3cd; background: transparent; cursor: pointer; font-weight: 700; font-size: 12px; }
+.sidebar-tabs button.active { color: #fff; background: #1a3c65; }
+.graph-list { display: grid; gap: 9px; }
+.graph-list-card { display: grid; gap: 7px; width: 100%; text-align: left; padding: 12px; border: 1px solid #334155; border-radius: 12px; background: #10243b; color: #e7f0ff; cursor: pointer; }
+.graph-list-card.active { border-color: #60a5fa; background: #173657; }
+.graph-list-title { font-size: 12px; font-weight: 700; overflow-wrap: anywhere; }
+.graph-list-description, .graph-list-meta, .graph-list-empty { font-size: 11px; line-height: 1.6; color: #9db3cd; }
+.graph-bundle-card { min-width: 280px; max-width: 360px; padding: 20px; border: 2px solid #60a5fa; border-radius: 14px; background: #10243b; color: #e7f0ff; box-shadow: 0 8px 30px #0004; }
+.graph-bundle-card h3 { margin: 10px 0; font-size: 17px; }
+.workflow-group-card { width: 320px; padding: 18px; border: 1px solid #547296; border-radius: 14px; background: #10243b; color: #e7f0ff; box-shadow: 0 8px 25px #0003; }
+.workflow-group-card h3 { margin: 10px 0; font-size: 17px; }
+.workflow-group-card p { font-size: 12px; line-height: 1.6; color: #b5c8df; }
+.workflow-group-card .workflow-group-detail { max-width: 290px; overflow-wrap: anywhere; }
+.workflow-status-error { border-color: #ef4444; }
+.workflow-status-running { border-color: #f59e0b; }
+.workflow-status-success { border-color: #22c55e; }
+.workflow-reports { margin-bottom: 16px; padding: 16px; border: 1px solid #334155; border-radius: 12px; background: #0b1727; color: #dbeafe; }
+.workflow-reports h3 { margin: 0 0 8px; font-size: 15px; }
+.workflow-reports p { font-size: 12px; line-height: 1.6; color: #a8bdd6; }
+.workflow-stage-report, .workflow-node-report { padding: 10px 0; border-top: 1px solid #334155; font-size: 12px; }
+.workflow-stage-report summary, .workflow-node-report summary { cursor: pointer; line-height: 1.7; }
+.workflow-node-report { margin-left: 14px; }
+.workflow-node-report pre { max-height: 320px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; padding: 10px; background: #07111e; color: #dbeafe; }
+.graph-bundle-card p { font-size: 12px; color: #a8bdd6; }
+.bundle-card-actions { display: flex; gap: 8px; }
+.bundle-card-actions button { font-size: 12px; }
+.graph-load-overlay, .bundle-window-overlay { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background: #020617b8; padding: 24px; }
+.graph-load-dialog, .bundle-window { width: min(900px, 100%); max-height: 90vh; overflow: auto; padding: 22px; border: 1px solid #475569; border-radius: 18px; background: #0b1727; color: #e7f0ff; box-shadow: 0 24px 80px #0007; }
+.graph-load-header, .graph-load-actions, .bundle-window-header { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.graph-load-title, .bundle-window h2 { margin: 0; font-size: 18px; font-weight: 700; }
+.graph-load-subtitle, .bundle-window p { font-size: 12px; color: #a8bdd6; line-height: 1.7; margin: 8px 0; }
+.graph-load-body { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; margin: 18px 0; }
+.graph-template-list { max-height: 55vh; overflow: auto; display: grid; gap: 8px; padding-right: 6px; }
+.graph-template-option { display: grid; gap: 5px; text-align: left; padding: 12px; background: #10243b; color: #e7f0ff; border: 1px solid #334155; border-radius: 10px; cursor: pointer; }
+.graph-template-option.selected { background: #173657; border-color: #60a5fa; }
+.graph-template-name { font-size: 12px; font-weight: 700; }
+.graph-template-description, .graph-load-preview-description { font-size: 12px; line-height: 1.6; color: #a8bdd6; }
+.graph-load-preview { padding: 18px; border-radius: 12px; background: #07111e; }
+.graph-load-preview-label { font-size: 10px; text-transform: uppercase; color: #94a3b8; }
+.graph-load-preview-title { font-size: 17px; font-weight: 700; margin: 12px 0; }
+.graph-load-preview-stats { display: flex; gap: 15px; margin-top: 18px; font-size: 12px; }
+.graph-load-header button, .graph-load-actions button, .bundle-window-header button { margin: 0; }
+.bundle-window-overlay { right: 292px; }
+.bundle-window { width: 100%; height: 88vh; display: flex; flex-direction: column; }
+.bundle-window-flow { flex: 1; min-height: 240px; margin-top: 16px; background: #07111e; }
+@media (max-width: 1180px) and (min-width: 861px) { .bundle-window-overlay { right: 260px; } }
+@media (max-width: 860px) {
+  .bundle-window-overlay { right: 0; bottom: 35vh; padding: 8px; }
+  .bundle-window { height: 60vh; }
+  .graph-load-overlay { padding: 10px; }
+  .graph-load-body { grid-template-columns: 1fr; }
+  .graph-template-list { max-height: 35vh; }
+}

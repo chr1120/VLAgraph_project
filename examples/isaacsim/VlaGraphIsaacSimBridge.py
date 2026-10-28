@@ -1557,7 +1557,7 @@ class VlaGraphIsaacSimBridge:
                         or action.get("cancel", False)
                         or action.get("freeze", False)
                     )
-                    if not stop_like:
+                    if not stop_like and command_key != "amr_navigate":
                         self._last_motion_command_time = time.time()
                         self._humanoid_frozen = False
             except Exception as exc:

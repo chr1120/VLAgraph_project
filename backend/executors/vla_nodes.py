@@ -2595,6 +2595,8 @@ def _omniverse_execute(data: Dict[str, Any], action: Any) -> Dict[str, Any]:
     if prompt_context:
         request_payload.update(prompt_context)
     command_id = data.get("commandId") or (payload.get("command_id") if isinstance(payload, dict) else None)
+    if command == "apply_fanuc_trajectory" and not command_id:
+        command_id = f"fanuc-{uuid.uuid4().hex}"
     if command_id:
         request_payload["command_id"] = str(command_id)
     _maybe_log_omniverse_payload(request_id, command, normalized_action, request_payload)
@@ -2842,10 +2844,25 @@ def exec_robot_execute(
     context: Dict[str, Any],
     edges: List[Dict[str, Any]],
 ) -> Dict[str, Any]:
-    data = node.get("data", {})
+    from backend.world_model.robot_profiles import configured_data, M710_PROFILE, validate_profile
+    data, robot_config = configured_data(node, context, edges, "execute")
     inputs = _incoming_values(node["id"], edges, context)
 
     action = inputs.get("action")
+    if isinstance(action, dict) and action.get("robot_profile") is not None:
+        data["requireExecutionGuard"] = True
+        if validate_profile(action["robot_profile"]) != M710_PROFILE:
+            return {"ok": False, "skipped": True, "message": "Custom profile execution has not been verified.",
+                    "result": {"ok": False, "skipped": True, "message": "Custom profile execution has not been verified."}}
+    if isinstance(action, dict) and action.get("robot_config_digest") is not None and robot_config is None:
+        return {"ok": False, "skipped": True, "message": "Prepared robot settings must also be connected to Execute.",
+                "result": {"ok": False, "skipped": True, "message": "Prepared robot settings must also be connected to Execute."}}
+    if robot_config:
+        data["requireExecutionGuard"] = True
+        if (not isinstance(action, dict) or action.get("robot_config_digest") != robot_config["digest"]
+                or action.get("robot_profile") != robot_config["profile"] or robot_config["profile"] != M710_PROFILE):
+            return {"ok": False, "skipped": True, "message": "Robot settings mismatch or profile execution is not verified.",
+                    "result": {"ok": False, "skipped": True, "message": "Robot settings mismatch or profile execution is not verified."}}
     mode = str(data.get("mode", "simulate")).lower().strip()
 
     if _coerce_bool(data.get("requireExecutionGuard"), False):

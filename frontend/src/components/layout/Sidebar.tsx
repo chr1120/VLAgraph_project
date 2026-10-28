@@ -1,4 +1,5 @@
 import React from "react";
+import type { CanvasGraph as GraphListItem } from "../../graphWorkspace";
 
 type PaletteItem = {
   label: string;
@@ -16,6 +17,7 @@ const groups: PaletteGroup[] = [
     title: "COMMON",
     items: [
       { label: "Prompt", description: "Text instruction input", type: "prompt" },
+      { label: "로봇 설정", description: "로봇 모델·자동/수동 프로파일·연결 설정", type: "robot_setup" },
       { label: "Print", description: "Debug output node", type: "print" },
     ],
   },
@@ -95,7 +97,21 @@ const groups: PaletteGroup[] = [
   },
 ];
 
-export default function Sidebar({ onAddNode }: { onAddNode: (type: string) => void }) {
+export default function Sidebar({
+  onAddNode,
+  graphs,
+  activeGraphId,
+  onSelectGraph,
+  disabled = false,
+}: {
+  onAddNode: (type: string) => void;
+  disabled?: boolean;
+  graphs: GraphListItem[];
+  activeGraphId: string | null;
+  onSelectGraph: (graphId: string) => void;
+}) {
+  const [activeTab, setActiveTab] = React.useState<"nodes" | "graphs">("nodes");
+
   return (
     <aside className="sidebar">
       <div className="brand">
@@ -103,20 +119,61 @@ export default function Sidebar({ onAddNode }: { onAddNode: (type: string) => vo
         <p>Build OPENVLA tuning and inference pipelines</p>
       </div>
 
-      {groups.map((group) => (
-        <section key={group.title} className="palette-group">
-          <div className="group-title">{group.title}</div>
-          {group.items.map((item) => (
-            <div key={item.type} className="palette-card">
-              <div className="palette-label">{item.label}</div>
-              <div className="palette-description">{item.description}</div>
-              <button className="add-btn" onClick={() => onAddNode(item.type)}>
-                Add Node
-              </button>
+      <div className="sidebar-tabs">
+        <button
+          className={activeTab === "nodes" ? "active" : ""}
+          onClick={() => setActiveTab("nodes")}
+        >
+          Nodes
+        </button>
+        <button
+          className={activeTab === "graphs" ? "active" : ""}
+          onClick={() => setActiveTab("graphs")}
+        >
+          Graphs
+        </button>
+      </div>
+
+      {activeTab === "graphs" ? (
+        <section className="palette-group">
+          <div className="group-title">CANVAS GRAPHS</div>
+          {graphs.length === 0 ? (
+            <div className="graph-list-empty">No graphs on the canvas.</div>
+          ) : (
+            <div className="graph-list">
+              {graphs.map((graph) => (
+                <button
+                  key={graph.id}
+                  className={`graph-list-card${graph.id === activeGraphId ? " active" : ""}`}
+                  aria-pressed={graph.id === activeGraphId}
+                  onClick={() => onSelectGraph(graph.id)}
+                >
+                  <span className="graph-list-title">{graph.label}</span>
+                  <span className="graph-list-description">{graph.description}</span>
+                  <span className="graph-list-meta">
+                    {graph.nodeCount} nodes / {graph.edgeCount} edges{graph.bundled ? " / Bundle" : ""}
+                  </span>
+                </button>
+              ))}
             </div>
-          ))}
+          )}
         </section>
-      ))}
+      ) : (
+        groups.map((group) => (
+          <section key={group.title} className="palette-group">
+            <div className="group-title">{group.title}</div>
+            {group.items.map((item) => (
+              <div key={item.type} className="palette-card">
+                <div className="palette-label">{item.label}</div>
+                <div className="palette-description">{item.description}</div>
+                <button className="add-btn" disabled={disabled} onClick={() => onAddNode(item.type)}>
+                  Add Node
+                </button>
+              </div>
+            ))}
+          </section>
+        ))
+      )}
     </aside>
   );
 }

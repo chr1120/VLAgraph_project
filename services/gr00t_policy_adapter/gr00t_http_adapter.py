@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import io
 import json
+import math
 import os
 from functools import lru_cache
 from pathlib import Path
@@ -79,6 +80,8 @@ class InferRequest(BaseModel):
     inference_mode: str = "pytorch"
     action_horizon: int = 40
     action_format: str = ""
+    require_complete_state: bool = False
+    require_image: bool = False
     unity_command: str = ""
     waypoint_speed: Any = None
 
@@ -234,7 +237,7 @@ def _load_image_bytes(image_ref: Any) -> Optional[bytes]:
     return None
 
 
-def _image_to_observation_array(image_ref: Any, image_url: Any, horizon: int) -> np.ndarray:
+def _image_to_observation_array(image_ref: Any, image_url: Any, horizon: int, *, strict: bool = False) -> np.ndarray:
     size = _env_int("GR00T_IMAGE_SIZE", 256)
     raw = _load_image_bytes(image_ref) or _load_image_bytes(image_url)
 
@@ -243,6 +246,8 @@ def _image_to_observation_array(image_ref: Any, image_url: Any, horizon: int) ->
             rgb = ImageOps.exif_transpose(image).convert("RGB")
             rgb = rgb.resize((size, size), Image.Resampling.BILINEAR)
             array = np.asarray(rgb, dtype=np.uint8)
+    elif strict:
+        raise ValueError("A valid robot-bound camera image is required; no blank image substitution")
     else:
         array = np.zeros((size, size, 3), dtype=np.uint8)
 
@@ -357,17 +362,32 @@ def _build_observation(req: InferRequest) -> tuple[Dict[str, Any], Dict[str, Any
         state = {}
 
     embodiment_key = _resolve_embodiment_key(req.embodiment_tag)
+    if req.require_complete_state:
+        configs = _processor_modality_configs()
+        requested = str(req.embodiment_tag).strip()
+        requested_key = next((key for key in configs if key.lower() == requested.lower()), None)
+        requested_key = requested_key or _EMBODIMENT_ALIASES.get(requested.lower())
+        if requested_key not in configs or requested_key != embodiment_key:
+            raise ValueError("Requested robot embodiment is unavailable or differs from the configured policy")
     video_horizon = _horizon(embodiment_key, "video", 1)
     state_horizon = _horizon(embodiment_key, "state", 1)
     language_horizon = _horizon(embodiment_key, "language", 1)
 
-    image = _image_to_observation_array(req.image, req.image_url, video_horizon)
+    image = _image_to_observation_array(req.image, req.image_url, video_horizon,
+                                      strict=req.require_complete_state and req.require_image)
     video_keys = _modality_keys(
         embodiment_key,
         "video",
         os.getenv("GR00T_CAMERA_KEY", "ego_view"),
     )
     state_keys = _modality_keys(embodiment_key, "state", "joint_positions")
+    if req.require_complete_state:
+        source = _state_source(state)
+        for key in state_keys:
+            values = source.get(key)
+            if (not isinstance(values, (list, tuple)) or len(values) != _state_dim(embodiment_key, key) or
+                    any(isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v) for v in values)):
+                raise ValueError(f"Complete measured state required for {key}; padding and truncation are disabled")
     language_keys = _modality_keys(
         embodiment_key,
         "language",
@@ -470,7 +490,7 @@ def infer(req: InferRequest) -> Dict[str, Any]:
     except Exception as exc:
         raise HTTPException(
             status_code=422,
-            detail=f"Failed to build GR00T G1 observation: {exc}",
+            detail=f"Failed to build GR00T observation: {exc}",
         ) from exc
 
     options = {

@@ -165,6 +165,22 @@ class FanucWorldModelAdapter:
     def apply(self, payload, original):
         command = str(payload.get("command") or "").lower()
         request_id = payload.get("request_id")
+        if command == "stop_command":
+            try:
+                command_id = payload.get("command_id")
+                record = self.public_record(command_id)
+                if payload.get("prim_path") != record["prim_path"]:
+                    raise ValueError("Stop request belongs to a different robot")
+                tracked_motion = self.records[command_id].get("_motion")
+                if self.active_id == command_id or (tracked_motion is not None and self.bridge.scene._active_motion is tracked_motion):
+                    response = original({**payload, "command": "stop"})
+                    if response.get("ok") is not True:
+                        raise ValueError("Bridge did not accept the targeted stop")
+                    self._cancel("explicit_command_stop")
+                return {"ok": True, "applied": False, "request_id": request_id, "command": command,
+                        "execution": self.public_record(command_id)}
+            except Exception as exc:
+                return {"ok": False, "applied": False, "request_id": request_id, "command": command, "message": str(exc)}
         if command in {"capture_world_state", "get_command_status", "get_collision_geometry"}:
             try:
                 if command == "get_collision_geometry":

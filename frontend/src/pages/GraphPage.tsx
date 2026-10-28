@@ -9,14 +9,23 @@ import ReactFlow, {
   Edge,
   MiniMap,
   Node,
+  ReactFlowInstance,
   useEdgesState,
   useNodesState,
 } from "reactflow";
 import "reactflow/dist/style.css";
+import "../workspace.css";
 
 import Sidebar from "../components/layout/Sidebar";
 import Inspector from "../components/layout/Inspector";
+import WorkflowReports from "../components/layout/WorkflowReports";
+import { workflowView } from "../workflowView";
+import fanucM710Graph from "../templates/fanuc-m710.json";
+import fanucPreflightGraph from "../templates/fanuc-m710-preflight.json";
+import fanucSnapshotGraph from "../templates/fanuc-m710-snapshot.json";
+import fanucObserveGraph from "../templates/fanuc-m710-observe.json";
 import { nodeTypes } from "../components/nodes";
+import { bundleGraph, bundleView, executionGraph, graphId, graphList, instantiateGraph, parseWorkspace, serializeWorkspace, workspaceId } from "../graphWorkspace";
 import {
   cancelGraphRuntime,
   getGraphRuntime,
@@ -571,6 +580,7 @@ const NODE_LABEL_BY_TYPE: Record<string, string> = {
   gr00t_infer: "NVIDIA GR00T Infer",
   action_decode: "Action Decode",
   g1_skill_decode: "G1 Skill Decode",
+  robot_setup: "로봇 설정",
   safety_clamp: "Safety Clamp",
   robot_execute: "Robot Execute",
   dataset_upload: "Dataset Upload",
@@ -2656,200 +2666,10 @@ const omy3mTemplateEdges: Edge[] = [
   },
 ];
 
-const fanucM710TemplateNodes: Node[] = [
-  {
-    id: "fanuc-m710-file",
-    type: "dataset_upload",
-    position: { x: 60, y: 120 },
-    data: {
-      label: "FANUC M-710 LS 파일 업로드",
-      datasetPath: "",
-      datasetFormat: "ls",
-      initialSettingsEnabled: true,
-      initialSettingsPath: "",
-      initialSettingsFormat: "ls",
-      initialSettingsLabel: "FANUC M-710 초기 설정 LS",
-    },
-  },
-  {
-    id: "fanuc-m710-parse",
-    type: "fanuc_ls_parse",
-    position: { x: 390, y: 120 },
-    data: { label: "FANUC LS 파싱" },
-  },
-  {
-    id: "fanuc-m710-prepare",
-    type: "fanuc_m710_prepare",
-    position: { x: 730, y: 120 },
-    data: {
-      label: "M-710 J1~J6 명령 준비",
-      totalDurationSec: 30,
-      secondsPerFrame: 3,
-      timingMode: "source_speed",
-      jointPercentReferenceSec: 2,
-      trajectoryTimeScale: 1.0,
-      initialPoseDurationSec: 2.0,
-      initialPoseHoldSec: 2.0,
-      returnToInitialPoseOnComplete: true,
-      initialPoseReturnSec: 2.0,
-      previewOnly: false,
-      enableExecution: true,
-      solveCartesianIk: true,
-      requireAllIk: true,
-      cartesianPositionScale: 1.0,
-      cartesianAxisSigns: "1,1,1",
-      jointAxisSigns: "1,1,1,1,1,1",
-      initialJointAxisSigns: "1,1,1,1,1,1",
-      externalAxisVectors: { E1: [-1, 0, 0] },
-      externalAxisJointNames: { E1: "externalAxisJoint" },
-      externalAxisRootMotionEnabled: true,
-      externalAxisAffectsIk: false,
-      cartesianOrientationScale: 1.0,
-      uframeTransforms: {},
-      utoolTransforms: {},
-      ikOrientationWeight: 0.75,
-      ikMaxIterations: 220,
-      ikPositionToleranceM: 0.001,
-      ikOrientationToleranceDeg: 1.0,
-      ikMaxJointDeltaDeg: 140.0,
-    },
-  },
-  {
-    id: "fanuc-m710-validate", type: "fanuc_trajectory_validate", position: { x: 1100, y: 120 },
-    data: createNodeData("fanuc_trajectory_validate"),
-  },
-  {
-    id: "fanuc-m710-guard", type: "execution_guard", position: { x: 1520, y: 180 },
-    data: { ...createNodeData("execution_guard"), requireWorldContext: true, requireInitialSnapshot: true },
-  },
-  {
-    id: "fanuc-m710-collision", type: "fanuc_collision_check", position: { x: 1100, y: 500 },
-    data: { ...createNodeData("fanuc_collision_check"), enabled: true },
-  },
-  {
-    id: "fanuc-m710-collision-result", type: "print", position: { x: 1520, y: 600 },
-    data: { label: "M-710 기하 충돌 결과" },
-  },
-  {
-    id: "fanuc-m710-segments", type: "print", position: { x: 1520, y: -480 },
-    data: { label: "M-710 LS 구간별 검사" },
-  },
-  {
-    id: "fanuc-m710-decision", type: "print", position: { x: 1940, y: -120 },
-    data: { label: "M-710 실행 판단" },
-  },
-  {
-    id: "fanuc-m710-preview",
-    type: "print",
-    position: { x: 1520, y: -180 },
-    data: { label: "M-710 상세 검사 결과" },
-  },
-  {
-    id: "fanuc-m710-execute",
-    type: "robot_execute",
-    position: { x: 1940, y: 240 },
-    data: {
-      label: "FANUC M-710 Isaac Sim 실행",
-      requireExecutionGuard: true,
-      executor: "robot-executor",
-      mode: "omniverse",
-      dryRun: false,
-      robotType: "articulated_arm",
-      controllerMode: "joint_position",
-      clientId: "fanuc_m710ic20l_01",
-      omniverseEndpoint: "ws://172.16.110.116:9910/omniverse",
-      omniverseUrl: "omniverse://localhost/Projects/FANUC_M710",
-      omniverseStage: "/World",
-      omniversePrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
-      omniverseCommand: "apply_fanuc_trajectory",
-      omniverseTimeoutSec: 30,
-      omniverseWaitForResponse: true,
-    },
-  },
-  {
-    id: "fanuc-m710-result",
-    type: "print",
-    position: { x: 2320, y: 240 },
-    data: { label: "M-710 실행 결과" },
-  },
-];
-
-const fanucWorldEndpoint = "ws://172.16.110.116:9910/omniverse";
-fanucM710TemplateNodes.push(
-  { id: "fanuc-m710-world-snapshot", type: "fanuc_snapshot_read", position: { x: 60, y: 850 },
-    data: { ...createNodeData("fanuc_snapshot_read"), omniverseEndpoint: fanucWorldEndpoint } },
-  { id: "fanuc-m710-world-scan", type: "scene_scan", position: { x: 60, y: 1120 },
-    data: { ...createNodeData("scene_scan"), omniverseEndpoint: fanucWorldEndpoint,
-      omniversePrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot", maxObjects: 4096 } },
-  { id: "fanuc-m710-world-geometry", type: "fanuc_usd_geometry_read", position: { x: 60, y: 1420 },
-    data: { ...createNodeData("fanuc_usd_geometry_read"), omniverseEndpoint: fanucWorldEndpoint } },
-  { id: "fanuc-m710-world-context", type: "fanuc_world_context", position: { x: 500, y: 1000 },
-    data: createNodeData("fanuc_world_context") },
-  { id: "fanuc-m710-world-prediction", type: "fanuc_world_prediction", position: { x: 1520, y: 950 },
-    data: createNodeData("fanuc_world_prediction") },
-  { id: "fanuc-m710-world-context-result", type: "print", position: { x: 950, y: 1250 }, data: { label: "Collection 대조 결과" } },
-  { id: "fanuc-m710-world-prediction-result", type: "print", position: { x: 1940, y: 950 }, data: { label: "월드모델 예측 상태" } },
-);
-
-const fanucM710TemplateEdges: Edge[] = [
-  ...[
-    ["world-scan", "scan", "world-context", "scan"],
-    ["world-geometry", "inventory", "world-context", "inventory"],
-    ["world-snapshot", "snapshot", "world-context", "snapshot"],
-    ["world-snapshot", "snapshot", "validate", "snapshot"],
-    ["world-snapshot", "snapshot", "collision", "snapshot"],
-    ["world-snapshot", "snapshot", "guard", "snapshot"],
-    ["world-snapshot", "snapshot", "world-prediction", "snapshot"],
-    ["world-context", "scene", "collision", "scene"],
-    ["world-context", "scene", "world-prediction", "scene"],
-    ["world-context", "context_report", "guard", "context_report"],
-    ["world-context", "context_report", "world-prediction", "context_report"],
-    ["world-context", "context_report", "world-context-result", "input"],
-    ["prepare", "action", "world-prediction", "action"],
-    ["collision", "collision_report", "world-prediction", "collision_report"],
-    ["world-prediction", "prediction_report", "guard", "prediction_report"],
-    ["world-prediction", "prediction_report", "world-prediction-result", "input"],
-  ].map(([source, sourceHandle, target, targetHandle]) => ({
-    id: `fanuc-wm-${source}-${target}-${targetHandle}`, source: `fanuc-m710-${source}`, target: `fanuc-m710-${target}`,
-    sourceHandle, targetHandle, animated: true,
-  })),
-  { id: "fanuc-m710-e-file-parse", source: "fanuc-m710-file", target: "fanuc-m710-parse", sourceHandle: "dataset", targetHandle: "dataset", animated: true },
-  { id: "fanuc-m710-e-initial-file-parse", source: "fanuc-m710-file", target: "fanuc-m710-parse", sourceHandle: "initialSettings", targetHandle: "initialSettings", animated: true },
-  { id: "fanuc-m710-e-parse-prepare", source: "fanuc-m710-parse", target: "fanuc-m710-prepare", sourceHandle: "program", targetHandle: "program", animated: true },
-  { id: "fanuc-m710-e-prepare-validate", source: "fanuc-m710-prepare", target: "fanuc-m710-validate", sourceHandle: "action", targetHandle: "action", animated: true },
-  { id: "fanuc-m710-e-validate-preview", source: "fanuc-m710-validate", target: "fanuc-m710-preview", sourceHandle: "report", targetHandle: "input", animated: true },
-  { id: "fanuc-m710-e-validate-segments", source: "fanuc-m710-validate", target: "fanuc-m710-segments", sourceHandle: "segment_report", targetHandle: "input", animated: true },
-  { id: "fanuc-m710-e-prepare-guard", source: "fanuc-m710-prepare", target: "fanuc-m710-guard", sourceHandle: "action", targetHandle: "action", animated: true },
-  { id: "fanuc-m710-e-validate-guard", source: "fanuc-m710-validate", target: "fanuc-m710-guard", sourceHandle: "report", targetHandle: "report", animated: true },
-  { id: "fanuc-m710-e-prepare-collision", source: "fanuc-m710-prepare", target: "fanuc-m710-collision", sourceHandle: "action", targetHandle: "action", animated: true },
-  { id: "fanuc-m710-e-collision-guard", source: "fanuc-m710-collision", target: "fanuc-m710-guard", sourceHandle: "collision_report", targetHandle: "collision_report", animated: true },
-  { id: "fanuc-m710-e-collision-result", source: "fanuc-m710-collision", target: "fanuc-m710-collision-result", sourceHandle: "collision_report", targetHandle: "input", animated: true },
-  { id: "fanuc-m710-e-guard-decision", source: "fanuc-m710-guard", target: "fanuc-m710-decision", sourceHandle: "decision", targetHandle: "input", animated: true },
-  { id: "fanuc-m710-e-guard-execute", source: "fanuc-m710-guard", target: "fanuc-m710-execute", sourceHandle: "action", targetHandle: "action", animated: true },
-  { id: "fanuc-m710-e-execute-result", source: "fanuc-m710-execute", target: "fanuc-m710-result", sourceHandle: "result", targetHandle: "input", animated: true },
-];
-
-const fanucWorldObserveTemplateNodes: Node[] = [
-  {
-    id: "fanuc-state", type: "fanuc_state_read", position: { x: 80, y: 100 },
-    data: createNodeData("fanuc_state_read"),
-  },
-  {
-    id: "fanuc-scan", type: "scene_scan", position: { x: 80, y: 380 },
-    data: {
-      ...createNodeData("scene_scan"), label: "FANUC Work Cell Scan",
-      omniverseEndpoint: "ws://host.docker.internal:9910/omniverse",
-      omniversePrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
-    },
-  },
-  { id: "fanuc-state-print", type: "print", position: { x: 540, y: 100 }, data: { label: "Print Arm Observation" } },
-  { id: "fanuc-scan-print", type: "print", position: { x: 540, y: 380 }, data: { label: "Print Work Cell Scan" } },
-];
-
-const fanucWorldObserveTemplateEdges: Edge[] = [
-  { id: "fanuc-state-out", source: "fanuc-state", target: "fanuc-state-print", sourceHandle: "state", targetHandle: "input" },
-  { id: "fanuc-scan-out", source: "fanuc-scan", target: "fanuc-scan-print", sourceHandle: "scan", targetHandle: "input" },
-];
+const fanucM710TemplateNodes = fanucM710Graph.nodes as Node[];
+const fanucM710TemplateEdges = fanucM710Graph.edges as Edge[];
+const fanucWorldObserveTemplateNodes = fanucObserveGraph.nodes as Node[];
+const fanucWorldObserveTemplateEdges = fanucObserveGraph.edges as Edge[];
 
 const fanucOmy3mTemplateNodes: Node[] = [
   {
@@ -2970,8 +2790,8 @@ const GRAPH_TEMPLATES: Record<GraphTemplateId, GraphTemplate> = {
   },
   fanuc_m710: {
     id: "fanuc_m710",
-    label: "FANUC M-710iC/20L Execute",
-    description: "Parse FANUC LS joint records and execute validated J1-J6 trajectories through the dedicated Isaac Sim bridge.",
+    label: "FANUC M-710iC/20L 실행 검증 (Full)",
+    description: "6단계로 표시합니다. 내부 검사를 유지하며 물리 예측이 준비되기 전에는 Full Guard가 실행을 차단합니다.",
     nodes: fanucM710TemplateNodes,
     edges: fanucM710TemplateEdges,
   },
@@ -2979,29 +2799,15 @@ const GRAPH_TEMPLATES: Record<GraphTemplateId, GraphTemplate> = {
     id: "fanuc_m710_preflight",
     label: "FANUC M-710 LS Preflight (Dev)",
     description: "Parse LS and report trajectory constraints without sending motion.",
-    nodes: [
-      ...fanucM710TemplateNodes.filter((node) => ["fanuc-m710-file", "fanuc-m710-parse", "fanuc-m710-prepare"].includes(node.id))
-        .map((node) => node.id === "fanuc-m710-prepare"
-          ? { ...node, data: { ...node.data, previewOnly: true, enableExecution: false, requireAllIk: true } }
-          : node),
-      { id: "validate", type: "fanuc_trajectory_validate", position: { x: 1100, y: 120 }, data: createNodeData("fanuc_trajectory_validate") },
-      { id: "report", type: "print", position: { x: 1520, y: 120 }, data: { label: "Print Preflight Report" } },
-    ],
-    edges: [
-      ...fanucM710TemplateEdges.filter((edge) => edge.target === "fanuc-m710-parse" || edge.target === "fanuc-m710-prepare"),
-      { id: "prepared-validate", source: "fanuc-m710-prepare", target: "validate", sourceHandle: "action", targetHandle: "action" },
-      { id: "validate-report", source: "validate", target: "report", sourceHandle: "report", targetHandle: "input" },
-    ],
+    nodes: fanucPreflightGraph.nodes as Node[],
+    edges: fanucPreflightGraph.edges as Edge[],
   },
   fanuc_m710_snapshot: {
     id: "fanuc_m710_snapshot",
     label: "FANUC M-710 Physics Snapshot",
-    description: "Read synchronized joints and physics clock after attaching the FANUC adapter.",
-    nodes: [
-      { id: "snapshot", type: "fanuc_snapshot_read", position: { x: 80, y: 180 }, data: createNodeData("fanuc_snapshot_read") },
-      { id: "print", type: "print", position: { x: 500, y: 180 }, data: { label: "Print Snapshot" } },
-    ],
-    edges: [{ id: "snapshot-out", source: "snapshot", target: "print", sourceHandle: "snapshot", targetHandle: "input" }],
+    description: "Read synchronized joints and physics clock without motion.",
+    nodes: fanucSnapshotGraph.nodes as Node[],
+    edges: fanucSnapshotGraph.edges as Edge[],
   },
   fanuc_m710_world_observe: {
     id: "fanuc_m710_world_observe",
@@ -3095,11 +2901,21 @@ function nextNodeIdFromNodes(nodes: Node[]) {
 
 export default function GraphPage() {
   const [graphTemplateId, setGraphTemplateId] = useState<GraphTemplateId>("openvla");
+  const [pendingTemplateId, setPendingTemplateId] = useState<GraphTemplateId>("openvla");
   const [flowKey, setFlowKey] = useState("openvla");
-  const [nodes, setNodes, onNodesChange] = useNodesState(cloneTemplateNodes(initialNodes));
+  const [nodes, setNodes, onNodesChange] = useNodesState(cloneTemplateNodes(initialNodes).map((node) => ({
+    ...node, data: { ...node.data, _graphId: "main", _graphLabel: GRAPH_TEMPLATES.openvla.label,
+      _graphDescription: GRAPH_TEMPLATES.openvla.description },
+  })));
   const [edges, setEdges, onEdgesChange] = useEdgesState(cloneTemplateEdges(initialEdges));
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+  const [activeGraphId, setActiveGraphId] = useState("main");
+  const [loadOpen, setLoadOpen] = useState(false);
+  const [bundleWindowId, setBundleWindowId] = useState<string | null>(null);
+  const graphFileRef = useRef<HTMLInputElement>(null);
+  const flowInstanceRef = useRef<ReactFlowInstance | null>(null);
   const [logs, setLogs] = useState<string[]>([]);
+  const [runtimeReports, setRuntimeReports] = useState<Record<string, unknown>>({});
   const [storyEntries, setStoryEntries] = useState<StoryEntry[]>(IDLE_STORY);
   const [runOverview, setRunOverview] = useState<RunOverview>(IDLE_OVERVIEW);
   const [runtimeSessionId, setRuntimeSessionId] = useState<string | null>(null);
@@ -3112,6 +2928,24 @@ export default function GraphPage() {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const recordedChunksRef = useRef<Blob[]>([]);
+  const editingLocked = isRunStarting || isRecording || (runtimeSessionId !== null && ACTIVE_RUNTIME_STATES.has(runtimeStatus));
+  const editingLockedRef = useRef(editingLocked);
+  editingLockedRef.current = editingLocked;
+  const graphs = useMemo(() => graphList(nodes, edges), [nodes, edges]);
+  useEffect(() => {
+    if (graphs.length && !graphs.some((graph) => graph.id === activeGraphId)) setActiveGraphId(graphs[0].id);
+  }, [graphs, activeGraphId]);
+  useEffect(() => {
+    const ids = new Set(nodes.map((node) => node.id));
+    setEdges((prev) => prev.some((edge) => !ids.has(edge.source) || !ids.has(edge.target))
+      ? prev.filter((edge) => ids.has(edge.source) && ids.has(edge.target)) : prev);
+    if (!nodes.some((node) => node.type === "graph_bundle" && node.data.memberIds.some((id: string) => !ids.has(id)))) return;
+    setNodes((prev) => prev.flatMap((node) => {
+      if (node.type !== "graph_bundle") return [node];
+      const memberIds = node.data.memberIds.filter((id: string) => ids.has(id));
+      return memberIds.length ? [{ ...node, data: { ...node.data, memberIds } }] : [];
+    }));
+  }, [nodes, setNodes, setEdges]);
   const nodesRef = useRef(nodes);
   const edgesRef = useRef(edges);
   const unityStateClientIds = useMemo(() => {
@@ -3170,12 +3004,16 @@ export default function GraphPage() {
   }, []);
 
   const applyGraphTemplate = useCallback((templateId: GraphTemplateId) => {
+    if (editingLockedRef.current) return;
     const template = GRAPH_TEMPLATES[templateId];
     setGraphTemplateId(templateId);
     setFlowKey(`${templateId}-${Date.now()}`);
-    setNodes(cloneTemplateNodes(template.nodes));
+    setNodes(cloneTemplateNodes(template.nodes).map((node) => ({ ...node,
+      data: { ...node.data, _graphId: "main", _graphLabel: template.label, _graphDescription: template.description },
+    })));
     setEdges(cloneTemplateEdges(template.edges));
     setSelectedNode(null);
+    setActiveGraphId("main"); setBundleWindowId(null); setLoadOpen(false);
     setRuntimeSessionId(null);
     setRuntimeStatus("idle");
     setIsRunStarting(false);
@@ -3183,8 +3021,65 @@ export default function GraphPage() {
     setStoryEntries(IDLE_STORY);
     setRunOverview(IDLE_OVERVIEW);
     setLogs([`Loaded template: ${template.label}`, template.description]);
+    setRuntimeReports({});
     setMicStatusByNodeId({});
   }, [setEdges, setNodes]);
+
+  const resetWorkspace = () => {
+    setSelectedNode(null); setBundleWindowId(null); setRuntimeSessionId(null); setRuntimeStatus("idle");
+    setIsRunStarting(false); setIsRunCancelling(false); setMicStatusByNodeId({});
+    setStoryEntries(IDLE_STORY); setRunOverview(IDLE_OVERVIEW);
+    setRuntimeReports({});
+  };
+  const newGraph = () => {
+    if (editingLockedRef.current) return;
+    resetWorkspace(); setNodes([]); setEdges([]); setActiveGraphId("main");
+    setFlowKey(`blank-${workspaceId()}`); setLogs(["Created a new blank graph."]);
+  };
+  const addTemplate = () => {
+    if (editingLockedRef.current) return;
+    const template = GRAPH_TEMPLATES[pendingTemplateId];
+    const id = `graph-${workspaceId()}`;
+    const offset = nodes.length ? Math.max(...nodes.map((node) => node.position.x)) + 500 : 100;
+    const added = instantiateGraph(cloneTemplateNodes(template.nodes), cloneTemplateEdges(template.edges), id,
+      template.label, template.description, offset);
+    setNodes((prev) => [...prev, ...added.nodes]); setEdges((prev) => [...prev, ...added.edges]);
+    setGraphTemplateId(pendingTemplateId); setActiveGraphId(id); setLoadOpen(false); setFlowKey(`added-${id}`);
+    setSelectedNode(null); setLogs((prev) => [`Added graph: ${template.label}`, ...prev]);
+  };
+  const createBundle = () => {
+    if (editingLockedRef.current) return;
+    try {
+      const bundle = bundleGraph(nodes, edges, activeGraphId, `bundle-${workspaceId()}`);
+      setNodes((prev) => [...prev.map((node) => ({ ...node, selected: false })), bundle]);
+      setSelectedNode(null); setFlowKey(`bundled-${bundle.id}`);
+      setLogs((prev) => [`Bundled ${bundle.data.label}: ${bundle.data.memberIds.length} nodes. Execution connections preserved.`, ...prev]);
+    } catch (error) { setLogs((prev) => [String(error), ...prev]); }
+  };
+  const unbundle = useCallback((id: string) => {
+    if (editingLockedRef.current) return;
+    setNodes((prev) => prev.filter((node) => node.id !== id));
+    setBundleWindowId(null); setSelectedNode(null); setFlowKey(`unbundle-${workspaceId()}`);
+  }, [setNodes]);
+  const saveGraph = () => {
+    const url = URL.createObjectURL(new Blob([serializeWorkspace(nodes, edges)], { type: "application/json" }));
+    const anchor = document.createElement("a"); anchor.href = url; anchor.download = "vlagraph-workspace.json";
+    anchor.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setLogs((prev) => ["Saved workspace including bundle contents.", ...prev]);
+  };
+  const importGraph = async (file: File) => {
+    if (editingLockedRef.current) return;
+    try {
+      const graph = parseWorkspace(await file.text(), Object.keys(nodeTypes));
+      if (editingLockedRef.current) return;
+      graph.nodes = graph.nodes.map((node) => ({ ...node, data: { ...node.data,
+        _graphLabel: node.data._graphLabel || file.name.replace(/\.json$/i, ""),
+      } }));
+      resetWorkspace(); setNodes(graph.nodes); setEdges(graph.edges);
+      setActiveGraphId(graph.nodes[0] ? graphId(graph.nodes[0]) : "main");
+      setFlowKey(`import-${workspaceId()}`); setLoadOpen(false); setLogs([`Loaded workspace: ${file.name}`]);
+    } catch (error) { setLogs((prev) => [`Load failed: ${String(error)}`, ...prev]); }
+  };
 
   const stopMediaStream = useCallback(() => {
     if (!mediaStreamRef.current) return;
@@ -3438,11 +3333,12 @@ export default function GraphPage() {
   }, [rgbdPreviewNodesKey, runtimeStatus, setNodes]);
 
   const applyRuntimeSnapshot = useCallback((snapshot: any, sourceNodes?: Node[]) => {
-    const liveNodes = sourceNodes ?? nodesRef.current;
+    const liveNodes = (sourceNodes ?? nodesRef.current).filter((node) => node.type !== "graph_bundle");
     const liveEdges = edgesRef.current;
     const sessionState = String(snapshot?.status ?? "idle");
     const presentation = buildRuntimePresentation(liveNodes, snapshot);
     const context = presentation.context ?? {};
+    setRuntimeReports(context);
     const summaryByNodeId = new Map(
       presentation.story
         .filter((entry) => entry.nodeId)
@@ -3646,6 +3542,7 @@ export default function GraphPage() {
 
   const removeNode = useCallback(
     (nodeId: string) => {
+      if (editingLockedRef.current) return;
       if (recordingTargetNodeId === nodeId) {
         const recorder = mediaRecorderRef.current;
         if (recorder && recorder.state !== "inactive") {
@@ -3829,6 +3726,10 @@ export default function GraphPage() {
 
   const onAddNode = useCallback(
     (type: string) => {
+      if (editingLockedRef.current || bundleWindowId) return;
+      if (nodesRef.current.some((node) => node.type === "graph_bundle" && graphId(node) === activeGraphId)) {
+        setLogs((prev) => ["Unbundle the selected graph before adding nodes.", ...prev]); return;
+      }
       setNodes((prev) => {
         const nextId = nextNodeIdFromNodes(prev);
         const defaults = createNodeData(type);
@@ -3836,16 +3737,18 @@ export default function GraphPage() {
           id: nextId,
           type,
           position: { x: 200 + prev.length * 40, y: 120 + prev.length * 30 },
-          data: createNodeData(type, { label: defaults.label ?? type }),
+          data: createNodeData(type, { label: defaults.label ?? type,
+            _graphId: activeGraphId, _graphLabel: graphs.find((graph) => graph.id === activeGraphId)?.label || "Manual Graph" }),
         };
 
         return [...prev, newNode];
       });
     },
-    [setNodes]
+    [setNodes, bundleWindowId, activeGraphId, graphs]
   );
 
   const onNodeDataChange = useCallback((nodeId: string, key: string, value: unknown) => {
+    if (editingLockedRef.current) return;
     setNodes((prev) =>
       prev.map((node) => {
         if (node.id !== nodeId) return node;
@@ -3900,7 +3803,10 @@ export default function GraphPage() {
 
     setIsRunStarting(true);
     setIsRunCancelling(false);
+    setRuntimeReports({});
     try {
+      const execution = executionGraph(nodes, edges);
+      if (!execution.nodes.length) throw new Error("실행할 노드가 없습니다. Load 또는 Add Node로 그래프를 구성하세요.");
       setRunOverview({
         state: "running",
         title: "그래프 런타임 시작 중",
@@ -3959,12 +3865,12 @@ export default function GraphPage() {
       );
 
       const snapshot = (await startGraphRuntime({
-        nodes,
-        edges,
-        options: runtimeOptionsForGraph(nodes),
+        nodes: execution.nodes,
+        edges: execution.edges,
+        options: runtimeOptionsForGraph(execution.nodes),
       })) as any;
       setRuntimeSessionId(String(snapshot?.session_id ?? ""));
-      applyRuntimeSnapshot(snapshot, nodes);
+      applyRuntimeSnapshot(snapshot, execution.nodes);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       setRuntimeSessionId(null);
@@ -4347,6 +4253,11 @@ export default function GraphPage() {
         ...node.data,
         onRemove: removeNode,
         onNodeDataChange,
+        ...(node.type === "graph_bundle" ? {
+          edgeCount: edges.filter((edge) => node.data.memberIds.includes(edge.source) && node.data.memberIds.includes(edge.target)).length,
+          onShowNodes: () => { setBundleWindowId(node.id); setSelectedNode(null); },
+          onUnbundle: () => unbundle(node.id), locked: editingLocked,
+        } : {}),
         ...(node.type === "dataset_upload"
           ? {
               onDatasetUpload: (file: File) => uploadDatasetForNode(node.id, file),
@@ -4385,6 +4296,9 @@ export default function GraphPage() {
       },
     }));
   }, [
+    edges,
+    unbundle,
+    editingLocked,
     isRecording,
     micStatusByNodeId,
     nodes,
@@ -4401,6 +4315,24 @@ export default function GraphPage() {
     uploadImageForNode,
     uploadVideoForNode,
   ]);
+
+  const workflowDetails = useMemo(() => workflowView(renderedNodes, edges), [renderedNodes, edges]);
+  const canvasView = useMemo(() => {
+    const bundled = bundleView(renderedNodes, edges);
+    const view = workflowView(bundled.nodes, bundled.edges);
+    return { ...view, nodes: view.nodes.map((node) => node.type === "workflow_group" ? {
+      ...node, data: { ...node.data, onShowDetails: () => { setBundleWindowId(node.id); setSelectedNode(null); } },
+    } : node) };
+  }, [renderedNodes, edges]);
+  const openBundle = nodes.find((node) => node.id === bundleWindowId && node.type === "graph_bundle")
+    || workflowDetails.nodes.find((node) => node.id === bundleWindowId && node.type === "workflow_group");
+  const innerIds = new Set<string>(openBundle?.data.memberIds || []);
+  const selectGraph = (id: string) => {
+    setActiveGraphId(id); setSelectedNode(null);
+    const visibleIds = new Set(canvasView.nodes.filter((node) => graphId(node) === id).map((node) => node.id));
+    if (!editingLocked) setNodes((prev) => prev.map((node) => ({ ...node, selected: visibleIds.has(node.id) })));
+    void flowInstanceRef.current?.fitView({ nodes: [...visibleIds].map((nodeId) => ({ id: nodeId })), duration: 250, padding: 0.15 });
+  };
 
   const minimap = useMemo(
     () => (
@@ -4429,69 +4361,101 @@ export default function GraphPage() {
 
   return (
     <div className="app-shell">
-      <Sidebar onAddNode={onAddNode} />
+      <Sidebar onAddNode={onAddNode} graphs={graphs} activeGraphId={activeGraphId}
+        onSelectGraph={selectGraph} disabled={editingLocked || Boolean(bundleWindowId)} />
 
       <main className="canvas-shell">
         <div className="topbar">
-          <div className="workspace-heading">
-            <div className="workspace-brand">VLA<span>graph</span></div>
-            <div className="workspace-heading-copy">
-              <strong>로봇 작업 그래프</strong>
-              <span>Build · Connect · Run — From Vision to Action</span>
-            </div>
+          <div className="topbar-group">
+            <span className="topbar-group-label">GRAPH</span>
+            <button className="secondary-btn" onClick={newGraph} disabled={editingLocked}>New Graph</button>
+            <button className="secondary-btn" onClick={() => { setPendingTemplateId(graphTemplateId); setLoadOpen(true); }} disabled={editingLocked}>Load</button>
+            <button className="secondary-btn" onClick={createBundle} disabled={editingLocked || !graphs.length || graphs.find((graph) => graph.id === activeGraphId)?.bundled}>Bundle Selected Graph</button>
           </div>
-          <div className="workspace-actions">
-            <label className="template-picker">
-              <span>템플릿</span>
-              <select
-                value={graphTemplateId}
-                disabled={runtimeSessionId !== null && ACTIVE_RUNTIME_STATES.has(runtimeStatus)}
-                onChange={(event) => applyGraphTemplate(event.target.value as GraphTemplateId)}
-              >
-                {GRAPH_TEMPLATE_OPTIONS.map((template) => (
-                  <option key={template.id} value={template.id}>
-                    {template.label}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <button
-              className="primary-btn"
-              onClick={onRun}
-              disabled={isRunStarting || (runtimeSessionId !== null && ACTIVE_RUNTIME_STATES.has(runtimeStatus))}
-            >
-              {isRunStarting ? "시작 중..." : "실행하기"}
-            </button>
-            <button
-              className="secondary-btn"
-              onClick={onCancelRun}
-              disabled={!runtimeSessionId || !ACTIVE_RUNTIME_STATES.has(runtimeStatus)}
-            >
-              {isRunCancelling || runtimeStatus === "cancelling" ? "취소 중..." : "실행 취소"}
-            </button>
-            <button className="secondary-btn">저장</button>
+          <div className="topbar-group run-actions">
+            <span className="topbar-group-label">RUN</span>
+            <button className="primary-btn" onClick={onRun} title="Run all graphs on the canvas, including bundle contents" disabled={editingLocked || !nodes.length}>{isRunStarting ? "Starting..." : "Run Graph"}</button>
+            <button className="secondary-btn" onClick={onCancelRun} disabled={!runtimeSessionId || !ACTIVE_RUNTIME_STATES.has(runtimeStatus)}>{isRunCancelling || runtimeStatus === "cancelling" ? "Cancelling..." : "Cancel Run"}</button>
+            <button className="secondary-btn" onClick={saveGraph}>Save</button>
           </div>
         </div>
 
         <section className="graph-titlebar">
           <div>
             <span className="workspace-eyebrow">WORKFLOW DESIGNER</span>
-            <h1>{GRAPH_TEMPLATE_OPTIONS.find((template) => template.id === graphTemplateId)?.label ?? "새 그래프"}</h1>
-            <p>{nodes.length}개 노드 · {edges.length}개 연결</p>
+            <h1>{graphs.find((graph) => graph.id === activeGraphId)?.label ?? "새 그래프"}</h1>
+            <p>{canvasView.nodes.length}개 표시 단계 · 내부 {nodes.filter((node) => node.type !== "graph_bundle").length}개 노드 · {edges.length}개 연결</p>
           </div>
           <div className={`status-pill tone-${runOverview.state}`}>{toneLabel(runOverview.state)}</div>
         </section>
 
+        {loadOpen && (
+          <div className="graph-load-overlay">
+            <div className="graph-load-dialog" onKeyDown={(event) => { if (event.key === "Escape") setLoadOpen(false); }} role="dialog" aria-modal="true" aria-labelledby="graph-load-title">
+              <div className="graph-load-header">
+                <div>
+                  <div id="graph-load-title" className="graph-load-title">Load Graph</div>
+                  <div className="graph-load-subtitle">그래프를 선택한 뒤 적용 방식을 고르세요.</div>
+                </div>
+                <button autoFocus className="secondary-btn" onClick={() => setLoadOpen(false)}>
+                  Close
+                </button>
+              </div>
+              <div className="graph-load-body">
+                <div className="graph-template-list">
+                  {GRAPH_TEMPLATE_OPTIONS.map((template) => {
+                    const isSelected = pendingTemplateId === template.id;
+                    return (
+                      <button
+                        key={template.id}
+                        className={`graph-template-option${isSelected ? " selected" : ""}`}
+                        onClick={() => setPendingTemplateId(template.id)}
+                      >
+                        <span className="graph-template-name">{template.label}</span>
+                        <span className="graph-template-description">{template.description}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="graph-load-preview">
+                  <div className="graph-load-preview-label">Selected Graph</div>
+                  <div className="graph-load-preview-title">
+                    {GRAPH_TEMPLATES[pendingTemplateId].label}
+                  </div>
+                  <div className="graph-load-preview-description">
+                    {GRAPH_TEMPLATES[pendingTemplateId].description}
+                  </div>
+                  <div className="graph-load-preview-stats">
+                    <span>{GRAPH_TEMPLATES[pendingTemplateId].nodes.length} nodes</span>
+                    <span>{GRAPH_TEMPLATES[pendingTemplateId].edges.length} edges</span>
+                  </div>
+                </div>
+              </div>
+              <div className="graph-load-actions">
+                <button className="secondary-btn" disabled={editingLocked} onClick={() => graphFileRef.current?.click()}>JSON import</button>
+                <button className="secondary-btn" disabled={editingLocked} onClick={() => applyGraphTemplate(pendingTemplateId)}>
+                  덮어쓰기
+                </button>
+                <button className="primary-btn" disabled={editingLocked} onClick={addTemplate}>
+                  추가하기
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="flow-wrap">
-          <ReactFlow key={flowKey} nodes={renderedNodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
+          <ReactFlow key={flowKey} nodes={canvasView.nodes}
+            onInit={(instance) => { flowInstanceRef.current = instance; }}
+            edges={canvasView.edges}
+            onNodesChange={editingLocked ? undefined : onNodesChange}
+            onEdgesChange={editingLocked ? undefined : onEdgesChange}
+            onConnect={editingLocked ? undefined : onConnect}
+            nodesDraggable={!editingLocked}
             isValidConnection={isValidConnection}
-            onNodeClick={(_, node) => setSelectedNode(node)}
+            onNodeClick={(_, node) => { setActiveGraphId(graphId(node)); setSelectedNode(["graph_bundle", "workflow_group"].includes(node.type || "") ? null : node); }}
             nodeTypes={nodeTypes}
-            nodesConnectable
+            nodesConnectable={!editingLocked}
             connectionRadius={32}
             fitView
           >
@@ -4501,8 +4465,32 @@ export default function GraphPage() {
           </ReactFlow>
         </div>
 
+        <input ref={graphFileRef} type="file" accept=".json,application/json" hidden onChange={(event) => {
+          const file = event.target.files?.[0]; event.target.value = ""; if (file) void importGraph(file);
+        }} />
+        {openBundle && <div className="bundle-window-overlay">
+          <section className="bundle-window" role="dialog" aria-modal="false" aria-labelledby="bundle-title" onKeyDown={(event) => {
+            if (event.key === "Escape") { setBundleWindowId(null); setSelectedNode(null); }
+          }}>
+            <header className="bundle-window-header"><div><h2 id="bundle-title">{openBundle.data.label}</h2>
+              <p>{innerIds.size} nodes · 노드를 클릭하면 오른쪽 Inspector에서 수정할 수 있습니다.</p></div>
+              <button autoFocus className="secondary-btn" onClick={() => { setBundleWindowId(null); setSelectedNode(null); }}>Close</button></header>
+            <div className="bundle-window-flow">
+              <ReactFlow key={openBundle.id} nodes={renderedNodes.filter((node) => innerIds.has(node.id))}
+                edges={edges.filter((edge) => innerIds.has(edge.source) && innerIds.has(edge.target))}
+                onNodesChange={editingLocked ? undefined : onNodesChange} onEdgesChange={editingLocked ? undefined : onEdgesChange}
+                onConnect={editingLocked ? undefined : onConnect} isValidConnection={isValidConnection}
+                nodesDraggable={!editingLocked} nodesConnectable={!editingLocked}
+                onNodeClick={(_, node) => setSelectedNode(node)} nodeTypes={nodeTypes} fitView>
+                <Background gap={24} size={1} color="#64748b" /><Controls />
+              </ReactFlow>
+            </div>
+          </section>
+        </div>}
+
         <section className="workspace-dock">
           <div className="output-panel">
+            <WorkflowReports nodes={nodes.filter((node) => graphId(node) === activeGraphId)} results={runtimeReports} />
             <section className={`run-strip tone-${runOverview.state}`}>
               <div className="run-hero">
                 <div className="run-title-row">
@@ -4586,6 +4574,7 @@ export default function GraphPage() {
       </main>
 
       <Inspector
+        executionActive={isRunStarting || (runtimeSessionId !== null && ACTIVE_RUNTIME_STATES.has(runtimeStatus))}
         selectedNode={selectedNode}
         nodeCount={nodes.length}
         edgeCount={edges.length}

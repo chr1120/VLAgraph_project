@@ -16,6 +16,7 @@ from backend.world_model.fanuc_usd_proxy import build_fanuc_usd_proxy
 from backend.world_model.fanuc_geometry_review import build_geometry_review, apply_geometry_review
 from backend.world_model.fanuc_segment_review import review_fanuc_segments
 from backend.world_model.fanuc_world_context import reconcile_memory, prediction_handoff
+from backend.world_model.robot_profiles import configured_data, validate_profile, M710_PROFILE
 
 
 FANUC_M710_PRIM_PATH = (
@@ -84,8 +85,10 @@ def exec_fanuc_usd_proxy_build(node, context, edges):
     props = _props(node)
     inputs = _incoming_values(node["id"], edges, context)
     try:
+        props, robot_config = configured_data(node, context, edges, "read")
         result = build_fanuc_usd_proxy(inputs.get("inventory"), padding_m=props.get("paddingM", 0.0),
-                                       excluded_self_pairs=props.get("excludedSelfPairs", []))
+                                       excluded_self_pairs=props.get("excludedSelfPairs", []),
+                                       profile=robot_config["profile"] if robot_config else None)
         plan = build_geometry_review(inputs["inventory"], result["scene"])
         review_connected = any(edge.get("target") == node["id"] and edge.get("targetHandle") == "review" for edge in edges)
         review = inputs.get("review") if review_connected else props.get("geometryReview")
@@ -103,6 +106,7 @@ def exec_fanuc_usd_proxy_build(node, context, edges):
 def exec_fanuc_usd_geometry_read(node, context, edges):
     props = _props(node)
     try:
+        props, _ = configured_data(node, context, edges, "read")
         source = props.get("source", "bridge")
         prim_path = props.get("robotPrimPath") or FANUC_M710_PRIM_PATH
         if source == "bridge":
@@ -135,6 +139,7 @@ def exec_fanuc_world_context(node, context, edges):
     from backend.executors.spatial_nodes import _memory_path, _read_records
     props, inputs = _props(node), _incoming_values(node["id"], edges, context)
     try:
+        props, robot_config = configured_data(node, context, edges, "world")
         snapshot, scan, inventory = inputs.get("snapshot"), inputs.get("scan"), inputs.get("inventory")
         if not isinstance(snapshot, dict):
             raise ValueError("Current FANUC physics snapshot is unavailable; activate the bridge adapter first")
@@ -154,9 +159,12 @@ def exec_fanuc_world_context(node, context, edges):
                   "max_live_age_sec": props.get("maxLiveAgeSec", 5),
                   "position_tolerance_m": props.get("positionToleranceM", .02)}
         report = reconcile_memory(record, scan, snapshot, inventory, now=time.time(), **config)
-        scene = build_fanuc_usd_proxy(inventory)["scene"] if report["status"] == "geometry_context_consistent" else None
+        profile = robot_config["profile"] if robot_config else None
+        scene = (build_fanuc_usd_proxy(inventory, profile=profile) if profile is not None else build_fanuc_usd_proxy(inventory))["scene"] if report["status"] == "geometry_context_consistent" else None
         report.update(scene_digest=action_fingerprint(scene) if scene else None,
                       evidence={"record": record, "scan": scan, "inventory": inventory})
+        if robot_config:
+            report["robot_config_digest"] = robot_config["digest"]
         return {"ok": True, "context_report": report, "scene": scene, "execution_ready": False}
     except (ValueError, TypeError, AttributeError, KeyError, OSError) as exc:
         return {"ok": False, "context_report": {"schema": "vlagraph.fanuc_world_context.v1", "status": "unavailable",
@@ -186,11 +194,22 @@ def exec_execution_guard(node, context, edges):
     verified_report = None
     collision_summary = None
     snapshot_age = None
+    robot_config = None
     try:
+        props, robot_config = configured_data(node, context, edges, "guard")
         if policy not in {"full", "static_simulation"}:
             raise ValueError("Unknown validationPolicy")
         if not isinstance(action, dict) or not isinstance(report, dict):
             raise ValueError("Prepared action and validation report are required")
+        profile = validate_profile(action.get("robot_profile"))
+        if profile != M710_PROFILE:
+            reasons.append({"code": "robot_profile_execution_unverified", "profile_id": profile["id"]})
+        if action.get("robot_config_digest") is not None or robot_config:
+            if (robot_config is None or action.get("robot_config_digest") != robot_config["digest"]
+                    or action.get("robot_profile") != robot_config["profile"]
+                    or action.get("robot_instance_id") != robot_config["instance_id"]
+                    or action.get("robot_prim_path") != robot_config["connection"]["robot_prim_path"]):
+                raise ValueError("Prepared action and selected robot configuration differ")
         require_snapshot = props.get("requireInitialSnapshot", False)
         if not isinstance(require_snapshot, bool):
             raise ValueError("requireInitialSnapshot must be a boolean")
@@ -204,6 +223,8 @@ def exec_execution_guard(node, context, edges):
             raise ValueError("Guard requires the same initial snapshot used by preflight")
         if inputs.get("snapshot") is not None:
             observed = FanucPhysicsSnapshot.model_validate(inputs["snapshot"])
+            if robot_config and observed.prim_path != robot_config["connection"]["robot_prim_path"]:
+                raise ValueError("Snapshot belongs to a different configured robot instance")
             maximum_age = props.get("maxSnapshotAgeSec", 5)
             if (isinstance(maximum_age, bool) or not isinstance(maximum_age, (float, int))
                     or not math.isfinite(maximum_age) or not 0.1 <= maximum_age <= 60):
@@ -228,9 +249,11 @@ def exec_execution_guard(node, context, edges):
             if checked["status"] != "geometry_context_consistent":
                 reasons.append({"code": "world_context_unresolved", "details": checked["reasons"]})
             else:
-                expected_scene = build_fanuc_usd_proxy(evidence["inventory"])["scene"]
+                expected_scene = (build_fanuc_usd_proxy(evidence["inventory"], profile=profile) if robot_config else build_fanuc_usd_proxy(evidence["inventory"]))["scene"]
                 if world.get("scene_digest") != action_fingerprint(expected_scene):
                     raise ValueError("World context proxy scene differs from its inventory")
+            if robot_config and world.get("robot_config_digest") != robot_config["digest"]:
+                raise ValueError("World context and selected robot configuration differ")
             prediction = inputs.get("prediction_report")
             collision = inputs.get("collision_report")
             if (not isinstance(prediction, dict) or prediction.get("schema") != "vlagraph.fanuc_world_prediction.v1"
@@ -289,6 +312,7 @@ def exec_execution_guard(node, context, edges):
     return {"ok": True, "type": "execution_guard_result", "action": guarded,
             "approved": approved, "action_digest": digest,
             "decision": {"approved": approved, "validation_policy": policy, "reasons": reasons,
+                         "robot_config_digest": robot_config["digest"] if robot_config else None,
                          "collision_checked": False, "physical_rollout_checked": False,
                          "collision_geometry": collision_summary,
                          "initial_snapshot_age_sec": snapshot_age,
@@ -319,6 +343,7 @@ def _fanuc_observation_request(props, command, **fields):
 def exec_fanuc_snapshot_read(node, context, edges):
     props = _props(node)
     try:
+        props, _ = configured_data(node, context, edges, "read")
         response = _fanuc_observation_request(props, "capture_world_state")
         snapshot = FanucPhysicsSnapshot.model_validate(response.get("snapshot"))
         if snapshot.prim_path != (props.get("robotPrimPath") or FANUC_M710_PRIM_PATH):
@@ -328,32 +353,86 @@ def exec_fanuc_snapshot_read(node, context, edges):
         return {"ok": False, "snapshot": None, "message": str(exc)}
 
 
-def exec_execution_observe(node, context, edges):
-    """Read one command status; running is explicitly not completed."""
+def exec_execution_observe(node, context, edges, stop_requested=None):
+    """Observe or await verified completion of the exact submitted command."""
     props = _props(node)
     inputs = _incoming_values(node["id"], edges, context)
     command_id = inputs.get("command_id") or props.get("commandId")
+    wait = False
+    last_execution = None
+    can_stop = False
     try:
+        props, _ = configured_data(node, context, edges, "read")
+        wait = props.get("waitForCompletion", False)
+        if not isinstance(wait, bool):
+            raise ValueError("waitForCompletion must be an explicit boolean")
+        result = inputs.get("result")
+        if isinstance(result, dict):
+            if result.get("ok") is not True or result.get("skipped") is True or result.get("dry_run") is True or result.get("preview_only") is True:
+                return {"ok": True, "execution": None, "completed": False, "terminal": True,
+                        "status": "not_started", "message": "실행 요청이 전송되지 않았습니다. 검증·실행 결과를 확인하세요."}
+            request = result.get("request") or {}
+            if (request.get("command") != "apply_fanuc_trajectory" or
+                    request.get("prim_path") != (props.get("robotPrimPath") or FANUC_M710_PRIM_PATH)):
+                raise ValueError("Execution result targets a different robot or command")
+            submitted = request.get("command_id")
+            if command_id and command_id != submitted:
+                raise ValueError("Submitted and observed command IDs differ")
+            command_id = submitted
+            if result.get("endpoint"):
+                props["omniverseEndpoint"] = result["endpoint"]
         if not isinstance(command_id, str) or not command_id:
             raise ValueError("commandId is required")
-        response = _fanuc_observation_request(props, "get_command_status", command_id=command_id)
-        execution = response.get("execution")
-        if not isinstance(execution, dict) or execution.get("command_id") != command_id:
-            raise ValueError("Execution command_id mismatch")
-        if execution.get("prim_path") != (props.get("robotPrimPath") or FANUC_M710_PRIM_PATH):
-            raise ValueError("Execution belongs to a different robot")
-        status = execution.get("status")
-        if status not in {"running", "completed", "failed", "cancelled"}:
-            raise ValueError("Unknown execution status")
-        if status == "completed":
-            actual = FanucPhysicsSnapshot.model_validate(execution.get("actual_state"))
-            if (execution.get("completion_verified") is not True or actual.prim_path != execution["prim_path"]
-                    or actual.episode_id != execution.get("episode_id")):
-                raise ValueError("Completion lacks matching episode and actual state")
-        return {"ok": True, "execution": execution, "completed": status == "completed",
-                "terminal": status != "running", "outcome": "unknown"}
+        can_stop = True
+        maximum, interval = props.get("completionTimeoutSec", 120), props.get("pollIntervalSec", .25)
+        for value, low, high in ((maximum, 1, 600), (interval, .05, 5)):
+            if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or not low <= value <= high:
+                raise ValueError("Invalid completion timeout or poll interval")
+        deadline = time.monotonic() + maximum
+        while True:
+            if wait and stop_requested and stop_requested():
+                stopped = _fanuc_observation_request(props, "stop_command", command_id=command_id,
+                                                    prim_path=props.get("robotPrimPath") or FANUC_M710_PRIM_PATH)
+                return {"ok": False, "execution": stopped.get("execution"), "completed": False,
+                        "command_id": command_id, "message": "런타임 취소로 해당 FANUC 명령의 정지를 요청했습니다."}
+            observed = _read_fanuc_execution(props, command_id)
+            last_execution = observed["execution"]
+            if not wait or observed["terminal"]:
+                if wait and not observed["completed"]:
+                    raise ValueError(f"FANUC command ended without completion: {last_execution['status']}")
+                return observed
+            if time.monotonic() >= deadline:
+                raise ValueError("FANUC completion timeout")
+            time.sleep(min(interval, max(0, deadline-time.monotonic())))
     except Exception as exc:
-        return {"ok": False, "execution": None, "completed": False, "message": str(exc)}
+        stop_error = None
+        if wait and command_id and can_stop:
+            try:
+                _fanuc_observation_request(props, "stop_command", command_id=command_id,
+                                          prim_path=props.get("robotPrimPath") or FANUC_M710_PRIM_PATH)
+            except Exception as stop_exc:
+                stop_error = str(stop_exc)
+        return {"ok": False, "execution": last_execution, "completed": False, "command_id": command_id,
+                "message": str(exc), "stop_error": stop_error}
+
+
+def _read_fanuc_execution(props, command_id):
+    response = _fanuc_observation_request(props, "get_command_status", command_id=command_id)
+    execution = response.get("execution")
+    if not isinstance(execution, dict) or execution.get("command_id") != command_id:
+        raise ValueError("Execution command_id mismatch")
+    if execution.get("prim_path") != (props.get("robotPrimPath") or FANUC_M710_PRIM_PATH):
+        raise ValueError("Execution belongs to a different robot")
+    status = execution.get("status")
+    if status not in {"running", "completed", "failed", "cancelled"}:
+        raise ValueError("Unknown execution status")
+    if status == "completed":
+        actual = FanucPhysicsSnapshot.model_validate(execution.get("actual_state"))
+        if (execution.get("completion_verified") is not True or actual.prim_path != execution["prim_path"]
+                or actual.episode_id != execution.get("episode_id")):
+            raise ValueError("Completion lacks matching episode and actual state")
+    return {"ok": True, "execution": execution, "completed": status == "completed", "command_id": command_id,
+            "terminal": status != "running", "outcome": "unknown"}
 
 
 def exec_fanuc_state_read(node, context, edges):

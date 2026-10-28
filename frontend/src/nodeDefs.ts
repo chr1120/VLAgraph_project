@@ -213,6 +213,20 @@ export function resolveSensorRemoteImageUrl(
 }
 
 export const NODE_DEF_BY_TYPE: Record<string, NodeDef> = {
+  robot_setup: {
+    type: "robot_setup", label: "로봇 설정", category: "Spatial", width: 360,
+    inputs: [],
+    outputs: [
+      { id: "robot_config", label: "Robot Configuration", pinType: "JSON", kind: "source" },
+      { id: "profile", label: "Robot Profile", pinType: "JSON", kind: "source" },
+      { id: "summary", label: "Setup Summary", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "로봇 설정", robotModel: "fanuc_m710ic20l", settingsMode: "preset", instanceId: "fanuc_01",
+      omniverseEndpoint: "ws://172.16.110.116:9910/omniverse",
+      robotPrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+      memoryPath: "spatial_memory/spatial_memory.jsonl", usdPath: "", customProfileId: "", customModelName: "",
+      toolOffsetM: [], manualProfile: {}, prepareSettings: {} },
+  },
   prompt: {
     type: "prompt",
     label: "Prompt Node",
@@ -591,7 +605,11 @@ export const NODE_DEF_BY_TYPE: Record<string, NodeDef> = {
 
   execution_observe: {
     type: "execution_observe", label: "Execution Observe", category: "Spatial", width: 340,
-    inputs: [{ id: "command_id", label: "Command ID", pinType: "TEXT", kind: "target" }],
+    inputs: [
+      { id: "command_id", label: "Command ID", pinType: "TEXT", kind: "target" },
+      { id: "result", label: "Execution Result", pinType: "JSON", kind: "target" },
+      { id: "robot_config", label: "Robot Config", pinType: "JSON", kind: "target" },
+    ],
     outputs: [
       { id: "execution", label: "Execution", pinType: "JSON", kind: "source" },
       { id: "completed", label: "Completed", pinType: "JSON", kind: "source" },
@@ -600,6 +618,7 @@ export const NODE_DEF_BY_TYPE: Record<string, NodeDef> = {
       label: "Execution Observe", omniverseEndpoint: "ws://host.docker.internal:9910/omniverse",
       robotPrimPath: "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
       commandId: "", timeoutSec: 5,
+      waitForCompletion: false, completionTimeoutSec: 120, pollIntervalSec: .25,
     },
   },
 
@@ -636,6 +655,108 @@ export const NODE_DEF_BY_TYPE: Record<string, NodeDef> = {
       { id: "prediction_ready", label: "Prediction Ready", pinType: "JSON", kind: "source" },
     ],
     defaults: { label: "World State Build", episodeId: "", sceneVersion: "" },
+  },
+
+  robot_observations_read: {
+    type: "robot_observations_read", label: "Robot Observations Read", category: "Spatial", width: 340,
+    inputs: [],
+    outputs: [
+      { id: "world_state", label: "World State", pinType: "JSON", kind: "source" },
+      { id: "navigation_map", label: "Navigation Map", pinType: "JSON", kind: "source" },
+      { id: "navigation_maps", label: "Maps by Robot", pinType: "JSON", kind: "source" },
+      { id: "scan", label: "Scan", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "Robot Observations Read", omniverseEndpoint: "ws://host.docker.internal:9900/omniverse",
+      robotPrimPath: "/World/AMR", sceneVersion: "v1", timeoutSec: 10 },
+  },
+
+  multi_robot_context: {
+    type: "multi_robot_context", label: "Multi Robot Context", category: "Spatial", width: 340,
+    inputs: [
+      { id: "world_state", label: "Shared World State", pinType: "JSON", kind: "target" },
+      { id: "navigation_maps", label: "Maps by Robot", pinType: "JSON", kind: "target" },
+      { id: "sensors", label: "Sensors by Robot", pinType: "JSON", kind: "target" },
+      { id: "bindings", label: "Model Bindings", pinType: "JSON", kind: "target" },
+      { id: "tasks", label: "Robot Tasks", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [{ id: "batch", label: "Inference Batch", pinType: "JSON", kind: "source" }],
+    defaults: { label: "Multi Robot Context", robotBindings: [], robotTasks: [] },
+  },
+
+  multi_robot_infer: {
+    type: "multi_robot_infer", label: "Multi Robot Infer", category: "Spatial", width: 320,
+    inputs: [{ id: "batch", label: "Inference Batch", pinType: "JSON", kind: "target" }],
+    outputs: [{ id: "candidates", label: "Robot Candidates", pinType: "JSON", kind: "source" }],
+    defaults: { label: "Multi Robot Infer", maxWorkers: 4 },
+  },
+
+  robot_candidate_select: {
+    type: "robot_candidate_select", label: "Robot Candidate Select", category: "Spatial", width: 340,
+    inputs: [
+      { id: "candidates", label: "Robot Candidates", pinType: "JSON", kind: "target" },
+      { id: "world_state", label: "Shared World State", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [
+      { id: "candidate", label: "Candidate for Preparation", pinType: "JSON", kind: "source" },
+      { id: "action", label: "Policy Preview", pinType: "ACTION", kind: "source" },
+      { id: "plan", label: "AMR Plan", pinType: "JSON", kind: "source" },
+      { id: "world_state", label: "Selected Robot World", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "Robot Candidate Select", robotPrimPath: "", requireBatchSuccess: true },
+  },
+
+  fanuc_policy_prepare: {
+    type: "fanuc_policy_prepare", label: "FANUC Policy Prepare", category: "Spatial", width: 340,
+    inputs: [
+      { id: "candidate", label: "Policy Candidate", pinType: "JSON", kind: "target" },
+      { id: "world_state", label: "Selected Robot World", pinType: "JSON", kind: "target" },
+      { id: "robot_config", label: "Robot Config", pinType: "JSON", kind: "target" },
+      { id: "snapshot", label: "Initial Snapshot", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [
+      { id: "action", label: "Prepared Action", pinType: "ACTION", kind: "source" },
+      { id: "report", label: "Preflight Report", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "FANUC Policy Prepare", enableExecution: false },
+  },
+
+  amr_path_plan: {
+    type: "amr_path_plan", label: "AMR Path Plan", category: "Spatial", width: 320,
+    inputs: [
+      { id: "world_state", label: "World State", pinType: "JSON", kind: "target" },
+      { id: "navigation_map", label: "Navigation Map", pinType: "JSON", kind: "target" },
+      { id: "goal", label: "Goal XY (m)", pinType: "JSON", kind: "target" },
+    ],
+    outputs: [{ id: "plan", label: "Plan", pinType: "JSON", kind: "source" }],
+    defaults: { label: "AMR Path Plan", goalM: [3, 0], marginM: .1 },
+  },
+
+  amr_navigate: {
+    type: "amr_navigate", label: "AMR Navigate (Simulation)", category: "Spatial", width: 340,
+    inputs: [{ id: "plan", label: "Plan", pinType: "JSON", kind: "target" }],
+    outputs: [
+      { id: "execution", label: "Execution", pinType: "JSON", kind: "source" },
+      { id: "command_id", label: "Command ID", pinType: "TEXT", kind: "source" },
+    ],
+    defaults: { label: "AMR Navigate (Simulation)", omniverseEndpoint: "ws://host.docker.internal:9900/omniverse",
+      enableExecution: false, commandId: "", navigationTimeoutSec: 120, timeoutSec: 10 },
+  },
+
+  amr_status: {
+    type: "amr_status", label: "AMR Status", category: "Spatial", width: 300,
+    inputs: [{ id: "command_id", label: "Command ID", pinType: "TEXT", kind: "target" }],
+    outputs: [
+      { id: "execution", label: "Execution", pinType: "JSON", kind: "source" },
+      { id: "completed", label: "Completed", pinType: "JSON", kind: "source" },
+    ],
+    defaults: { label: "AMR Status", omniverseEndpoint: "ws://host.docker.internal:9900/omniverse", commandId: "", timeoutSec: 5 },
+  },
+
+  amr_stop: {
+    type: "amr_stop", label: "AMR Stop", category: "Spatial", width: 300,
+    inputs: [{ id: "command_id", label: "Command ID", pinType: "TEXT", kind: "target" }],
+    outputs: [{ id: "execution", label: "Execution", pinType: "JSON", kind: "source" }],
+    defaults: { label: "AMR Stop", omniverseEndpoint: "ws://host.docker.internal:9900/omniverse", commandId: "", timeoutSec: 5 },
   },
 
   scene_context_reset: {
@@ -1183,6 +1304,11 @@ export const NODE_DEF_BY_TYPE: Record<string, NodeDef> = {
     },
   },
 };
+
+for (const type of ["fanuc_m710_prepare", "scene_scan", "fanuc_snapshot_read", "fanuc_usd_geometry_read",
+  "fanuc_world_context", "execution_guard", "robot_execute", "fanuc_usd_proxy_build"]) {
+  NODE_DEF_BY_TYPE[type].inputs.push({ id: "robot_config", label: "Robot Settings", pinType: "JSON", kind: "target" });
+}
 
 export function pinColor(pinType: PinType) {
   switch (pinType) {

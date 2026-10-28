@@ -1,0 +1,27 @@
+{
+  "nodes": [
+    {
+      "id": "observe", "type": "robot_observations_read", "position": {"x": 80, "y": 160},
+      "data": {"label": "Live FANUC + AMR Observations", "robotPrimPath": "/World/AMR",
+               "omniverseEndpoint": "ws://host.docker.internal:9900/omniverse", "sceneVersion": "v1", "timeoutSec": 10}
+    },
+    {
+      "id": "plan", "type": "amr_path_plan", "position": {"x": 480, "y": 160},
+      "data": {"label": "Plan AMR Route", "goalM": [3, 0], "marginM": 0.1}
+    },
+    {
+      "id": "navigate", "type": "amr_navigate", "position": {"x": 860, "y": 160},
+      "data": {"label": "AMR Navigate (Preview)", "enableExecution": false,
+               "omniverseEndpoint": "ws://host.docker.internal:9900/omniverse", "navigationTimeoutSec": 120, "timeoutSec": 10}
+    },
+    {"id": "print", "type": "print", "position": {"x": 1260, "y": 160}, "data": {"label": "Print Navigation Result"}},
+    {"id": "print-plan", "type": "print", "position": {"x": 860, "y": 460}, "data": {"label": "Review AMR Plan"}}
+  ],
+  "edges": [
+    {"id": "observe-plan-state", "source": "observe", "target": "plan", "sourceHandle": "world_state", "targetHandle": "world_state"},
+    {"id": "observe-plan-map", "source": "observe", "target": "plan", "sourceHandle": "navigation_map", "targetHandle": "navigation_map"},
+    {"id": "plan-navigate", "source": "plan", "target": "navigate", "sourceHandle": "plan", "targetHandle": "plan"},
+    {"id": "navigate-print", "source": "navigate", "target": "print", "sourceHandle": "execution", "targetHandle": "input"},
+    {"id": "plan-print", "source": "plan", "target": "print-plan", "sourceHandle": "plan", "targetHandle": "input"}
+  ]
+}

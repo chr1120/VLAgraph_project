@@ -4,36 +4,41 @@
       "id": "fanuc-m710-file",
       "type": "dataset_upload",
       "position": {
-        "x": 60,
+        "x": 420,
         "y": 120
       },
       "data": {
-        "label": "FANUC M-710 LS 파일 업로드",
+        "label": "2. LS 입력",
         "datasetPath": "",
         "datasetFormat": "ls",
         "initialSettingsEnabled": true,
         "initialSettingsPath": "",
         "initialSettingsFormat": "ls",
-        "initialSettingsLabel": "FANUC M-710 초기 설정 LS"
+        "initialSettingsLabel": "FANUC M-710 초기 설정 LS",
+        "_workflowStage": "2. LS 입력"
       }
     },
     {
       "id": "fanuc-m710-parse",
       "type": "fanuc_ls_parse",
       "position": {
-        "x": 390,
+        "x": 800,
         "y": 120
       },
       "data": {
-        "label": "Parse FANUC LS"
+        "label": "Parse FANUC LS",
+        "_workflowStage": "3. 명령 준비",
+        "_workflowGroup": "preparation",
+        "_workflowGroupTitle": "3. 명령 준비",
+        "_workflowGroupDescription": "LS 파싱 · 초기 설정 · 관절·IK 명령 준비"
       }
     },
     {
       "id": "fanuc-m710-prepare",
       "type": "fanuc_m710_prepare",
       "position": {
-        "x": 730,
-        "y": 120
+        "x": 800,
+        "y": 520
       },
       "data": {
         "label": "Prepare M-710 J1-J6",
@@ -72,29 +77,22 @@
         "ikMaxIterations": 220,
         "ikPositionToleranceM": 0.001,
         "ikOrientationToleranceDeg": 1.0,
-        "ikMaxJointDeltaDeg": 140.0
-      }
-    },
-    {
-      "id": "fanuc-m710-preview",
-      "type": "print",
-      "position": {
-        "x": 1520,
-        "y": -180
-      },
-      "data": {
-        "label": "M-710 Detailed Validation Report"
+        "ikMaxJointDeltaDeg": 140.0,
+        "_workflowStage": "3. 명령 준비",
+        "_workflowGroup": "preparation",
+        "_workflowGroupTitle": "3. 명령 준비",
+        "_workflowGroupDescription": "LS 파싱 · 초기 설정 · 관절·IK 명령 준비"
       }
     },
     {
       "id": "fanuc-m710-execute",
       "type": "robot_execute",
       "position": {
-        "x": 1940,
-        "y": 240
+        "x": 1600,
+        "y": 120
       },
       "data": {
-        "label": "Execute FANUC M-710 in Isaac Sim",
+        "label": "5. 실행 요청",
         "executor": "robot-executor",
         "mode": "omniverse",
         "dryRun": false,
@@ -108,64 +106,51 @@
         "omniverseCommand": "apply_fanuc_trajectory",
         "omniverseTimeoutSec": 30,
         "omniverseWaitForResponse": true,
-        "requireExecutionGuard": true
-      }
-    },
-    {
-      "id": "fanuc-m710-result",
-      "type": "print",
-      "position": {
-        "x": 2320,
-        "y": 240
-      },
-      "data": {
-        "label": "M-710 Execution Result"
+        "requireExecutionGuard": true,
+        "_workflowStage": "5. 실행 요청"
       }
     },
     {
       "id": "fanuc-m710-validate",
       "type": "fanuc_trajectory_validate",
       "position": {
-        "x": 1100,
-        "y": 120
+        "x": 1620,
+        "y": 520
       },
       "data": {
         "label": "FANUC Trajectory Preflight",
         "maxVelocity": {},
-        "maxAcceleration": {}
+        "maxAcceleration": {},
+        "_workflowStage": "4. 통합 검증",
+        "_workflowGroup": "validation",
+        "_workflowGroupTitle": "4. 통합 검증",
+        "_workflowGroupDescription": "현재 상태 · 장면·USD · 충돌 · 기억 대조 · Guard"
       }
     },
     {
       "id": "fanuc-m710-guard",
       "type": "execution_guard",
       "position": {
-        "x": 1520,
-        "y": 180
+        "x": 1620,
+        "y": 920
       },
       "data": {
         "label": "Execution Guard",
         "validationPolicy": "full",
         "requireWorldContext": true,
-        "requireInitialSnapshot": true
-      }
-    },
-    {
-      "id": "fanuc-m710-decision",
-      "type": "print",
-      "position": {
-        "x": 1940,
-        "y": -120
-      },
-      "data": {
-        "label": "M-710 Execution Decision"
+        "requireInitialSnapshot": true,
+        "_workflowStage": "4. 통합 검증",
+        "_workflowGroup": "validation",
+        "_workflowGroupTitle": "4. 통합 검증",
+        "_workflowGroupDescription": "현재 상태 · 장면·USD · 충돌 · 기억 대조 · Guard"
       }
     },
     {
       "id": "fanuc-m710-collision",
       "type": "fanuc_collision_check",
       "position": {
-        "x": 1100,
-        "y": 500
+        "x": 2040,
+        "y": 520
       },
       "data": {
         "label": "FANUC Geometry Collision",
@@ -173,51 +158,37 @@
         "scene": {},
         "maxStepSec": 0.05,
         "marginM": 0.01,
-        "maxSamples": 10000
-      }
-    },
-    {
-      "id": "fanuc-m710-collision-result",
-      "type": "print",
-      "position": {
-        "x": 1520,
-        "y": 600
-      },
-      "data": {
-        "label": "Print Geometry Collision Report"
-      }
-    },
-    {
-      "id": "fanuc-m710-segments",
-      "type": "print",
-      "position": {
-        "x": 1520,
-        "y": -480
-      },
-      "data": {
-        "label": "M-710 LS Segment Review"
+        "maxSamples": 10000,
+        "_workflowStage": "4. 통합 검증",
+        "_workflowGroup": "validation",
+        "_workflowGroupTitle": "4. 통합 검증",
+        "_workflowGroupDescription": "현재 상태 · 장면·USD · 충돌 · 기억 대조 · Guard"
       }
     },
     {
       "id": "fanuc-m710-world-snapshot",
       "type": "fanuc_snapshot_read",
       "position": {
-        "x": 60,
-        "y": 850
+        "x": 1200,
+        "y": 120
       },
       "data": {
         "label": "fanuc_snapshot_read",
         "omniverseEndpoint": "ws://172.16.110.116:9910/omniverse",
         "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
-        "timeoutSec": 5
+        "timeoutSec": 5,
+        "_workflowStage": "4. 통합 검증",
+        "_workflowGroup": "validation",
+        "_workflowGroupTitle": "4. 통합 검증",
+        "_workflowGroupDescription": "현재 상태 · 장면·USD · 충돌 · 기억 대조 · Guard"
       }
     },
     {
       "id": "fanuc-m710-world-scan",
       "type": "scene_scan",
       "position": {
-        "x": 60,
-        "y": 1150
+        "x": 1620,
+        "y": 120
       },
       "data": {
         "label": "scene_scan",
@@ -225,15 +196,19 @@
         "omniversePrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
         "sceneRootPath": "/World",
         "maxObjects": 4096,
-        "timeoutSec": 5
+        "timeoutSec": 5,
+        "_workflowStage": "4. 통합 검증",
+        "_workflowGroup": "validation",
+        "_workflowGroupTitle": "4. 통합 검증",
+        "_workflowGroupDescription": "현재 상태 · 장면·USD · 충돌 · 기억 대조 · Guard"
       }
     },
     {
       "id": "fanuc-m710-world-geometry",
       "type": "fanuc_usd_geometry_read",
       "position": {
-        "x": 60,
-        "y": 1450
+        "x": 2040,
+        "y": 120
       },
       "data": {
         "label": "fanuc_usd_geometry_read",
@@ -242,55 +217,87 @@
         "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
         "rootPath": "/World",
         "maxColliders": 4096,
-        "timeoutSec": 5
+        "timeoutSec": 5,
+        "_workflowStage": "4. 통합 검증",
+        "_workflowGroup": "validation",
+        "_workflowGroupTitle": "4. 통합 검증",
+        "_workflowGroupDescription": "현재 상태 · 장면·USD · 충돌 · 기억 대조 · Guard"
       }
     },
     {
       "id": "fanuc-m710-world-context",
       "type": "fanuc_world_context",
       "position": {
-        "x": 510,
-        "y": 850
+        "x": 1200,
+        "y": 520
       },
       "data": {
         "label": "fanuc_world_context",
         "memoryPath": "spatial_memory/spatial_memory.jsonl",
         "maxMemoryAgeSec": 86400,
         "maxLiveAgeSec": 5,
-        "positionToleranceM": 0.02
+        "positionToleranceM": 0.02,
+        "_workflowStage": "4. 통합 검증",
+        "_workflowGroup": "validation",
+        "_workflowGroupTitle": "4. 통합 검증",
+        "_workflowGroupDescription": "현재 상태 · 장면·USD · 충돌 · 기억 대조 · Guard"
       }
     },
     {
       "id": "fanuc-m710-world-prediction",
       "type": "fanuc_world_prediction",
       "position": {
-        "x": 510,
-        "y": 1150
+        "x": 1200,
+        "y": 920
       },
       "data": {
-        "label": "fanuc_world_prediction"
+        "label": "fanuc_world_prediction",
+        "_workflowStage": "4. 통합 검증",
+        "_workflowGroup": "validation",
+        "_workflowGroupTitle": "4. 통합 검증",
+        "_workflowGroupDescription": "현재 상태 · 장면·USD · 충돌 · 기억 대조 · Guard"
       }
     },
     {
-      "id": "fanuc-m710-world-context-result",
-      "type": "print",
+      "id": "fanuc-m710-setup",
+      "type": "robot_setup",
       "position": {
-        "x": 510,
-        "y": 1450
+        "x": 40,
+        "y": 120
       },
       "data": {
-        "label": "Collection reconciliation"
+        "label": "1. 로봇 설정",
+        "robotModel": "fanuc_m710ic20l",
+        "settingsMode": "preset",
+        "instanceId": "fanuc_01",
+        "omniverseEndpoint": "ws://172.16.110.116:9910/omniverse",
+        "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+        "memoryPath": "spatial_memory/spatial_memory.jsonl",
+        "usdPath": "",
+        "customProfileId": "",
+        "customModelName": "",
+        "toolOffsetM": [],
+        "manualProfile": {},
+        "prepareSettings": {},
+        "_workflowStage": "1. 로봇 설정"
       }
     },
     {
-      "id": "fanuc-m710-world-prediction-result",
-      "type": "print",
+      "id": "fanuc-m710-observe",
+      "type": "execution_observe",
       "position": {
-        "x": 960,
-        "y": 850
+        "x": 2000,
+        "y": 120
       },
       "data": {
-        "label": "World prediction availability"
+        "label": "6. 완료 확인",
+        "_workflowStage": "6. 완료 확인",
+        "omniverseEndpoint": "ws://172.16.110.116:9910/omniverse",
+        "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
+        "waitForCompletion": true,
+        "completionTimeoutSec": 600,
+        "pollIntervalSec": 0.25,
+        "timeoutSec": 5
       }
     }
   ],
@@ -320,27 +327,11 @@
       "animated": true
     },
     {
-      "id": "fanuc-m710-e-execute-result",
-      "source": "fanuc-m710-execute",
-      "target": "fanuc-m710-result",
-      "sourceHandle": "result",
-      "targetHandle": "input",
-      "animated": true
-    },
-    {
       "id": "fanuc-m710-e-prepare-validate",
       "source": "fanuc-m710-prepare",
       "target": "fanuc-m710-validate",
       "sourceHandle": "action",
       "targetHandle": "action",
-      "animated": true
-    },
-    {
-      "id": "fanuc-m710-e-validate-preview",
-      "source": "fanuc-m710-validate",
-      "target": "fanuc-m710-preview",
-      "sourceHandle": "report",
-      "targetHandle": "input",
       "animated": true
     },
     {
@@ -357,14 +348,6 @@
       "target": "fanuc-m710-guard",
       "sourceHandle": "report",
       "targetHandle": "report",
-      "animated": true
-    },
-    {
-      "id": "fanuc-m710-e-guard-decision",
-      "source": "fanuc-m710-guard",
-      "target": "fanuc-m710-decision",
-      "sourceHandle": "decision",
-      "targetHandle": "input",
       "animated": true
     },
     {
@@ -389,22 +372,6 @@
       "target": "fanuc-m710-guard",
       "sourceHandle": "collision_report",
       "targetHandle": "collision_report",
-      "animated": true
-    },
-    {
-      "id": "fanuc-m710-e-collision-result",
-      "source": "fanuc-m710-collision",
-      "target": "fanuc-m710-collision-result",
-      "sourceHandle": "collision_report",
-      "targetHandle": "input",
-      "animated": true
-    },
-    {
-      "id": "fanuc-m710-e-validate-segments",
-      "source": "fanuc-m710-validate",
-      "target": "fanuc-m710-segments",
-      "sourceHandle": "segment_report",
-      "targetHandle": "input",
       "animated": true
     },
     {
@@ -456,14 +423,6 @@
       "animated": true
     },
     {
-      "id": "fanuc-wm-world-context-world-context-result-input",
-      "source": "fanuc-m710-world-context",
-      "sourceHandle": "context_report",
-      "target": "fanuc-m710-world-context-result",
-      "targetHandle": "input",
-      "animated": true
-    },
-    {
       "id": "fanuc-wm-prepare-world-prediction-action",
       "source": "fanuc-m710-prepare",
       "sourceHandle": "action",
@@ -485,14 +444,6 @@
       "sourceHandle": "prediction_report",
       "target": "fanuc-m710-guard",
       "targetHandle": "prediction_report",
-      "animated": true
-    },
-    {
-      "id": "fanuc-wm-world-prediction-world-prediction-result-input",
-      "source": "fanuc-m710-world-prediction",
-      "sourceHandle": "prediction_report",
-      "target": "fanuc-m710-world-prediction-result",
-      "targetHandle": "input",
       "animated": true
     },
     {
@@ -534,6 +485,76 @@
       "target": "fanuc-m710-world-prediction",
       "targetHandle": "snapshot",
       "animated": true
+    },
+    {
+      "id": "fanuc-setup-prepare",
+      "source": "fanuc-m710-setup",
+      "sourceHandle": "robot_config",
+      "target": "fanuc-m710-prepare",
+      "targetHandle": "robot_config",
+      "animated": true
+    },
+    {
+      "id": "fanuc-setup-world-snapshot",
+      "source": "fanuc-m710-setup",
+      "sourceHandle": "robot_config",
+      "target": "fanuc-m710-world-snapshot",
+      "targetHandle": "robot_config",
+      "animated": true
+    },
+    {
+      "id": "fanuc-setup-world-scan",
+      "source": "fanuc-m710-setup",
+      "sourceHandle": "robot_config",
+      "target": "fanuc-m710-world-scan",
+      "targetHandle": "robot_config",
+      "animated": true
+    },
+    {
+      "id": "fanuc-setup-world-geometry",
+      "source": "fanuc-m710-setup",
+      "sourceHandle": "robot_config",
+      "target": "fanuc-m710-world-geometry",
+      "targetHandle": "robot_config",
+      "animated": true
+    },
+    {
+      "id": "fanuc-setup-world-context",
+      "source": "fanuc-m710-setup",
+      "sourceHandle": "robot_config",
+      "target": "fanuc-m710-world-context",
+      "targetHandle": "robot_config",
+      "animated": true
+    },
+    {
+      "id": "fanuc-setup-guard",
+      "source": "fanuc-m710-setup",
+      "sourceHandle": "robot_config",
+      "target": "fanuc-m710-guard",
+      "targetHandle": "robot_config",
+      "animated": true
+    },
+    {
+      "id": "fanuc-setup-execute",
+      "source": "fanuc-m710-setup",
+      "sourceHandle": "robot_config",
+      "target": "fanuc-m710-execute",
+      "targetHandle": "robot_config",
+      "animated": true
+    },
+    {
+      "id": "fanuc-setup-observe",
+      "source": "fanuc-m710-setup",
+      "sourceHandle": "robot_config",
+      "target": "fanuc-m710-observe",
+      "targetHandle": "robot_config"
+    },
+    {
+      "id": "fanuc-execute-observe",
+      "source": "fanuc-m710-execute",
+      "sourceHandle": "result",
+      "target": "fanuc-m710-observe",
+      "targetHandle": "result"
     }
   ]
 }

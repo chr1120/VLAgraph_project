@@ -1,5 +1,10 @@
 .git
 .env
+# Local verification artifacts can contain unreadable pytest directories.
+.tmp/
+**/.tmp-build-*/
+**/.venv/
+**/.venv-*/
 .DS_Store
 ._*
 **/.DS_Store

@@ -1,0 +1,66 @@
+{
+  "schema": "vlagraph.robot_setup_validation.v1",
+  "date": "2026-10-22",
+  "network_commands_sent": [],
+  "motion_requested": false,
+  "preset": {
+    "ok": true,
+    "summary": {
+      "model": "M-710iC/20L",
+      "instance_id": "fanuc_01",
+      "mode": "preset",
+      "profile_digest": "170e79f85d1e319361fe699feb6ed8b47f09c43e7800d4fcc4f8a749a1585d53",
+      "execution_verified": false,
+      "automatic_fields": [],
+      "pending": [
+        "TCP and workcell calibration",
+        "controller compatibility",
+        "physical execution validation"
+      ]
+    },
+    "message": null
+  },
+  "auto": {
+    "ok": true,
+    "summary": {
+      "model": "M-710iC/20L",
+      "instance_id": "fanuc_01",
+      "mode": "auto",
+      "profile_digest": "170e79f85d1e319361fe699feb6ed8b47f09c43e7800d4fcc4f8a749a1585d53",
+      "execution_verified": false,
+      "automatic_fields": [
+        "joint origins",
+        "axes",
+        "limits",
+        "collision binding"
+      ],
+      "pending": [
+        "TCP and workcell calibration",
+        "controller compatibility",
+        "physical execution validation"
+      ]
+    },
+    "message": null
+  },
+  "manual": {
+    "ok": true,
+    "summary": {
+      "model": "M-710iC/20L",
+      "instance_id": "fanuc_01",
+      "mode": "manual",
+      "profile_digest": "170e79f85d1e319361fe699feb6ed8b47f09c43e7800d4fcc4f8a749a1585d53",
+      "execution_verified": false,
+      "automatic_fields": [],
+      "pending": [
+        "TCP and workcell calibration",
+        "controller compatibility",
+        "physical execution validation"
+      ]
+    },
+    "message": null
+  },
+  "execute_boundary": "blocked_as_expected",
+  "execute_skipped": true,
+  "guard_approved": false,
+  "execution_validation_completed": false
+}

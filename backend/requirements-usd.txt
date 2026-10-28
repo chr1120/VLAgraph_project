@@ -1,0 +1,2 @@
+# Optional offline USD geometry/profile support; tested with this version.
+usd-core==25.8

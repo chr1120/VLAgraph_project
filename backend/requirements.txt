@@ -8,6 +8,11 @@ requests
 websocket-client
 websockets
 mediapipe==0.10.21
-numpy<2
+# Known-compatible MediaPipe CPU stack; avoid resolver drift to NumPy 2/OpenCV 5.
+numpy==1.26.4
+protobuf==4.25.9
+jax==0.7.1
+jaxlib==0.7.1
+opencv-contrib-python==4.11.0.86
 Pillow
 pyrealsense2==2.58.1.10581

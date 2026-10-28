@@ -1,6 +1,7 @@
 ﻿
 //type/graph.ts
 export type NodeKind =
+  | "robot_setup"
   | "prompt"
   | "image_input"
   | "sensor_input"
@@ -16,6 +17,15 @@ export type NodeKind =
   | "motion_retarget"
   | "scene_scan"
   | "world_state_build"
+  | "robot_observations_read"
+  | "amr_path_plan"
+  | "amr_navigate"
+  | "amr_status"
+  | "amr_stop"
+  | "multi_robot_context"
+  | "multi_robot_infer"
+  | "robot_candidate_select"
+  | "fanuc_policy_prepare"
   | "fanuc_state_read"
   | "fanuc_snapshot_read"
   | "fanuc_usd_geometry_read"

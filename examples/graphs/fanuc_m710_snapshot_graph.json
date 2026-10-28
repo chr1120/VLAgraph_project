@@ -1,16 +1,38 @@
 {
   "nodes": [
     {
-      "id": "snapshot", "type": "fanuc_snapshot_read", "position": {"x": 80, "y": 180},
+      "id": "snapshot",
+      "type": "fanuc_snapshot_read",
+      "position": {
+        "x": 80,
+        "y": 180
+      },
       "data": {
-        "label": "FANUC Joint Physics Snapshot", "omniverseEndpoint": "ws://host.docker.internal:9910/omniverse",
+        "label": "FANUC Joint Physics Snapshot",
+        "omniverseEndpoint": "ws://host.docker.internal:9910/omniverse",
         "robotPrimPath": "/World/GraphicViewer/Device/LASD/Robot/HFS1/HFS1_R01_R03/HFS1_7Axis_LH/lnk3/FANUC_M710/Robot",
         "timeoutSec": 5
       }
     },
-    {"id": "print", "type": "print", "position": {"x": 500, "y": 180}, "data": {"label": "Print Snapshot"}}
+    {
+      "id": "print",
+      "type": "print",
+      "position": {
+        "x": 500,
+        "y": 180
+      },
+      "data": {
+        "label": "Print Snapshot"
+      }
+    }
   ],
   "edges": [
-    {"id": "snapshot-out", "source": "snapshot", "target": "print", "sourceHandle": "snapshot", "targetHandle": "input"}
+    {
+      "id": "snapshot-out",
+      "source": "snapshot",
+      "target": "print",
+      "sourceHandle": "snapshot",
+      "targetHandle": "input"
+    }
   ]
 }

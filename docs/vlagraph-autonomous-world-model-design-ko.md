@@ -1,8 +1,8 @@
 # VLAGraph Omniverse 자율형 월드모델 개발 설계
 
 작성일: 2026년 10월 15일  
-수정일: 2026년 10월 20일  
-상태: 기반 구현 진행 중 — FANUC 검사 기반 구현·실환경 검증 보류, 휴머노이드 G1 월드모델 단계별 개발 계획 수립
+수정일: 2026년 10월 27일<br>
+상태: 다종·다중 로봇 관측·병렬 추론 및 AMR 동시 제어 기반 구현, 물리 예측·실환경 통합 검증 보류
 
 VLAGraph의 기존 그래프 실행 구조에 세계 상태 관리, 후보 행동의 미래 예측, 행동 선택, 실행 결과 검증을 추가한다. 첫 MVP는 Isaac Sim의 방 안에서 이동 로봇이 장애물을 피해 목표 지점에 도달하고, 예상 이동과 실제 이동을 비교하는 시스템이다.
 
@@ -365,6 +365,23 @@ frontend/src/
 
 화면에는 후보 경로와 선택 경로, 후보 제외 사유, 예측 종료 위치와 실제 종료 위치, 목표까지 거리, 회차, 예측 및 실행 소요 시간을 표시한다. 사용자는 일시 정지, 재개, 중단과 에피소드 리플레이를 수행할 수 있어야 한다.
 
+## 로봇 설정과 모델 프로파일 분리
+
+2026-10-22에 공통 `robot_setup` 노드를 기존 FANUC Execute에 추가했다. [모델 프로파일](../backend/world_model/robot_profiles.py)에는 관절 원점·부호 축·제한·J6 기준점 오프셋과 모델 ID·revision·출처를 보존한다. [설정 노드](../backend/executors/robot_setup_nodes.py)는 모델 프로파일, 인스턴스 ID, 연결 주소·prim, 작업 셀 준비 설정과 Collection 경로를 묶어 digest가 있는 `vlagraph.robot_config.v1`로 출력한다. 설정 연결이 있으면 노드별 기존 값보다 우선하며, 연결 값이 없거나 잘못되면 과거 M-710 기본값으로 대체하지 않는다.
+
+| 기능 | 구현 범위 | 제한 |
+| --- | --- | --- |
+| 기본 프로파일 | M-710 수치를 한 프로파일로 분리, 기존 함수와 그래프의 호환 기본값 유지 | 실제 물리 실행 검증은 여전히 보류 |
+| 자동 설정 | USD 관절·제한·부호 축 추출 및 독립 USD/FK 바인딩 대조 | 지원 가능한 직렬 J1~J6만 처리. TCP·보정·제어기는 추정하지 않음. URDF 직접 입력은 미구현 |
+| 수동 설정 | 프로파일·준비 설정 JSON 입력/불러오기/내보내기, 기본 JSON 다운로드 | boolean·단위별 숫자·축·관절 수·구조·허용 키 검사. 설정 파일은 사용자가 보관하고 다시 불러오는 방식 |
+| 공통 전달 | Prepare·Snapshot·Scene Scan·USD Geometry·Collection Context·Guard·Execute에 연결 | 새 템플릿 선택 또는 기존 그래프의 수동 연결 필요 |
+| 프로파일 계산 | FK·IK·제한 검사·USD 바인딩·충돌·hull 진단에 선택 구조 적용 | 일반 고정 회전·다축·다른 제조사 컨트롤러는 추가 어댑터 필요 |
+| 실행 일치 | action에 프로파일·설정 digest·instance·prim 보존, Guard/Execute 재대조, 실행 중 UI 설정 편집 잠금 | 사용자 정의 모델은 실제 전송 차단. 물리 워커의 원자적 실행 상태 검사는 미구현 |
+
+변경된 모델에 M-710 ID를 재사용하거나 설정에서 실행 허가·Guard 정책을 바꾸는 키를 입력하면 거부한다. 노드 설정 변경으로 digest가 바뀌면 기존 준비 action·검사 보고서를 재사용하지 않는다. 같은 모델의 추가 로봇은 다른 instance ID·prim·연결·작업 셀 보정으로 구분한다. 다른 제조사·이동 로봇·휴머노이드의 선택/실행 어댑터와 프로파일 서버 저장소는 후속 범위이며 이번 구현 완료에 포함하지 않는다.
+
+[사용 방법](fanuc-m710ic20l-isaacsim-template-ko.md#로봇-설정-기본값자동수동)과 [설정 파일 예시](../examples/graphs/fanuc_m710_robot_settings.json)를 제공한다. 자동 USD 지원의 선택 의존성은 [requirements-usd.txt](../backend/requirements-usd.txt)로 분리했다. [2026-10-22 검증 기록](validation/fanuc-robot-settings-2026-10-22.json)은 실제 Test8 USD의 기본/자동/수동 모드 일치와 기존 LS의 전송 차단을 기록한다. 네트워크·이동 명령은 요청하지 않았다. 전체 테스트 336개와 subtest 5개, 프론트엔드 빌드를 통과했다. 새 모델의 실제 호환성·보정·물리 예측 완료를 이 결과로 선언하지 않는다.
+
 ## 휴머노이드 G1 월드모델 개발 계획
 
 ### 목표와 첫 적용 범위
@@ -475,7 +492,26 @@ H7 시작 전에 자산·환경·제어기 버전, 평가 시나리오·seed·�
 3. `episodeId`는 시뮬레이션 초기화마다 새 값으로, `sceneVersion`은 장면·보정 구성이 바뀔 때 새 값으로 지정한다. 두 값은 아직 런타임에서 자동 발급하지 않는다. 상태 버전은 같은 실행 context에서 해당 노드의 성공한 관측마다 증가하며 새 context에서는 다시 시작한다.
 4. 출력의 `frame`, 정규화한 위치·크기, `raw_scan`, `missing_fields`를 확인한다. 단위·축이 불명확하거나 좌표가 유효하지 않으면 노드는 실패하고 `world_state: null`을 반환한다.
 
-현재 `WorldState`는 위치·크기 중심의 기하 관측 계약이다. Y-up은 `(x, y, z) → (x, -z, y)`로 변환하고 크기는 축 순서만 바꾼다. 자세·속도·충돌 형상은 아직 변환하지 않으며, 시스템 시각을 `sim_time`으로 대체하지 않는다. 따라서 `prediction_ready`는 항상 `false`이고 실행 허가를 의미하지 않는다. 로봇 팔·이동 로봇의 전체 상태 계약은 후속 물리 상태 수집과 함께 확장한다.
+현재 `WorldState`는 장면 기하와 선택적 로봇 관측을 담는다. Y-up은 `(x, y, z) → (x, -z, y)`로 변환하고 크기는 축 순서만 바꾼다. 로봇 자세와 속도도 같은 월드 좌표 변환을 적용한다. 충돌 형상과 동기화된 물리 상태는 별도 수집이 필요하며 시스템 시각을 `sim_time`으로 대체하지 않는다. `prediction_ready`는 항상 `false`이고 실행 허가를 의미하지 않는다.
+
+### 로봇 팔과 AMR의 공통 관측
+
+동일 씬의 여러 로봇을 인스턴스별 작업·센서·모델에 연결하고 같은 월드 버전에서 병렬 추론하는 경로는 [다중 로봇 월드 상태·추론 가이드](multi-robot-world-inference-ko.md)에 정리했다. AMR 제어 상태는 prim 경로별로 분리하고 전체 경로 통로의 공간 예약을 적용한다. FANUC 정책 후보는 로봇 설정에 바인딩한 준비 노드와 기존 Guard를 거친다. 여러 로봇의 물리 미래 예측과 작업 배정·일괄 승인·동기화된 dispatch는 아직 후속 계층이다.
+
+월드모델은 휴머노이드에 한정하지 않는다. `robot_kind`로 `articulated_arm`, `amr`, `humanoid`, `mobile_manipulator`, `unknown`을 구분하고 제조사·모델은 별도로 보관한다. FANUC M-710iC/20L은 `articulated_arm`으로 표현한다. 이름이나 prim 경로로 로봇 종류·관절·정지 상태를 추측하지 않는다. `base_motion`은 `fixed`, `rail`, `planar`, `free`, `unknown`으로 별도 지정하므로 레일 위의 FANUC도 표현할 수 있다.
+
+| 관측 대상 | 입력 필드 | 처리 |
+| --- | --- | --- |
+| 공통 베이스 | `position`, `orientation_xyzw`, `linear_velocity`, `angular_velocity_rad_s` | Stage 월드 좌표의 위치·단위 quaternion·선속도·각속도를 Z-up으로 변환. 위치와 선속도에만 Stage 단위를 적용 |
+| 로봇 팔·외부축·바퀴 관절 | `joints[]`의 `name`, `kind`, `unit`, `position`, 선택적 `velocity` | 회전 관절은 rad·rad/s, 직선 관절은 m·m/s. 이미 SI 단위이므로 Stage 배율을 다시 적용하지 않음. 중복 관절명·종류와 단위 불일치 거부 |
+| AMR·이동 매니퓰레이터 | `mobile_base` | `drive_type`은 differential/omnidirectional/ackermann/unknown, `footprint_radius_m`은 미터 단위 차체 외접 반경, `navigation_frame`은 위치추정 좌표계 이름, `localization_valid`는 명시적 boolean |
+| 혼합 장면 | `robots[]` | FANUC와 AMR 등 여러 로봇을 같은 장면·에피소드에 보관. 모든 로봇 prim은 객체 목록과도 중복 불가 |
+
+기존 단일 `scan.robot` 입력과 `WorldState.robot` 출력은 유지한다. `scan.robots`도 주면 선택한 `scan.robot`과 정확히 같은 항목을 목록에 포함해야 한다. `scan.robots`만 주면 첫 항목을 선택한다. 출력 `robots`에는 선택한 로봇도 포함된다. 기존 v1의 필수 필드를 유지하는 추가 필드 확장이다.
+
+미수집 관측은 로봇별 `missing_fields`와 월드의 `robots[/prim/path].필드`에 표시한다. AMR에는 팔의 J1~J6을 요구하지 않고 차체 반경·구동 방식·위치추정 정보를 확인한다. `localization_valid: false`는 유효한 위치추정이 없는 상태로 기록한다. 차체 반경은 통행 가능 공간·충돌 검증을 대신하지 않으며 `navigation_frame`만으로 map/odom과 Stage 사이의 좌표 변환이 검증되지는 않는다.
+
+[FANUC + AMR 관측 그래프](../examples/graphs/mixed_robot_world_state_graph.json)는 Load의 JSON import로 불러올 수 있는 **합성 입력 예제**다. Robot State → World State Build → Print로 두 로봇을 함께 정규화하며 실제 장비를 제어하지 않는다. 라이브 관측 수집과 차동구동 AMR의 점유 격자 경로 계획·시뮬레이션 주행은 [라이브 월드모델 실행 가이드](amr-live-world-model-ko.md)의 별도 launcher와 그래프로 연결했다. 실제 USD 장면의 PhysX 주행 검증은 미완료다. FANUC 전용 관측·snapshot은 기존 별도 계약을 유지하며 동기화 확인 없이 공통 상태와 합치지 않는다. AMR 제동 거리 예측·다중 로봇 미래 충돌 예측은 후속 구현 대상이다.
 
 공간 기억의 접근 지점은 Stage 좌표와 단위·축 출처를 함께 표시하고 미검증 참고값으로 전달한다. G1 디코더는 `Known spatial context`의 좌표를 사용자 명령으로 해석하지 않으며 `User task` 부분만 제어 지시로 읽는다. 저장된 접근 지점을 구조화된 후보로 재검증해 사용하는 계획 경로는 아직 구현 대상이다.
 

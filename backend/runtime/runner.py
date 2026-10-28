@@ -93,14 +93,18 @@ def execute_node(
     node: Dict[str, Any],
     context: Dict[str, Any],
     edges: List[Dict[str, Any]],
+    stop_requested: Callable[[], bool] | None = None,
 ) -> Any:
+    sig = None
     try:
         sig = inspect.signature(executor)
         param_count = len(sig.parameters)
     except Exception:
         param_count = 3
 
-    if param_count >= 3:
+    if "stop_requested" in getattr(sig, "parameters", {}):
+        result = executor(node, context, edges, stop_requested=stop_requested)
+    elif param_count >= 3:
         result = executor(node, context, edges)
     else:
         result = executor(node, context)
@@ -116,6 +120,7 @@ def run_graph(
     input_data: Dict[str, Any] | None = None,
     *,
     on_node_result: NodeResultCallback | None = None,
+    on_node_start: NodeResultCallback | None = None,
     stop_requested: Callable[[], bool] | None = None,
     initial_context: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
@@ -142,10 +147,12 @@ def run_graph(
             raise HTTPException(status_code=400, detail=f"Unknown node type: {node_type}")
 
         executor = NODE_EXECUTORS[node_type]
+        if on_node_start:
+            on_node_start({"node_id": node_id, "node_type": node_type, "node": node})
         started_at = time.time()
 
         try:
-            result = execute_node(executor, node, context, edges)
+            result = execute_node(executor, node, context, edges, stop_requested=stop_requested)
         except Exception as e:
             context[node_id] = {
                 "error": str(e),

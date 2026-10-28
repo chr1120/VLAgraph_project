@@ -32,12 +32,18 @@ function isBooleanKey(key: string) {
     "solveIk",
     "requireAllIk",
     "enableExecution",
+    "requireBatchSuccess",
+    "waitForCompletion",
   ].includes(key);
 }
 
 function isNumberKey(key: string) {
   return [
     "maxStepSec",
+    "navigationTimeoutSec",
+    "maxWorkers",
+    "completionTimeoutSec",
+    "pollIntervalSec",
     "marginM",
     "maxSamples",
     "maxSnapshotAgeSec",
@@ -99,7 +105,7 @@ function isNumberKey(key: string) {
 }
 
 function isJsonKey(key: string) {
-  return ["robotState", "remoteHeaders", "remoteBody", "lidarSample"].includes(key);
+  return ["robotState", "remoteHeaders", "remoteBody", "lidarSample", "manualProfile", "prepareSettings", "toolOffsetM", "goalM", "robotBindings", "robotTasks"].includes(key);
 }
 
 function isRootMotionModeKey(nodeType: string | undefined, key: string) {
@@ -306,6 +312,14 @@ function unityCommandsForRobotType(robotType: unknown) {
 }
 
 function fieldLabel(nodeType: string | undefined, key: string) {
+  if (nodeType === "robot_setup") {
+    const labels: Record<string, string> = { robotModel: "로봇 모델", settingsMode: "설정 방식",
+      instanceId: "로봇 인스턴스 ID", robotPrimPath: "로봇 Prim 경로", omniverseEndpoint: "브리지 주소",
+      memoryPath: "Collection 기억 경로", usdPath: "백엔드 USD 파일 경로", manualProfile: "수동 프로파일 JSON",
+      prepareSettings: "동작 준비 설정 JSON", customProfileId: "새 프로파일 ID", customModelName: "로봇 모델명",
+      toolOffsetM: "J6 이후 FK 기준점 오프셋 [m] — 별도 확인 필요" };
+    return labels[key] ?? key;
+  }
   if (nodeType === "robot_execute") {
     const robotLabels: Record<string, string> = {
       mode: "실행 모드",
@@ -690,6 +704,13 @@ function shouldShowField(
   key: string,
   data: Record<string, unknown>
 ) {
+  if (nodeType === "robot_setup") {
+    if (key === "manualProfile") return data.settingsMode === "manual";
+    if (key === "usdPath") return data.settingsMode === "auto";
+    if (["toolOffsetM", "customProfileId", "customModelName"].includes(key)) {
+      return data.settingsMode === "auto" && data.robotModel === "custom_fanuc_6axis";
+    }
+  }
   if (nodeType !== "robot_execute") {
     return true;
   }
@@ -774,6 +795,18 @@ function renderFieldInput(
   nodeId: string,
   onNodeDataChange: (nodeId: string, key: string, value: unknown) => void
 ) {
+  if (nodeType === "robot_setup" && key === "robotModel") {
+    return <select value={String(value)} onChange={(e) => onNodeDataChange(nodeId, key, e.target.value)}>
+      <option value="fanuc_m710ic20l">FANUC M-710iC/20L</option>
+      <option value="custom_fanuc_6axis">사용자 정의 FANUC 6축 — 진단용</option>
+    </select>;
+  }
+  if (nodeType === "robot_setup" && key === "settingsMode") {
+    return <select value={String(value)} onChange={(e) => onNodeDataChange(nodeId, key, e.target.value)}>
+      <option value="preset">기본 프로파일</option><option value="auto">USD 자동 읽기</option>
+      <option value="manual">수동 프로파일 JSON</option>
+    </select>;
+  }
   if (nodeType === "fanuc_usd_geometry_read" && key === "source") {
     return (
       <select value={String(value ?? "bridge")} onChange={(e) => onNodeDataChange(nodeId, key, e.target.value)}>
@@ -1189,18 +1222,22 @@ export default function Inspector({
   edgeCount,
   logs,
   onNodeDataChange,
+  executionActive = false,
 }: {
   selectedNode: Node | null;
   nodeCount: number;
   edgeCount: number;
   logs: string[];
   onNodeDataChange: (nodeId: string, key: string, value: unknown) => void;
+  executionActive?: boolean;
 }) {
+  const [settingsError, setSettingsError] = React.useState("");
   const data = (selectedNode?.data ?? {}) as Record<string, unknown>;
   const nodeType = selectedNode?.type;
 
   const filteredEntries = Object.entries(data).filter(
     ([key]) =>
+      !key.startsWith("_") &&
       key !== "label" &&
       key !== "status" &&
       key !== "lastSummary" &&
@@ -1247,6 +1284,37 @@ export default function Inspector({
       {selectedNode && (
         <div className="panel-card">
           <div className="panel-title">노드 설정</div>
+          {nodeType === "robot_setup" && <div className="panel-body">
+            <div className="field-hint">같은 설정을 연결된 관측·준비·검사·실행 노드에 적용합니다. 자동 모드는 백엔드에서 읽을 수 있는 USD를 사용하며 TCP를 추정하지 않습니다. 사용자 정의 모델은 진단용이며 실행 검증은 별도입니다.</div>
+            {executionActive && <div className="field-hint">실행을 종료한 뒤 로봇 설정을 변경하세요.</div>}
+            <label className="field-row"><span>설정 또는 프로파일 JSON 불러오기</span>
+              <input type="file" accept=".json,application/json" disabled={executionActive} onChange={async (event) => {
+                const file = event.target.files?.[0];
+                if (!file) return;
+                try {
+                  if (file.size > 1024 * 1024) throw new Error("설정 파일은 1 MiB 이하여야 합니다.");
+                  const parsed = JSON.parse(await file.text());
+                  const settings = parsed.schema === "vlagraph.serial_arm_profile.v1"
+                    ? { manualProfile: parsed, settingsMode: "manual", robotModel: parsed.id === "fanuc_m710ic20l" ? "fanuc_m710ic20l" : "custom_fanuc_6axis" }
+                    : parsed.schema === "vlagraph.robot_setup.settings.v1" ? parsed.settings : null;
+                  const allowed = ["label", "robotModel", "settingsMode", "instanceId", "omniverseEndpoint", "robotPrimPath", "memoryPath", "usdPath", "customProfileId", "customModelName", "toolOffsetM", "manualProfile", "prepareSettings"];
+                  if (!settings || typeof settings !== "object" || Array.isArray(settings) || Object.keys(settings).some((key) => !allowed.includes(key))) throw new Error("지원하는 로봇 설정 JSON이 아닙니다.");
+                  for (const [key, value] of Object.entries(settings)) onNodeDataChange(selectedNode.id, key, value);
+                  setSettingsError("");
+                } catch (error) { setSettingsError(String(error)); }
+                event.target.value = "";
+              }} />
+            </label>
+            <button className="secondary-btn" disabled={executionActive} onClick={() => {
+              const allowed = ["label", "robotModel", "settingsMode", "instanceId", "omniverseEndpoint", "robotPrimPath", "memoryPath", "usdPath", "customProfileId", "customModelName", "toolOffsetM", "manualProfile", "prepareSettings"];
+              const settings = Object.fromEntries(Object.entries(data).filter(([key]) => allowed.includes(key)));
+              const url = URL.createObjectURL(new Blob([JSON.stringify({ schema: "vlagraph.robot_setup.settings.v1", settings }, null, 2)], { type: "application/json" }));
+              const anchor = document.createElement("a"); anchor.href = url; anchor.download = "robot-settings.json"; anchor.click();
+              setTimeout(() => URL.revokeObjectURL(url), 1000);
+            }}>설정 JSON 내보내기</button>
+            <p><a href="/robot_profiles/fanuc_m710ic20l.json" download>M-710 기본 프로파일 JSON 받기</a></p>
+            {settingsError && <div className="field-hint" role="alert">{settingsError}</div>}
+          </div>}
               {(data.lastSummary || data.lastDetail) && (
             <div className={`run-summary-box tone-${String(data.status ?? "idle")}`}>
               <div className="run-summary-title">{String(data.lastSummary ?? "최근 실행 결과")}</div>
@@ -1298,6 +1366,7 @@ export default function Inspector({
               )}
             </div>
           )}
+          <fieldset disabled={executionActive} style={{ border: 0, padding: 0, minWidth: 0 }}>
           <div className="form-grid">
             <label className="field-row">
               <span>label</span>
@@ -1317,6 +1386,7 @@ export default function Inspector({
               </label>
             ))}
           </div>
+          </fieldset>
         </div>
       )}
 

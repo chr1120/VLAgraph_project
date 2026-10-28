@@ -1,4 +1,7 @@
-﻿services:
+﻿# Keep the existing stack identity when this checkout is moved or copied.
+name: vlagraph
+
+services:
   frontend:
     build:
       context: .

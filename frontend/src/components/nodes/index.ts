@@ -1,10 +1,14 @@
 // components/nodes/index.ts
 import GenericNode from "./GenericNode";
+import GraphBundleNode from "./GraphBundleNode";
+import WorkflowGroupNode from "./WorkflowGroupNode";
 import SpeechToTextNode from "./audio/SpeechToTextNode";
 import TextToSpeechNode from "./audio/TextToSpeechNode";
 import SensorInputNode from "./sensor/SensorInputNode";
 
 export const nodeTypes = {
+  graph_bundle: GraphBundleNode,
+  workflow_group: WorkflowGroupNode,
   prompt: GenericNode,
   image_input: GenericNode,
   sensor_input: SensorInputNode,
@@ -20,11 +24,21 @@ export const nodeTypes = {
   motion_retarget: GenericNode,
   scene_scan: GenericNode,
   world_state_build: GenericNode,
+  robot_observations_read: GenericNode,
+  amr_path_plan: GenericNode,
+  amr_navigate: GenericNode,
+  amr_status: GenericNode,
+  amr_stop: GenericNode,
+  multi_robot_context: GenericNode,
+  multi_robot_infer: GenericNode,
+  robot_candidate_select: GenericNode,
+  fanuc_policy_prepare: GenericNode,
   fanuc_state_read: GenericNode,
   fanuc_snapshot_read: GenericNode,
   fanuc_usd_geometry_read: GenericNode,
   fanuc_usd_proxy_build: GenericNode,
   fanuc_world_context: GenericNode,
+  robot_setup: GenericNode,
   fanuc_world_prediction: GenericNode,
   fanuc_trajectory_validate: GenericNode,
   fanuc_collision_check: GenericNode,

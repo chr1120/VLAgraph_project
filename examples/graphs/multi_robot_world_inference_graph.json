@@ -1,0 +1,309 @@
+{
+  "nodes": [
+    {
+      "id": "observe",
+      "type": "robot_observations_read",
+      "position": {
+        "x": 80,
+        "y": 350
+      },
+      "data": {
+        "label": "Shared Scene Observation",
+        "robotPrimPath": "/World/AMR1",
+        "sceneVersion": "v1",
+        "omniverseEndpoint": "ws://host.docker.internal:9900/omniverse",
+        "timeoutSec": 10
+      }
+    },
+    {
+      "id": "context",
+      "type": "multi_robot_context",
+      "position": {
+        "x": 480,
+        "y": 350
+      },
+      "data": {
+        "label": "Bind Tasks and Models by Robot",
+        "robotBindings": [
+          {
+            "robot_prim_path": "/World/AMR1",
+            "robot_kind": "amr",
+            "provider": "amr_grid",
+            "action_schema": "vlagraph.amr_plan.v1"
+          },
+          {
+            "robot_prim_path": "/World/AMR2",
+            "robot_kind": "amr",
+            "provider": "amr_grid",
+            "action_schema": "vlagraph.amr_plan.v1"
+          },
+          {
+            "robot_prim_path": "/World/FANUC1",
+            "robot_kind": "articulated_arm",
+            "provider": "openvla",
+            "model_name": "openvla-stub",
+            "action_schema": "vlagraph.fanuc_m710ic20l.action.v1",
+            "require_image": false
+          },
+          {
+            "robot_prim_path": "/World/FANUC2",
+            "robot_kind": "articulated_arm",
+            "provider": "openvla",
+            "model_name": "openvla-stub",
+            "action_schema": "vlagraph.fanuc_m710ic20l.action.v1",
+            "require_image": false
+          }
+        ],
+        "robotTasks": [
+          {
+            "robot_prim_path": "/World/AMR1",
+            "instruction": "Navigate to assigned goal",
+            "goal_m": [
+              3,
+              0
+            ]
+          },
+          {
+            "robot_prim_path": "/World/AMR2",
+            "instruction": "Navigate to assigned goal",
+            "goal_m": [
+              3,
+              3
+            ]
+          },
+          {
+            "robot_prim_path": "/World/FANUC1",
+            "instruction": "Inspect the assigned work station; return a candidate only"
+          },
+          {
+            "robot_prim_path": "/World/FANUC2",
+            "instruction": "Inspect the assigned work station; return a candidate only"
+          }
+        ]
+      }
+    },
+    {
+      "id": "infer",
+      "type": "multi_robot_infer",
+      "position": {
+        "x": 900,
+        "y": 350
+      },
+      "data": {
+        "label": "Parallel Robot Inference",
+        "maxWorkers": 4
+      }
+    },
+    {
+      "id": "select-AMR1",
+      "type": "robot_candidate_select",
+      "position": {
+        "x": 1320,
+        "y": 0
+      },
+      "data": {
+        "label": "AMR1 Candidate",
+        "robotPrimPath": "/World/AMR1",
+        "requireBatchSuccess": true
+      }
+    },
+    {
+      "id": "navigate-AMR1",
+      "type": "amr_navigate",
+      "position": {
+        "x": 1740,
+        "y": 0
+      },
+      "data": {
+        "label": "AMR1 Navigate (Preview)",
+        "enableExecution": false,
+        "omniverseEndpoint": "ws://host.docker.internal:9900/omniverse",
+        "navigationTimeoutSec": 120,
+        "timeoutSec": 10
+      }
+    },
+    {
+      "id": "select-AMR2",
+      "type": "robot_candidate_select",
+      "position": {
+        "x": 1320,
+        "y": 250
+      },
+      "data": {
+        "label": "AMR2 Candidate",
+        "robotPrimPath": "/World/AMR2",
+        "requireBatchSuccess": true
+      }
+    },
+    {
+      "id": "navigate-AMR2",
+      "type": "amr_navigate",
+      "position": {
+        "x": 1740,
+        "y": 250
+      },
+      "data": {
+        "label": "AMR2 Navigate (Preview)",
+        "enableExecution": false,
+        "omniverseEndpoint": "ws://host.docker.internal:9900/omniverse",
+        "navigationTimeoutSec": 120,
+        "timeoutSec": 10
+      }
+    },
+    {
+      "id": "select-FANUC1",
+      "type": "robot_candidate_select",
+      "position": {
+        "x": 1320,
+        "y": 500
+      },
+      "data": {
+        "label": "FANUC1 Candidate",
+        "robotPrimPath": "/World/FANUC1",
+        "requireBatchSuccess": true
+      }
+    },
+    {
+      "id": "preview-FANUC1",
+      "type": "print",
+      "position": {
+        "x": 1740,
+        "y": 500
+      },
+      "data": {
+        "label": "FANUC1 Policy Candidate (Requires Prepare + Guard)"
+      }
+    },
+    {
+      "id": "select-FANUC2",
+      "type": "robot_candidate_select",
+      "position": {
+        "x": 1320,
+        "y": 750
+      },
+      "data": {
+        "label": "FANUC2 Candidate",
+        "robotPrimPath": "/World/FANUC2",
+        "requireBatchSuccess": true
+      }
+    },
+    {
+      "id": "preview-FANUC2",
+      "type": "print",
+      "position": {
+        "x": 1740,
+        "y": 750
+      },
+      "data": {
+        "label": "FANUC2 Policy Candidate (Requires Prepare + Guard)"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "observe-world_state-context-world_state",
+      "source": "observe",
+      "sourceHandle": "world_state",
+      "target": "context",
+      "targetHandle": "world_state"
+    },
+    {
+      "id": "observe-navigation_maps-context-navigation_maps",
+      "source": "observe",
+      "sourceHandle": "navigation_maps",
+      "target": "context",
+      "targetHandle": "navigation_maps"
+    },
+    {
+      "id": "context-batch-infer-batch",
+      "source": "context",
+      "sourceHandle": "batch",
+      "target": "infer",
+      "targetHandle": "batch"
+    },
+    {
+      "id": "infer-candidates-select-AMR1-candidates",
+      "source": "infer",
+      "sourceHandle": "candidates",
+      "target": "select-AMR1",
+      "targetHandle": "candidates"
+    },
+    {
+      "id": "observe-world_state-select-AMR1-world_state",
+      "source": "observe",
+      "sourceHandle": "world_state",
+      "target": "select-AMR1",
+      "targetHandle": "world_state"
+    },
+    {
+      "id": "select-AMR1-plan-navigate-AMR1-plan",
+      "source": "select-AMR1",
+      "sourceHandle": "plan",
+      "target": "navigate-AMR1",
+      "targetHandle": "plan"
+    },
+    {
+      "id": "infer-candidates-select-AMR2-candidates",
+      "source": "infer",
+      "sourceHandle": "candidates",
+      "target": "select-AMR2",
+      "targetHandle": "candidates"
+    },
+    {
+      "id": "observe-world_state-select-AMR2-world_state",
+      "source": "observe",
+      "sourceHandle": "world_state",
+      "target": "select-AMR2",
+      "targetHandle": "world_state"
+    },
+    {
+      "id": "select-AMR2-plan-navigate-AMR2-plan",
+      "source": "select-AMR2",
+      "sourceHandle": "plan",
+      "target": "navigate-AMR2",
+      "targetHandle": "plan"
+    },
+    {
+      "id": "infer-candidates-select-FANUC1-candidates",
+      "source": "infer",
+      "sourceHandle": "candidates",
+      "target": "select-FANUC1",
+      "targetHandle": "candidates"
+    },
+    {
+      "id": "observe-world_state-select-FANUC1-world_state",
+      "source": "observe",
+      "sourceHandle": "world_state",
+      "target": "select-FANUC1",
+      "targetHandle": "world_state"
+    },
+    {
+      "id": "select-FANUC1-candidate-preview-FANUC1-input",
+      "source": "select-FANUC1",
+      "sourceHandle": "candidate",
+      "target": "preview-FANUC1",
+      "targetHandle": "input"
+    },
+    {
+      "id": "infer-candidates-select-FANUC2-candidates",
+      "source": "infer",
+      "sourceHandle": "candidates",
+      "target": "select-FANUC2",
+      "targetHandle": "candidates"
+    },
+    {
+      "id": "observe-world_state-select-FANUC2-world_state",
+      "source": "observe",
+      "sourceHandle": "world_state",
+      "target": "select-FANUC2",
+      "targetHandle": "world_state"
+    },
+    {
+      "id": "select-FANUC2-candidate-preview-FANUC2-input",
+      "source": "select-FANUC2",
+      "sourceHandle": "candidate",
+      "target": "preview-FANUC2",
+      "targetHandle": "input"
+    }
+  ]
+}

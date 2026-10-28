@@ -24,6 +24,13 @@ from backend.executors.motion_nodes import (
     exec_video_motion_input,
 )
 from backend.executors.g1_skill_nodes import exec_g1_skill_decode
+from backend.executors.robot_setup_nodes import exec_robot_setup
+from backend.executors.amr_nodes import (
+    exec_robot_observations_read, exec_amr_path_plan, exec_amr_navigate, exec_amr_status, exec_amr_stop,
+)
+from backend.executors.multi_robot_nodes import (
+    exec_multi_robot_context, exec_multi_robot_infer, exec_robot_candidate_select, exec_fanuc_policy_prepare,
+)
 from backend.executors.omy3m_nodes import (
     exec_omy3m_isaaclab_record,
     exec_omy3m_joint_action,
@@ -86,6 +93,7 @@ NODE_EXECUTORS = {
     "motion_extract": exec_motion_extract,
     "motion_retarget": exec_motion_retarget,
     "g1_skill_decode": exec_g1_skill_decode,
+    "robot_setup": exec_robot_setup,
     "omy3m_joint_action": exec_omy3m_joint_action,
     "omy3m_isaaclab_record": exec_omy3m_isaaclab_record,
     "fanuc_ls_parse": exec_fanuc_ls_parse,
@@ -94,6 +102,15 @@ NODE_EXECUTORS = {
     "fanuc_omy3m_isaaclab_export": exec_fanuc_omy3m_isaaclab_export,
     "scene_scan": exec_scene_scan,
     "world_state_build": exec_world_state_build,
+    "robot_observations_read": exec_robot_observations_read,
+    "amr_path_plan": exec_amr_path_plan,
+    "amr_navigate": exec_amr_navigate,
+    "amr_status": exec_amr_status,
+    "amr_stop": exec_amr_stop,
+    "multi_robot_context": exec_multi_robot_context,
+    "multi_robot_infer": exec_multi_robot_infer,
+    "robot_candidate_select": exec_robot_candidate_select,
+    "fanuc_policy_prepare": exec_fanuc_policy_prepare,
     "fanuc_state_read": exec_fanuc_state_read,
     "fanuc_snapshot_read": exec_fanuc_snapshot_read,
     "execution_observe": exec_execution_observe,

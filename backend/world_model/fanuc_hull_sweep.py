@@ -13,8 +13,9 @@ from .fanuc_hull_inspection import _inspection_context, _points_in_anchor, _worl
 from .fanuc_preflight import action_fingerprint
 
 
-def _motion_levers(points, anchor):
-    from backend.executors.fanuc_nodes import M710_JOINT_ORIGINS
+def _motion_levers(points, anchor, profile=None):
+    from .robot_profiles import profile_arrays
+    M710_JOINT_ORIGINS = profile_arrays(profile)[0]
 
     if anchor["attachment"] != "joint":
         return []
@@ -65,7 +66,7 @@ def inspect_review_hull_sweep(stage, inventory, scene, action, collision_report,
         try:
             source_path = capsules[identifier]["source_prim_path"]
             points, anchor, description = _points_in_anchor(stage, inventory, sources[source_path], anchors)
-            cache[identifier] = points, anchor, description, _motion_levers(points, anchor)
+            cache[identifier] = points, anchor, description, _motion_levers(points, anchor, scene.get("robot_profile"))
         except (ValueError, TypeError, KeyError, np.linalg.LinAlgError) as exc:
             failures[identifier] = str(exc)
     states = []
