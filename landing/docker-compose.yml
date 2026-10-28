@@ -34,6 +34,8 @@ services:
       SMTP_USERNAME: ${SMTP_USERNAME:-}
       SMTP_PASSWORD: ${SMTP_PASSWORD:-}
       SMTP_FROM_EMAIL: ${SMTP_FROM_EMAIL:-}
+      OMNIVERSE_LAUNCHER_URL: ${OMNIVERSE_LAUNCHER_URL:-http://host.docker.internal:9188/launch}
+      OMNIVERSE_LAUNCH_TOKEN: ${OMNIVERSE_LAUNCH_TOKEN:-}
     ports:
       - "127.0.0.1:8001:8000"
     depends_on:

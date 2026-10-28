@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     smtp_username: str | None = None
     smtp_password: str | None = None
     smtp_from_email: str | None = None
+    omniverse_launcher_url: str | None = None
+    omniverse_launch_token: str | None = None
 
     model_config = SettingsConfigDict(
         env_file=".env",
